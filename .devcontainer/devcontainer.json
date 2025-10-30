@@ -4,6 +4,7 @@
     "dockerfile": "Dockerfile"
   },
   "remoteUser": "root",
+  "onCreateCommand": "lake exe cache get!",
   "customizations": {
     "vscode": {
       "extensions": [
