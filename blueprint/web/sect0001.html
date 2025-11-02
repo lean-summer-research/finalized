@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Green’s Relations</title>
+<link rel="prev" href="index.html" title="finalized" />
+<link rel="up" href="index.html" title="finalized" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">finalized</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class=" active current">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Green’s Relations</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000002">1 Green’s Relations</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:greens-relations">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">1</span>
+    <span class="definition_thmtitle">Green’s Preorder and Equivalence Relations</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#def:greens-relations">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.RPreorder" class="lean_decl">Semigroup.RPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LPreorder" class="lean_decl">Semigroup.LPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JPreorder" class="lean_decl">Semigroup.JPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HPreorder" class="lean_decl">Semigroup.HPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.RPreorder.isPreorder" class="lean_decl">Semigroup.RPreorder.isPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LPreorder.isPreorder" class="lean_decl">Semigroup.LPreorder.isPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JPreorder.isPreorder" class="lean_decl">Semigroup.JPreorder.isPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HPreorder.isPreorder" class="lean_decl">Semigroup.HPreorder.isPreorder</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv" class="lean_decl">Semigroup.REquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv" class="lean_decl">Semigroup.LEquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JEquiv" class="lean_decl">Semigroup.JEquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv" class="lean_decl">Semigroup.HEquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv" class="lean_decl">Semigroup.DEquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.isEquivalence" class="lean_decl">Semigroup.REquiv.isEquivalence</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.isEquivalence" class="lean_decl">Semigroup.LEquiv.isEquivalence</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JEquiv.isEquivalence" class="lean_decl">Semigroup.JEquiv.isEquivalence</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.isEquivalence" class="lean_decl">Semigroup.HEquiv.isEquivalence</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.isEquivalence" class="lean_decl">Semigroup.DEquiv.isEquivalence</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  In a semigroup \(S\), Green’s relations are a set of five equivalence relations that characterize the elements of \(S\) in terms of the principal ideals they generate. These relations are fundamental to the study of semigroups. </p>
+<p>First, we define four preorder relations: \(\leq _{\mathcal{R}}\), \(\leq _{\mathcal{L}}\), \(\leq _{\mathcal{J}}\), and \(\leq _{\mathcal{H}}\). Let \(S^1\) be the monoid obtained by adjoining an identity element to \(S\) if it does not already have one. For any two elements \(x, y \in S\): </p>
+<ul class="itemize">
+  <li><p>\(x \leq _{\mathcal{R}} y\) if and only if the principal right ideal generated by \(x\) is a subset of the principal right ideal generated by \(y\) (\(xS^1 \subseteq yS^1\)). In Lean, we use the equivalent definition that there must exist some \(z \in S^1\) such that \(x = yz\). </p>
+</li>
+  <li><p>\(x \leq _{\mathcal{L}} y\) if and only if the principal left ideal generated by \(x\) is a subset of the principal left ideal generated by \(y\) (\(S^1x \subseteq S^1y\)). In Lean, we use the equivalent definition that there must exist some \(z \in S^1\) such that \(x = zy\). </p>
+</li>
+  <li><p>\(x \leq _{\mathcal{J}} y\) if and only if the principal two-sided ideal generated by \(x\) is a subset of the principal two-sided ideal generated by \(y\) (\(S^1xS^1 \subseteq S^1yS^1\)). In Lean, we use the equivalent definition that there must exist some \(u, v \in S^1\) such that \(x = uyv\). </p>
+</li>
+  <li><p>\(x \leq _{\mathcal{H}} y\) if and only if \(x \leq _{\mathcal{R}} y\) and \(x \leq _{\mathcal{L}} y\). </p>
+</li>
+</ul>
+<p> These four relations are preorders (they are reflexive and transitive). </p>
+<p>From these preorders, we define the equivalence relations \(\mathcal{R}\), \(\mathcal{L}\), \(\mathcal{J}\), and \(\mathcal{H}\) as the symmetric closures of their corresponding preorders. For example, \(x \mathcal{R} y\) if and only if \(x \leq _{\mathcal{R}} y\) and \(y \leq _{\mathcal{R}} x\). The equivalence classes are denoted by \([x]_{\mathcal{R}}\), \([x]_{\mathcal{L}}\), etc. </p>
+<p>Finally, the \(\mathcal{D}\) relation is defined by composing \(\mathcal{R}\) and \(\mathcal{L}\): \(x \mathcal{D} y\) if there exists an element \(z \in S\) such that \(x \mathcal{R} z\) and \(z \mathcal{L} y\). It can be shown that \(\mathcal{D}\) is an equivalence relation and that it can also be defined by composing \(\mathcal{L}\) and \(\mathcal{R}\). </p>
+
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:greens-relations-mul-compat">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2</span>
+    <span class="lemma_thmtitle">Multiplication Compatibility of Green’s Relations</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#lem:greens-relations-mul-compat">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000003"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:greens-relations">Definition 1</a></li>
+          
+          <li><a href="sect0001.html#def:greens-relations">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.RPreorder.lmult_compat" class="lean_decl">Semigroup.RPreorder.lmult_compat</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.lmult_compat" class="lean_decl">Semigroup.REquiv.lmult_compat</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LPreorder.rmult_compat" class="lean_decl">Semigroup.LPreorder.rmult_compat</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.rmult_compat" class="lean_decl">Semigroup.LEquiv.rmult_compat</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  The \(\mathcal{R}\) and \(\mathcal{L}\) relations exhibit compatibility with semigroup multiplication on one side. Specifically, the \(\mathcal{R}\)-preorder is compatible with left multiplication, and the \(\mathcal{L}\)-preorder is compatible with right multiplication. If \(x \leq _{\mathcal{R}} y\), then for any \(z \in S\), we have \(zx \leq _{\mathcal{R}} zy\). This property extends to the equivalence relation \(\mathcal{R}\). If \(x \mathcal{R} y\), then \(zx \mathcal{R} zy\). A similar argument holds for the \(\mathcal{L}\)-preorder and \(\mathcal{L}\)-equivalence, which are compatible with right multiplication. If \(x \leq _{\mathcal{L}} y\), then \(xz \leq _{\mathcal{L}} yz\) for any \(z \in S\).   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000003">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Let \(x, y, z \in S\). To prove left compatibility for \(\leq _{\mathcal{R}}\), assume \(x \leq _{\mathcal{R}} y\). By definition, there exists \(a \in S^1\) such that \(x = ya\). Multiplying by \(z\) on the left gives \(zx = z(ya) = (zy)a\). This implies \(zx \leq _{\mathcal{R}} zy\). For the equivalence \(x \mathcal{R} y\), we have both \(x \leq _{\mathcal{R}} y\) and \(y \leq _{\mathcal{R}} x\). Applying the result for preorders, we get \(zx \leq _{\mathcal{R}} zy\) and \(zy \leq _{\mathcal{R}} zx\), which means \(zx \mathcal{R} zy\). The proof for \(\leq _{\mathcal{L}}\) and \(\mathcal{L}\) with right multiplication is analogous.  </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:r-l-comm">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">3</span>
+    <span class="lemma_thmtitle">Commutation of R and L Relations</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#lem:r-l-comm">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000004"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:greens-relations">Definition 1</a></li>
+          
+          <li><a href="sect0001.html#lem:greens-relations-mul-compat">Lemma 2</a></li>
+          
+          <li><a href="sect0001.html#def:greens-relations">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.rEquiv_lEquiv_comm" class="lean_decl">Semigroup.rEquiv_lEquiv_comm</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  The composition of the relations \(\mathcal{R}\) and \(\mathcal{L}\) is commutative. That is, for any \(x, y \in S\), there exists a \(z\) such that \(x \mathcal{R} z\) and \(z \mathcal{L} y\) if and only if there exists a \(w\) such that \(x \mathcal{L} w\) and \(w \mathcal{R} y\). This can be written as \(\mathcal{R} \circ \mathcal{L} = \mathcal{L} \circ \mathcal{R}\). This property is crucial for proving that the relation \(\mathcal{D} = \mathcal{R} \circ \mathcal{L}\) is symmetric, and therefore an equivalence relation.   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000004">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Suppose there exists \(z\) with \(x \mathcal{R} z\) and \(z \mathcal{L} y\). From \(x \mathcal{R} z\), we have \(x=za\) and \(z=xb\) for some \(a,b \in S^1\). From \(z \mathcal{L} y\), we have \(z=cy\) and \(y=dz\) for some \(c,d \in S^1\). We need to find an element \(w\) such that \(x \mathcal{L} w\) and \(w \mathcal{R} y\). The Lean proof shows that in the non-trivial case, the element \(dza\) can be used for \(w\). This commutation is essential for establishing that \(\mathcal{D}\) is an equivalence relation, as it directly implies symmetry.  </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:d-equiv-closed">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">4</span>
+    <span class="lemma_thmtitle">Closure of D under R and L</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#lem:d-equiv-closed">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000005"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:greens-relations">Definition 1</a></li>
+          
+          <li><a href="sect0001.html#def:greens-relations">Definition 1</a></li>
+          
+          <li><a href="sect0001.html#lem:r-l-comm">Lemma 3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.closed_under_lEquiv" class="lean_decl">Semigroup.DEquiv.closed_under_lEquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.closed_under_rEquiv" class="lean_decl">Semigroup.DEquiv.closed_under_rEquiv</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  The \(\mathcal{D}\) relation is closed under composition with \(\mathcal{R}\) and \(\mathcal{L}\). If \(x \mathcal{D} y\) and \(y \mathcal{L} z\), then \(x \mathcal{D} z\). Similarly, if \(x \mathcal{D} y\) and \(y \mathcal{R} z\), then \(x \mathcal{D} z\). This property is used to prove the transitivity of \(\mathcal{D}\).   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000005">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Suppose \(x \mathcal{D} y\) and \(y \mathcal{L} z\). By definition of \(\mathcal{D}\), there exists an element \(w\) such that \(x \mathcal{R} w\) and \(w \mathcal{L} y\). Since \(\mathcal{L}\) is an equivalence relation, from \(w \mathcal{L} y\) and \(y \mathcal{L} z\), we can deduce \(w \mathcal{L} z\). Now we have \(x \mathcal{R} w\) and \(w \mathcal{L} z\), which by definition means \(x \mathcal{D} z\). A similar argument holds for closure under \(\mathcal{R}\). If \(x \mathcal{D} y\) and \(y \mathcal{R} z\), we use the commutation of \(\mathcal{R}\) and \(\mathcal{L}\) (<a href="sect0001.html#lem:r-l-comm">3</a>). \(x \mathcal{D} y\) means there is a \(w\) with \(x \mathcal{L} w\) and \(w \mathcal{R} y\). Since \(\mathcal{R}\) is an equivalence relation, \(w \mathcal{R} y\) and \(y \mathcal{R} z\) implies \(w \mathcal{R} z\). So we have \(x \mathcal{L} w\) and \(w \mathcal{R} z\), which means \(x \mathcal{D} z\).  </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="index.html" title="finalized"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="finalized"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>
