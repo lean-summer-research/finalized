@@ -187,7 +187,7 @@ instance isPreorder : IsPreorder S RPreorder where
 end RPreorder
 
 /-- `x` is 𝓛-below `y` if `x = y` or there exists a `z : S` such that `x = z * y` -/
-def LPreorder (x y: S) : Prop := ∃ z : WithOne S, ↑x = z * ↑y
+def LPreorder (x y : S) : Prop := ∃ z : WithOne S, ↑x = z * ↑y
 
 infix:50 " ≤𝓛 " => LPreorder
 
@@ -259,7 +259,7 @@ end HPreorder
 /-- The symmetric closure of a preorder is an equivalence relation. -/
 -- The `_root_` prefix escapes the current `Semigroup` namespace
 def _root_.IsPreorder.SymmClosure {α : Type*} (p : α → α → Prop) [h : IsPreorder α p] :
-    Equivalence (λ a b  => p a b ∧ p b a) where
+    Equivalence (fun a b ↦ p a b ∧ p b a) where
   refl := by simp [h.refl]
   symm := by aesop
   trans {x y z : α} (h₁ : p x y ∧ p y x) (h₂ : p y z ∧ p z y) : p x z ∧ p z x := by
@@ -624,7 +624,7 @@ variable {x y z : S}
   simp_rw [WithOne.coe_mul, ← mul_assoc] at *
   exact hu
 
-/-- If `x 𝓡 x * y * z`, then `x * y 𝓡 x * y * z`.-/
+/-- If `x 𝓡 x * y * z`, then `x * y 𝓡 x * y * z`. -/
 @[simp] lemma REquiv.right_extend (h : x 𝓡 x * y * z) : x * y 𝓡 x * y * z := by
   simp_all [REquiv]
   obtain ⟨⟨u, hu⟩, _⟩ := h
@@ -633,7 +633,7 @@ variable {x y z : S}
   rw [← hu]
 
 /-- If `x 𝓛 z * y * x`, then `x 𝓛 y * x`. -/
-@[simp] lemma LEquiv.left_cancel (h: x 𝓛 z * y * x ) : x 𝓛 y * x := by
+@[simp] lemma LEquiv.left_cancel (h : x 𝓛 z * y * x) : x 𝓛 y * x := by
   simp_all [LEquiv]
   obtain ⟨u, hu⟩ := h
   use u * z

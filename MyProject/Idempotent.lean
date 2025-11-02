@@ -10,7 +10,8 @@ This file defines properties related to idempotent elements in finite semigroups
 
 ## Main theorems
 
-* `Semigroup.exists_idempotent_pow` - `∃ (m : ℕ+), IsIdempotentElem (x ^ m)` in finite semigroups.
+let `S` be a finite semigroup and `x : S`
+* `Semigroup.exists_idempotent_pow` - `∃ (m : ℕ+), IsIdempotentElem (x ^ m)`
 * `Monoid.exists_idempotent_pow` - `∃ (n : ℕ), IsIdempotentElem (x ^ n) ∧ n ≠ 0` in finite monoids.
 * `Monoid.exists_pow_sandwich_eq_self` - If `a = x * a * y`, then
   `∃ n₁ n₂ : ℕ, n₁ ≠ 0 ∧ n₂ ≠ 0 ∧ x ^ n₁ * a = a ∧ a * y ^ n₂ = a`.
@@ -132,7 +133,11 @@ theorem exists_pow_sandwich_eq_self [Finite M] {x a y : M} (h : a = x * a * y) :
   have ⟨n₁, ⟨hn₁, hneq₁⟩⟩ := Monoid.exists_idempotent_pow x
   have ⟨n₂, ⟨hn₂, hneq₂⟩⟩ := Monoid.exists_idempotent_pow y
   use n₁, n₂
-  constructor; exact hneq₁; constructor; exact hneq₂; constructor
+  constructor
+  · exact hneq₁
+  constructor
+  · exact hneq₂
+  constructor
   · rw [← (loop n₁), ← mul_assoc, ← mul_assoc, hn₁]
   · rw [← (loop n₂), mul_assoc, hn₂]
 

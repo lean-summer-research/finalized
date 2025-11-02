@@ -65,7 +65,7 @@ namespace Semigroup
 variable {S : Type*} [Semigroup S]
 
 /-- An element `x` is 𝓡-below an idempotent `e` if and only if `x = e * x`. -/
-theorem RPreorder.le_idempotent (x e : S) (h: IsIdempotentElem e) :
+theorem RPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
     (x ≤𝓡 e) ↔ (x = e * x) := by
   constructor
   · rintro ⟨u, hru⟩
@@ -76,7 +76,7 @@ theorem RPreorder.le_idempotent (x e : S) (h: IsIdempotentElem e) :
     rw [← WithOne.coe_inj] at hl; exact hl
 
 /-- An element `x` is 𝓛-below an idempotent `e` if and only if `x = x * e`. -/
-theorem LPreorder.le_idempotent (x e : S) (h: IsIdempotentElem e) :
+theorem LPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
     (x ≤𝓛 e) ↔ (x = x * e) := by
   constructor
   · rintro ⟨u, hru⟩

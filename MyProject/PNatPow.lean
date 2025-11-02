@@ -40,7 +40,7 @@ Analogous definitions and lemmas for exponentiation in monoids can be found in
 
 ## Blueprint
 
-This file should not have any blueprint entries.
+This file does not have any blueprint entries.
 -/
 
 namespace PNat

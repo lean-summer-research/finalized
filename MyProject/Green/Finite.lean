@@ -54,7 +54,7 @@ variable {S} [Semigroup S] [Finite S] {x y u v : S}
 /-! ### The D-J Theorem for Finite Semigroups -/
 
 /-- If `S` is finite, then `WithOne S` is also finite. -/
-instance _root_.WithOne.finite: Finite (WithOne S) := by
+instance _root_.WithOne.finite : Finite (WithOne S) := by
   have H := finite_or_infinite (WithOne S)
   cases H with
   | inl hfinite => exact hfinite
@@ -112,8 +112,6 @@ theorem dEquiv_iff_jEquiv [Finite S] : x 𝓓 y ↔ x 𝓙 y := by
   · apply DEquiv.to_jEquiv
   · apply JEquiv.to_dEquiv
 
-example (h : x ∈ DEquiv.set y) : x ∈ ⟦y⟧𝓙 := by sorry
-
 /-!
 ### Properties relating J, L, and R (Proposition 1.4.2 and 1.4.4)
 This section shows how 𝓙-equivalence "strengthens"
@@ -144,7 +142,7 @@ lemma LEquiv.of_jEquiv_mul_left (hj : x 𝓙 y * x) : x 𝓛 y * x := by
   rw [hl, ha]
 
 /-- In finite semigroups, 𝓙-equivalence strengthens the 𝓡-preorder to 𝓡-equivalence. -/
-theorem REquiv.of_rPreorder_and_jEquiv (hr : x ≤𝓡 y) (hj: x 𝓙 y) : x 𝓡 y := by
+theorem REquiv.of_rPreorder_and_jEquiv (hr : x ≤𝓡 y) (hj : x 𝓙 y) : x 𝓡 y := by
   obtain ⟨z, hz⟩ := hr
   cases z with
   | one =>
@@ -159,7 +157,7 @@ theorem REquiv.of_rPreorder_and_jEquiv (hr : x ≤𝓡 y) (hj: x 𝓙 y) : x �
     apply REquiv.of_jEquiv_mul_right hj.symm
 
 /-- In finite semigroups, 𝓙-equivalence strengthens the 𝓛-preorder to 𝓛-equivalence. -/
-theorem LEquiv.of_lPreorder_and_jEquiv (hl : x ≤𝓛 y) (hj: x 𝓙 y) : x 𝓛 y := by
+theorem LEquiv.of_lPreorder_and_jEquiv (hl : x ≤𝓛 y) (hj : x 𝓙 y) : x 𝓛 y := by
   obtain ⟨z, hz⟩ := hl
   cases z with
   | one =>
@@ -177,7 +175,7 @@ theorem LEquiv.of_lPreorder_and_jEquiv (hl : x ≤𝓛 y) (hj: x 𝓙 y) : x �
 
 /-- In finite semigroups, an element sandwiched between two factors is 𝓗-related to its
 left and right partial products. -/
-theorem HEquiv.of_eq_sandwich (h : x = u * x * v ) : x 𝓗 u * x ∧ x 𝓗 x * v := by
+theorem HEquiv.of_eq_sandwich (h : x = u * x * v) : x 𝓗 u * x ∧ x 𝓗 x * v := by
   simp [HEquiv.iff_rEquiv_and_lEquiv]
   constructor <;> constructor
   · apply REquiv.of_rPreorder_and_jEquiv
