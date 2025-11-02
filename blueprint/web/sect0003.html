@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Basic Properties of Green’s Relations</title>
+<link rel="next" href="sect0004.html" title="Green’s Relations in Finite Semigroups" />
+<link rel="prev" href="sect0002.html" title="Green’s Relations" />
+<link rel="up" href="index.html" title="finalized" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">finalized</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Idempotent Elements in Finite Semigroups</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Green’s Relations</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Basic Properties of Green’s Relations</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Green’s Relations in Finite Semigroups</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000004">3 Basic Properties of Green’s Relations</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:le-idempotent">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">7</span>
+    <span class="lemma_thmtitle">Characterization of Elements Below Idempotents</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:le-idempotent">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000011"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.RPreorder.le_idempotent" class="lean_decl">Semigroup.RPreorder.le_idempotent</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LPreorder.le_idempotent" class="lean_decl">Semigroup.LPreorder.le_idempotent</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HPreorder.le_idempotent" class="lean_decl">Semigroup.HPreorder.le_idempotent</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  Let \(e\) be an idempotent element in a semigroup \(S\). An element \(x \in S\) is \(\mathcal{R}\)-below \(e\) if and only if \(x = ex\). Similarly, \(x\) is \(\mathcal{L}\)-below \(e\) if and only if \(x = xe\). It follows that \(x\) is \(\mathcal{H}\)-below \(e\) if and only if both conditions hold, i.e., \(x = ex\) and \(x = xe\).   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000011">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>For the \(\mathcal{R}\)-preorder, if \(x \leq _{\mathcal{R}} e\), then \(x = ez\) for some \(z \in S^1\). Since \(e\) is idempotent, \(e=e^2\), so \(ex = e(ez) = e^2z = ez = x\). Conversely, if \(x=ex\), then \(x \leq _{\mathcal{R}} e\) by definition. The argument for the \(\mathcal{L}\)-preorder is analogous. The statement for \(\mathcal{H}\) follows directly from the definitions.  </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:greens-relations-hom-pres">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8</span>
+    <span class="lemma_thmtitle">Preservation of Green’s Relations by Morphisms</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:greens-relations-hom-pres">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000012"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.RPreorder.hom_pres" class="lean_decl">Semigroup.RPreorder.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LPreorder.hom_pres" class="lean_decl">Semigroup.LPreorder.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JPreorder.hom_pres" class="lean_decl">Semigroup.JPreorder.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HPreorder.hom_pres" class="lean_decl">Semigroup.HPreorder.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.hom_pres" class="lean_decl">Semigroup.REquiv.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.hom_pres" class="lean_decl">Semigroup.LEquiv.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JEquiv.hom_pres" class="lean_decl">Semigroup.JEquiv.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.hom_pres" class="lean_decl">Semigroup.HEquiv.hom_pres</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.hom_pres" class="lean_decl">Semigroup.DEquiv.hom_pres</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  Green’s relations are preserved under semigroup morphisms. Let \(f: S \to T\) be a semigroup morphism. If two elements \(x, y \in S\) are related by any of Green’s preorders or equivalence relations, then their images \(f(x), f(y)\) are related by the same relation in \(T\).   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000012">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>If \(x \leq _{\mathcal{R}} y\), then \(x = yz\) for some \(z \in S^1\). Applying the morphism \(f\) gives \(f(x) = f(yz) = f(y)f(z)\), so \(f(x) \leq _{\mathcal{R}} f(y)\). This extends to the equivalence relation: if \(x \mathcal{R} y\), then \(x \leq _{\mathcal{R}} y\) and \(y \leq _{\mathcal{R}} x\), which implies \(f(x) \leq _{\mathcal{R}} f(y)\) and \(f(y) \leq _{\mathcal{R}} f(x)\), so \(f(x) \mathcal{R} f(y)\). </p>
+<p>A similar argument holds for \(\mathcal{L}\). The preservation of \(\mathcal{J}\) and \(\mathcal{H}\) follows from their definitions. For \(\mathcal{D}\), if \(x \mathcal{D} y\), there exists \(z\) such that \(x \mathcal{R} z\) and \(z \mathcal{L} y\). Then \(f(x) \mathcal{R} f(z)\) and \(f(z) \mathcal{L} f(y)\), which implies \(f(x) \mathcal{D} f(y)\).  </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0002.html" title="Green’s Relations"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="finalized"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0004.html" title="Green’s Relations in Finite Semigroups"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1762121287 "print.tex" "/workspaces/finalized/blueprint/print/print.pdf" "print" 1762121288
+["pdflatex"] 1762122682 "print.tex" "/workspaces/finalized/blueprint/print/print.pdf" "print" 1762122683
   "/etc/texmf/web2c/texmf.cnf" 1762120508 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -85,10 +85,13 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1762120528 3606619 d6fe9c7261afcf4baef1ef21999bbb13 ""
-  "/workspaces/finalized/blueprint/print/../../LaTeX/Chapters.tex" 1762121278 34 71b473f672d351e5462f14da346b96bc ""
+  "/workspaces/finalized/blueprint/print/../../LaTeX/Chapters.tex" 1762121995 142 dfbe0dd8a16d538a5766e71f0a84d4bf ""
+  "/workspaces/finalized/blueprint/print/../../LaTeX/Green/Basic.tex" 1762107309 2584 e2abf0ead4225564dad31e2940bdc16e ""
   "/workspaces/finalized/blueprint/print/../../LaTeX/Green/Defs.tex" 1762107288 7311 7b60c656ce4f7fb21e04ed955e35c67f ""
-  "/workspaces/finalized/blueprint/print/print.aux" 1762121287 1235 a6c048ad6e3318a2cdd4b5ef0ffdb7b0 "pdflatex"
-  "/workspaces/finalized/blueprint/print/print.out" 1762121287 131 21f78d149bedcbb55bae84d7bd76b1fb "pdflatex"
+  "/workspaces/finalized/blueprint/print/../../LaTeX/Green/Finite.tex" 1762107309 3683 33d7dd955e08b91cf798ca7b448042ea ""
+  "/workspaces/finalized/blueprint/print/../../LaTeX/Idempotent.tex" 1762107306 2295 d14ee00dac88f60a10902dae961e4d45 ""
+  "/workspaces/finalized/blueprint/print/print.aux" 1762122683 2547 42cd6ceec8289de032676deb943673a3 "pdflatex"
+  "/workspaces/finalized/blueprint/print/print.out" 1762122683 871 116d3917dc8aea294536794440f1e5ec "pdflatex"
   "content.tex" 1762121259 397 c59d46ff748cbf5fc2552c4b44bd6e87 ""
   "macros/common.tex" 1762110946 820 60fafcc3aa944a5e60030581a943ef6b ""
   "macros/print.tex" 1762110946 1101 87627b2ec24fef68edc71c13f43f7bab ""

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.11.2)  2 NOV 2025 22:08
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.11.2)  2 NOV 2025 22:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -710,7 +710,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] (./content.tex
 (/workspaces/finalized/blueprint/print/../../LaTeX/Chapters.tex
-(/workspaces/finalized/blueprint/print/../../LaTeX/Green/Defs.tex
+(/workspaces/finalized/blueprint/print/../../LaTeX/Idempotent.tex
 Chapter 1.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 10.00107pt on input line 7.
@@ -724,19 +724,32 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 7.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 7.
-[1
+) (/workspaces/finalized/blueprint/print/../../LaTeX/Green/Defs.tex [1
 
-]))) [2] (/workspaces/finalized/blueprint/print/print.aux)
+]
+Chapter 2.
+[2
+
+]) (/workspaces/finalized/blueprint/print/../../LaTeX/Green/Basic.tex
+[3]
+Chapter 3.
+) (/workspaces/finalized/blueprint/print/../../LaTeX/Green/Finite.tex [4
+
+]
+Chapter 4.
+))) [5
+
+] (/workspaces/finalized/blueprint/print/print.aux)
 Package rerunfilecheck Info: File `print.out' has not changed.
-(rerunfilecheck)             Checksum: 21F78D149BEDCBB55BAE84D7BD76B1FB;131.
+(rerunfilecheck)             Checksum: 116D3917DC8AEA294536794440F1E5EC;871.
  ) 
 Here is how much of TeX's memory you used:
- 16560 strings out of 478190
- 308040 string characters out of 5854827
+ 16582 strings out of 478190
+ 308815 string characters out of 5854827
  807831 words of memory out of 5000000
- 36953 multiletter control sequences out of 15000+600000
+ 36966 multiletter control sequences out of 15000+600000
  474598 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,6n,115p,635b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 86i,6n,115p,775b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on /workspaces/finalized/blueprint/print/print.pdf (3 pages).
+Output written on /workspaces/finalized/blueprint/print/print.pdf (6 pages).

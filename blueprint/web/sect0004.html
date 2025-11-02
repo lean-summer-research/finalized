@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Green’s Relations in Finite Semigroups</title>
+<link rel="prev" href="sect0003.html" title="Basic Properties of Green’s Relations" />
+<link rel="up" href="index.html" title="finalized" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">finalized</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Idempotent Elements in Finite Semigroups</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Green’s Relations</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Basic Properties of Green’s Relations</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Green’s Relations in Finite Semigroups</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000005">4 Green’s Relations in Finite Semigroups</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:d-j-theorem">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">9</span>
+    <span class="lemma_thmtitle">Equivalence of D and J Relations in Finite Semigroups</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#lem:d-j-theorem">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000013"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0001.html#lem:exists-pow-sandwich">Lemma 2</a></li>
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0001.html#lem:exists-pow-sandwich">Lemma 2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JEquiv.to_dEquiv" class="lean_decl">Semigroup.JEquiv.to_dEquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.dEquiv_iff_jEquiv" class="lean_decl">Semigroup.dEquiv_iff_jEquiv</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  In a finite semigroup, the \(\mathcal{D}\) and \(\mathcal{J}\) relations are equivalent. That is, for any two elements \(x, y \in S\), \(x \mathcal{D} y\) if and only if \(x \mathcal{J} y\).   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000013">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The forward direction, that \(x \mathcal{D} y\) implies \(x \mathcal{J} y\), holds in any semigroup, not just finite ones. This is because if \(x \mathcal{D} y\), there exists \(z\) such that \(x \mathcal{R} z\) and \(z \mathcal{L} y\). These relations imply \(x \leq _{\mathcal{J}} z\) and \(z \leq _{\mathcal{J}} y\), and by transitivity, \(x \leq _{\mathcal{J}} y\). A symmetric argument shows \(y \leq _{\mathcal{J}} x\), so \(x \mathcal{J} y\). </p>
+<p>The reverse direction relies on the semigroup being finite. If \(x \mathcal{J} y\), then \(x \leq _{\mathcal{J}} y\) and \(y \leq _{\mathcal{J}} x\). This means there exist \(s, t, u, v \in S^1\) such that \(x = syt\) and \(y=uxv\). Substituting these into each other shows that \(x\) is of the form \(axb\) for some \(a,b \in S\). In a finite semigroup, this implies that some power of \(a\) and \(b\) will lead to an idempotent element related to \(x\), which can be used to construct the intermediate element for the \(\mathcal{D}\) relation. This relies on the property that for any element \(a\) in a finite semigroup, the sequence \(a, a^2, a^3, \dots \) must contain an idempotent.  </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:j-strengthening">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">10</span>
+    <span class="lemma_thmtitle">J-Equivalence Strengthening Preorders</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#lem:j-strengthening">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000014"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0004.html#lem:d-j-theorem">Lemma 9</a></li>
+          
+          <li><a href="sect0001.html#lem:exists-pow-sandwich">Lemma 2</a></li>
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0004.html#lem:d-j-theorem">Lemma 9</a></li>
+          
+          <li><a href="sect0001.html#lem:exists-pow-sandwich">Lemma 2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.of_rPreorder_and_jEquiv" class="lean_decl">Semigroup.REquiv.of_rPreorder_and_jEquiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.of_lPreorder_and_jEquiv" class="lean_decl">Semigroup.LEquiv.of_lPreorder_and_jEquiv</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  In a finite semigroup, if two elements are \(\mathcal{J}\)-equivalent, then a one-sided preorder implies the corresponding one-sided equivalence. Specifically, if \(x \mathcal{J} y\) and \(x \leq _{\mathcal{R}} y\), then \(x \mathcal{R} y\). Similarly, if \(x \mathcal{J} y\) and \(x \leq _{\mathcal{L}} y\), then \(x \mathcal{L} y\).   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000014">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Suppose \(x \mathcal{J} y\) and \(x \leq _{\mathcal{R}} y\). Since we are in a finite semigroup, \(x \mathcal{J} y\) implies \(x \mathcal{D} y\) by <a href="sect0004.html#lem:d-j-theorem">9</a>. So there exists a \(z\) such that \(x \mathcal{R} z\) and \(z \mathcal{L} y\). From \(x \leq _{\mathcal{R}} y\), we can show that \(y \leq _{\mathcal{R}} x\), which gives \(x \mathcal{R} y\). The argument for \(\mathcal{L}\) is analogous.  </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:h-of-sandwich">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">11</span>
+    <span class="lemma_thmtitle">H-Equivalence from Sandwiching</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#lem:h-of-sandwich">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000015"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0004.html#lem:j-strengthening">Lemma 10</a></li>
+          
+          <li><a href="sect0001.html#lem:exists-pow-sandwich">Lemma 2</a></li>
+          
+          <li><a href="sect0002.html#def:greens-relations">Definition 3</a></li>
+          
+          <li><a href="sect0004.html#lem:j-strengthening">Lemma 10</a></li>
+          
+          <li><a href="sect0001.html#lem:exists-pow-sandwich">Lemma 2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.of_eq_sandwich" class="lean_decl">Semigroup.HEquiv.of_eq_sandwich</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  In a finite semigroup, if an element \(x\) can be written as \(x = uxv\) for some \(u, v \in S\), then \(x\) is \(\mathcal{H}\)-equivalent to both \(ux\) and \(xv\).   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000015">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The condition \(x = uxv\) implies \(x \leq _{\mathcal{J}} ux\) and \(x \leq _{\mathcal{J}} xv\). It also implies \(ux \leq _{\mathcal{R}} x\) and \(xv \leq _{\mathcal{L}} x\). Using the property that \(\mathcal{J}\)-equivalence strengthens preorders to equivalences in finite semigroups (<a href="sect0004.html#lem:j-strengthening">10</a>), we can establish the \(\mathcal{R}\) and \(\mathcal{L}\) equivalences needed to show \(x \mathcal{H} ux\) and \(x \mathcal{H} xv\).  </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0003.html" title="Basic Properties of Green’s Relations"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="finalized"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

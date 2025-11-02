@@ -74,7 +74,7 @@
       <span class="definition_thmcaption">
       Definition
       </span>
-      <span class="definition_thmlabel">1</span><span class="definition_thmtitle">Green’s Preorder and Equivalence Relations</span></div>
+      <span class="definition_thmlabel">3</span><span class="definition_thmtitle">Green’s Preorder and Equivalence Relations</span></div>
     <div class="thm_thmcontent"><p>  In a semigroup \(S\), Green’s relations are a set of five equivalence relations that characterize the elements of \(S\) in terms of the principal ideals they generate. These relations are fundamental to the study of semigroups. </p>
 <p>First, we define four preorder relations: \(\leq _{\mathcal{R}}\), \(\leq _{\mathcal{L}}\), \(\leq _{\mathcal{J}}\), and \(\leq _{\mathcal{H}}\). Let \(S^1\) be the monoid obtained by adjoining an identity element to \(S\) if it does not already have one. For any two elements \(x, y \in S\): </p>
 <ul class="itemize">
@@ -93,7 +93,7 @@
 
 </div>
 
-    <a class="latex_link" href="sect0001.html#def:greens-relations">LaTeX</a>
+    <a class="latex_link" href="sect0002.html#def:greens-relations">LaTeX</a>
     
     
   <div class="tooltip">
@@ -160,11 +160,11 @@
       <span class="lemma_thmcaption">
       Lemma
       </span>
-      <span class="lemma_thmlabel">4</span><span class="lemma_thmtitle">Closure of D under R and L</span></div>
+      <span class="lemma_thmlabel">6</span><span class="lemma_thmtitle">Closure of D under R and L</span></div>
     <div class="thm_thmcontent"><p>  The \(\mathcal{D}\) relation is closed under composition with \(\mathcal{R}\) and \(\mathcal{L}\). If \(x \mathcal{D} y\) and \(y \mathcal{L} z\), then \(x \mathcal{D} z\). Similarly, if \(x \mathcal{D} y\) and \(y \mathcal{R} z\), then \(x \mathcal{D} z\). This property is used to prove the transitivity of \(\mathcal{D}\).   </p>
 </div>
 
-    <a class="latex_link" href="sect0001.html#lem:d-equiv-closed">LaTeX</a>
+    <a class="latex_link" href="sect0002.html#lem:d-equiv-closed">LaTeX</a>
     
     
   <div class="tooltip">
@@ -174,6 +174,169 @@
            <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.closed_under_lEquiv" class="lean_decl">Semigroup.DEquiv.closed_under_lEquiv</a></li>
         
            <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.closed_under_rEquiv" class="lean_decl">Semigroup.DEquiv.closed_under_rEquiv</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:d-j-theorem_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:d-j-theorem" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">9</span><span class="lemma_thmtitle">Equivalence of D and J Relations in Finite Semigroups</span></div>
+    <div class="thm_thmcontent"><p>  In a finite semigroup, the \(\mathcal{D}\) and \(\mathcal{J}\) relations are equivalent. That is, for any two elements \(x, y \in S\), \(x \mathcal{D} y\) if and only if \(x \mathcal{J} y\).   </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:d-j-theorem">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JEquiv.to_dEquiv" class="lean_decl">Semigroup.JEquiv.to_dEquiv</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.dEquiv_iff_jEquiv" class="lean_decl">Semigroup.dEquiv_iff_jEquiv</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:exists-pow-sandwich_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:exists-pow-sandwich" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">2</span><span class="lemma_thmtitle">Sandwich Property in Finite Monoids</span></div>
+    <div class="thm_thmcontent"><p>  In a finite monoid \(M\), if an element \(a\) satisfies the property \(a = xay\) for some \(x, y \in M\), then there exist non-zero powers of \(x\) and \(y\), say \(n_1\) and \(n_2\), such that \(x^{n_1}a = a\) and \(ay^{n_2} = a\).   </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:exists-pow-sandwich">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Monoid.exists_pow_sandwich_eq_self">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:exists-unique-idempotent-pow_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:exists-unique-idempotent-pow" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">1</span><span class="lemma_thmtitle">Existence of Idempotent Powers</span></div>
+    <div class="thm_thmcontent"><p>  In a finite semigroup, for any element \(x\), there exists a positive integer \(m\) such that \(x^m\) is an idempotent. This idempotent power is unique. The existence is a consequence of the fact that in a finite semigroup, the sequence of powers of an element \(x, x^2, x^3, \dots \) must eventually repeat. From a repeating sequence, an idempotent can be constructed.  </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:exists-unique-idempotent-pow">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.exists_repeating_pow" class="lean_decl">Semigroup.exists_repeating_pow</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.pow_idempotent_unique" class="lean_decl">Semigroup.pow_idempotent_unique</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.exists_idempotent_pow" class="lean_decl">Semigroup.exists_idempotent_pow</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:greens-relations-hom-pres_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:greens-relations-hom-pres" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">8</span><span class="lemma_thmtitle">Preservation of Green’s Relations by Morphisms</span></div>
+    <div class="thm_thmcontent"><p>  Green’s relations are preserved under semigroup morphisms. Let \(f: S \to T\) be a semigroup morphism. If two elements \(x, y \in S\) are related by any of Green’s preorders or equivalence relations, then their images \(f(x), f(y)\) are related by the same relation in \(T\).   </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:greens-relations-hom-pres">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.RPreorder.hom_pres" class="lean_decl">Semigroup.RPreorder.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LPreorder.hom_pres" class="lean_decl">Semigroup.LPreorder.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JPreorder.hom_pres" class="lean_decl">Semigroup.JPreorder.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HPreorder.hom_pres" class="lean_decl">Semigroup.HPreorder.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.hom_pres" class="lean_decl">Semigroup.REquiv.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.hom_pres" class="lean_decl">Semigroup.LEquiv.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.JEquiv.hom_pres" class="lean_decl">Semigroup.JEquiv.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.hom_pres" class="lean_decl">Semigroup.HEquiv.hom_pres</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.hom_pres" class="lean_decl">Semigroup.DEquiv.hom_pres</a></li>
         
       </ul>
   </div>
@@ -199,11 +362,11 @@
       <span class="lemma_thmcaption">
       Lemma
       </span>
-      <span class="lemma_thmlabel">2</span><span class="lemma_thmtitle">Multiplication Compatibility of Green’s Relations</span></div>
+      <span class="lemma_thmlabel">4</span><span class="lemma_thmtitle">Multiplication Compatibility of Green’s Relations</span></div>
     <div class="thm_thmcontent"><p>  The \(\mathcal{R}\) and \(\mathcal{L}\) relations exhibit compatibility with semigroup multiplication on one side. Specifically, the \(\mathcal{R}\)-preorder is compatible with left multiplication, and the \(\mathcal{L}\)-preorder is compatible with right multiplication. If \(x \leq _{\mathcal{R}} y\), then for any \(z \in S\), we have \(zx \leq _{\mathcal{R}} zy\). This property extends to the equivalence relation \(\mathcal{R}\). If \(x \mathcal{R} y\), then \(zx \mathcal{R} zy\). A similar argument holds for the \(\mathcal{L}\)-preorder and \(\mathcal{L}\)-equivalence, which are compatible with right multiplication. If \(x \leq _{\mathcal{L}} y\), then \(xz \leq _{\mathcal{L}} yz\) for any \(z \in S\).   </p>
 </div>
 
-    <a class="latex_link" href="sect0001.html#lem:greens-relations-mul-compat">LaTeX</a>
+    <a class="latex_link" href="sect0002.html#lem:greens-relations-mul-compat">LaTeX</a>
     
     
   <div class="tooltip">
@@ -231,6 +394,116 @@
 
 
     
+    <div class="dep-modal-container" id="lem:h-of-sandwich_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:h-of-sandwich" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">11</span><span class="lemma_thmtitle">H-Equivalence from Sandwiching</span></div>
+    <div class="thm_thmcontent"><p>  In a finite semigroup, if an element \(x\) can be written as \(x = uxv\) for some \(u, v \in S\), then \(x\) is \(\mathcal{H}\)-equivalent to both \(ux\) and \(xv\).   </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:h-of-sandwich">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.of_eq_sandwich">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:j-strengthening_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:j-strengthening" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">10</span><span class="lemma_thmtitle">J-Equivalence Strengthening Preorders</span></div>
+    <div class="thm_thmcontent"><p>  In a finite semigroup, if two elements are \(\mathcal{J}\)-equivalent, then a one-sided preorder implies the corresponding one-sided equivalence. Specifically, if \(x \mathcal{J} y\) and \(x \leq _{\mathcal{R}} y\), then \(x \mathcal{R} y\). Similarly, if \(x \mathcal{J} y\) and \(x \leq _{\mathcal{L}} y\), then \(x \mathcal{L} y\).   </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:j-strengthening">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.of_rPreorder_and_jEquiv" class="lean_decl">Semigroup.REquiv.of_rPreorder_and_jEquiv</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.of_lPreorder_and_jEquiv" class="lean_decl">Semigroup.LEquiv.of_lPreorder_and_jEquiv</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:le-idempotent_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:le-idempotent" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">7</span><span class="lemma_thmtitle">Characterization of Elements Below Idempotents</span></div>
+    <div class="thm_thmcontent"><p>  Let \(e\) be an idempotent element in a semigroup \(S\). An element \(x \in S\) is \(\mathcal{R}\)-below \(e\) if and only if \(x = ex\). Similarly, \(x\) is \(\mathcal{L}\)-below \(e\) if and only if \(x = xe\). It follows that \(x\) is \(\mathcal{H}\)-below \(e\) if and only if both conditions hold, i.e., \(x = ex\) and \(x = xe\).   </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:le-idempotent">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.RPreorder.le_idempotent" class="lean_decl">Semigroup.RPreorder.le_idempotent</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LPreorder.le_idempotent" class="lean_decl">Semigroup.LPreorder.le_idempotent</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HPreorder.le_idempotent" class="lean_decl">Semigroup.HPreorder.le_idempotent</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:r-l-comm_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -242,11 +515,11 @@
       <span class="lemma_thmcaption">
       Lemma
       </span>
-      <span class="lemma_thmlabel">3</span><span class="lemma_thmtitle">Commutation of R and L Relations</span></div>
+      <span class="lemma_thmlabel">5</span><span class="lemma_thmtitle">Commutation of R and L Relations</span></div>
     <div class="thm_thmcontent"><p>  The composition of the relations \(\mathcal{R}\) and \(\mathcal{L}\) is commutative. That is, for any \(x, y \in S\), there exists a \(z\) such that \(x \mathcal{R} z\) and \(z \mathcal{L} y\) if and only if there exists a \(w\) such that \(x \mathcal{L} w\) and \(w \mathcal{R} y\). This can be written as \(\mathcal{R} \circ \mathcal{L} = \mathcal{L} \circ \mathcal{R}\). This property is crucial for proving that the relation \(\mathcal{D} = \mathcal{R} \circ \mathcal{L}\) is symmetric, and therefore an equivalence relation.   </p>
 </div>
 
-    <a class="latex_link" href="sect0001.html#lem:r-l-comm">LaTeX</a>
+    <a class="latex_link" href="sect0002.html#lem:r-l-comm">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.rEquiv_lEquiv_comm">Lean</a>
@@ -277,7 +550,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:greens-relations"	[color=green,		fillcolor="#B0ECA3",		label="greens-relations",		shape=box,		style=filled];	"lem:greens-relations-mul-compat"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-mul-compat",		shape=ellipse,		style=filled];	"def:greens-relations" -> "lem:greens-relations-mul-compat"	[style=dashed];	"lem:r-l-comm"	[color=green,		fillcolor="#1CAC78",		label="r-l-comm",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:r-l-comm"	[style=dashed];	"lem:d-equiv-closed"	[color=green,		fillcolor="#1CAC78",		label="d-equiv-closed",		shape=ellipse,		style=filled];	"lem:r-l-comm" -> "lem:d-equiv-closed";}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"lem:r-l-comm"	[color=green,		fillcolor="#1CAC78",		label="r-l-comm",		shape=ellipse,		style=filled];	"lem:d-equiv-closed"	[color=green,		fillcolor="#1CAC78",		label="d-equiv-closed",		shape=ellipse,		style=filled];	"lem:r-l-comm" -> "lem:d-equiv-closed";	"lem:d-j-theorem"	[color=green,		fillcolor="#1CAC78",		label="d-j-theorem",		shape=ellipse,		style=filled];	"lem:j-strengthening"	[color=green,		fillcolor="#1CAC78",		label="j-strengthening",		shape=ellipse,		style=filled];	"lem:d-j-theorem" -> "lem:j-strengthening"	[style=dashed];	"lem:h-of-sandwich"	[color=green,		fillcolor="#1CAC78",		label="h-of-sandwich",		shape=ellipse,		style=filled];	"lem:j-strengthening" -> "lem:h-of-sandwich"	[style=dashed];	"def:greens-relations"	[color=green,		fillcolor="#B0ECA3",		label="greens-relations",		shape=box,		style=filled];	"def:greens-relations" -> "lem:d-j-theorem"	[style=dashed];	"lem:greens-relations-mul-compat"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-mul-compat",		shape=ellipse,		style=filled];	"def:greens-relations" -> "lem:greens-relations-mul-compat"	[style=dashed];	"lem:le-idempotent"	[color=green,		fillcolor="#1CAC78",		label="le-idempotent",		shape=ellipse,		style=filled];	"def:greens-relations" -> "lem:le-idempotent"	[style=dashed];	"lem:greens-relations-hom-pres"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-hom-pres",		shape=ellipse,		style=filled];	"def:greens-relations" -> "lem:greens-relations-hom-pres"	[style=dashed];	"lem:greens-relations-mul-compat" -> "lem:r-l-comm"	[style=dashed];	"lem:exists-unique-idempotent-pow"	[color=green,		fillcolor="#1CAC78",		label="exists-unique-idempotent-pow",		shape=ellipse,		style=filled];	"lem:exists-pow-sandwich"	[color=green,		fillcolor="#1CAC78",		label="exists-pow-sandwich",		shape=ellipse,		style=filled];	"lem:exists-unique-idempotent-pow" -> "lem:exists-pow-sandwich"	[style=dashed];	"lem:exists-pow-sandwich" -> "lem:d-j-theorem"	[style=dashed];}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {
