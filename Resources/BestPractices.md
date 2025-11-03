@@ -1,19 +1,10 @@
-# Lean/Mathlib Best Practices
+# Mathlib Best Practices
 
 This document contains high-level coding practices and guidelines for Lean 4 code and Mathlib contributions.
 
 **Sources:**
 * Lean Community website: <https://leanprover-community.github.io/index.html>
 * Library Style Guidelines: <https://leanprover-community.github.io/contribute/style.html>
-
----
-
-## Table of Contents
-
-1. [Quick Reference](#quick-reference)
-2. [Normal Forms](#normal-forms)
-3. [Simp Lemmas](#simp-lemmas)
-4. [Iff Theorems](#iff-theorems)
 
 ---
 
