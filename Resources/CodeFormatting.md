@@ -1,19 +1,10 @@
-# Lean/Mathlib Code Formatting
+# Code Formatting Guide
 
 This document contains comprehensive code formatting guidelines for Lean 4 code and Mathlib contributions.
 
 **Sources:**
 * Lean Community website: <https://leanprover-community.github.io/index.html>
 * Library Style Guidelines: <https://leanprover-community.github.io/contribute/style.html>
-
----
-
-## Table of Contents
-
-1. [Line Length](#line-length)
-2. [Hypotheses Placement](#hypotheses-placement)
-3. [Tactics](#tactics)
-4. [Whitespace and Operators](#whitespace-and-operators)
 
 ---
 
