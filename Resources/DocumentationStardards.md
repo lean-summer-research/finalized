@@ -1,20 +1,10 @@
 # Lean/Mathlib Documentation Standards
 
-This document contains comprehensive documentation standards for Lean 4 code and Mathlib contributions.
+This document contains documentation standards for Lean 4 code and Mathlib contributions.
 
 **Sources:**
 * Lean Community website: <https://leanprover-community.github.io/index.html>
 * Library Style Guidelines: <https://leanprover-community.github.io/contribute/style.html>
-
----
-
-## Table of Contents
-
-1. [Comments](#comments)
-2. [Declaration Docstrings](#declaration-docstrings)
-3. [Module Docstrings](#module-docstrings)
-4. [File Structure](#file-structure)
-5. [Examples of Good Documentation](#examples-of-good-documentation)
 
 ---
 
@@ -40,7 +30,7 @@ Documentation strings for declarations are delimited with `/-- ... -/`.
 - Doc strings on lemmas are encouraged, particularly if the lemma has any mathematical content or might be useful in another file
 - Use newlines or single spaces between the markers (`/--`, `-/`) and the text
 - If a doc string is a complete sentence, it should end in a period
-- Named theorems (like the **mean value theorem**) should be bold faced (i.e., with two asterisks before and after)
+- Named theorems should be bold faced (i.e., with two asterisks before and after)
 
 ### Purpose
 
@@ -70,7 +60,7 @@ def padicValRat (p : ℕ) (q : ℚ) : ℤ :=
 
 ## Module Docstrings
 
-Each Mathlib file should start with a module docstring containing general documentation, written using **Markdown** and **LaTeX**.
+Each file must start with a module docstring.
 
 ### Format
 
