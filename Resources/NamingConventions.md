@@ -8,15 +8,6 @@ This document contains comprehensive naming conventions for this project.
 
 ---
 
-## Table of Contents
-
-1. [Variable Naming Conventions](#variable-naming-conventions)
-2. [Case Conventions](#case-conventions)
-3. [Naming Dictionary](#naming-dictionary)
-4. [Theorem Naming](#theorem-naming)
-
----
-
 ## Variable Naming Conventions
 
 Use consistent variable names throughout your code:
@@ -43,13 +34,6 @@ Use consistent variable names throughout your code:
 
 Use `snake_case` for terms of type `Prop` (e.g., proofs, theorem names).
 
-**Examples from this project:**
-- `pow_add` - describes `x ^ m * x ^ n = x ^ (m + n)`
-- `mul_pow_mul` - describes `(x * y) ^ n * x = x * (y * x) ^ n`
-- `exists_idempotent_pow` - existence theorem for idempotent powers
-- `le_idempotent` - characterization of elements below idempotents
-- `hom_pres` - morphism preservation properties
-
 **Standard examples:** `add_comm`, `mul_assoc`, `lt_of_succ_le`, `le_of_lt`
 
 ### `UpperCamelCase` (for Types)
@@ -62,9 +46,6 @@ Use `UpperCamelCase` for:
 - `RPreorder`, `LPreorder`, `JPreorder`, `HPreorder` - Green's preorder relations
 - `REquiv`, `LEquiv`, `JEquiv`, `HEquiv`, `DEquiv` - Green's equivalence relations
 - `IsIdempotentElem` - predicate for idempotent elements
-- `WithOne` - type constructor for adjoining a unit
-
-**Standard examples:** `REquiv`, `RLE`, `REquiv.isEquiv`, `IsClosed`, `Continuous`
 
 ### `lowerCamelCase` (for Terms)
 
@@ -72,10 +53,8 @@ Use `lowerCamelCase` for all other terms of `Type`s (basically anything else).
 
 **Examples from this project:**
 - `pNatPow` - exponentiation function for semigroups
-- `isEquivalence` - proof that a relation is an equivalence
+- `REquiv.set` - the R-class of an elemnent as a set
 - `lmult_compat`, `rmult_compat` - compatibility lemmas
-
-**Standard examples:** `REquiv.set`, `padicNorm`, `realPart`
 
 ### Special Cases
 
@@ -86,11 +65,7 @@ Use `lowerCamelCase` for all other terms of `Type`s (basically anything else).
 **Types in theorem names:** When appearing in the names of theorems, `UpperCamelCase` types get `lowerCamelCase`d.
 
 **Examples from this project:**
-- `HEquiv.to_rEquiv` - converts `HEquiv` to `REquiv` (types become lowercase)
-- `REquiv.of_rPreorder_and_jEquiv` - creates `REquiv` from preorder and `JEquiv`
-- `dEquiv_iff_jEquiv` - relates `DEquiv` and `JEquiv` (types become lowercase)
-
-**Standard example:** `HEquiv.to_rEquiv`
+- `HEquiv.to_rEquiv` - converts `HEquiv` to `REquiv` (types become lowerca
 
 **Namespaced definitions:** When referring to a namespaced definition in a lemma name not in the same namespace, the definition should have its namespace removed. If the definition name is unambiguous without its namespace, it can be used as is. Otherwise, the namespace is prepended back to it in `lowerCamelCase`. This ensures that `_`-separated strings in a lemma name correspond to a definition name or connective.
 
@@ -215,10 +190,6 @@ Sometimes, to disambiguate the name of a theorem or better convey the intended r
 
 **Examples from this project:**
 - `REquiv.of_rPreorder_and_jEquiv` - creates 𝓡-equivalence from 𝓡-preorder and 𝓙-equivalence
-- `LEquiv.of_lPreorder_and_jEquiv` - creates 𝓛-equivalence from 𝓛-preorder and 𝓙-equivalence  
-- `HEquiv.of_eq_sandwich` - creates 𝓗-equivalence from sandwich equality
-- `REquiv.of_jEquiv_mul_right` - creates 𝓡-equivalence from 𝓙-equivalence with multiplication
-- `exists_eq_add_of_lt` - existence of addition form given strict inequality
 
 **Standard examples:**
 - `lt_of_succ_le`
@@ -234,8 +205,6 @@ Some theorems are better described using axiomatic names. Common "axiomatic" pro
 
 **Examples from this project:**
 - `refl`, `symm`, `trans` in `REquiv`, `LEquiv`, `JEquiv`, `HEquiv` - standard equivalence properties
-- `isEquivalence` - bundled equivalence relation proof
-- `isPreorder` - bundled preorder relation proof
 
 **Standard examples:**
 - `And.comm`, `And.intro`, `And.elim`
