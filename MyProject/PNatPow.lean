@@ -18,7 +18,7 @@ This file also contains lemmas about the properties of this exponentiation opera
 
 ## Main theorems
 
-In the follwing statments, `x y : S` and `m n : ℕ+` where `S` is a semigroup:
+In the following statements, `x y : S` and `m n : ℕ+` where `S` is a semigroup:
 * `Semigroup.pow_add` - `x ^ m * x ^ n = x ^ (m + n)`.
 * `Semigroup.mul_pow_mul` - `(x * y) ^ n * x = x * (y * x) ^ n`.
 * `Semigroup.pow_mul_comm` - `x ^ m * x ^ n = x ^ n * x ^ m`.

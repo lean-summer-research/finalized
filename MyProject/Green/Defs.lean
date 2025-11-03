@@ -66,10 +66,10 @@ We use the preceding theorem to prove that `𝓡, 𝓛, 𝓙, 𝓗` are equivale
 We prove that `≤𝓡` and `𝓡` are compatible with left multiplication.
 That is, if `x (≤)𝓡 y`, then `z * x (≤)𝓡 z * y`.
 We also prove that `≤𝓛` and `𝓛` are compatible with right multiplication:
-* `Semigroup.RPreorder.lmul_compat`
-* `Semigroup.REquiv.lmul_compat`
-* `Semigroup.LPreorder.rmul_compat`
-* `Semigroup.LEquiv.rmul_compat`
+* `Semigroup.RPreorder.lmult_compat`
+* `Semigroup.REquiv.lmult_compat`
+* `Semigroup.LPreorder.rmult_compat`
+* `Semigroup.LEquiv.rmult_compat`
 
 * `Semigroup.rEquiv_lEquiv_comm` - We prove that `𝓡` and `𝓛` commute under composition, i.e.
 `(∃ z, x 𝓡 z ∧ z 𝓛 y) ↔ (∃ z, x 𝓛 z ∧ z 𝓡 y)`. This allows us to prove that `𝓓` is symmetric.
@@ -134,10 +134,10 @@ Dependencies : None
 * One Lemma entry for the right/left mul compatibility lemmas.
 Label : greens-relations-mul-compat
 tagged lean lemmas :
-  - `Semigroup.RPreorder.lmul_compat`
-  - `Semigroup.REquiv.lmul_compat`
-  - `Semigroup.LPreorder.rmul_compat`
-  - `Semigroup.LEquiv.rmul_compat`
+  - `Semigroup.RPreorder.lmult_compat`
+  - `Semigroup.REquiv.lmult_compat`
+  - `Semigroup.LPreorder.rmult_compat`
+  - `Semigroup.LEquiv.rmult_compat`
 Content : Prove it for ≤𝓡, then for 𝓡, then say a similar arguement holds for ≤𝓛 and 𝓛
 Dependencies : greens-relations
 
@@ -232,7 +232,7 @@ instance isPreorder : IsPreorder S JPreorder where
 end JPreorder
 
 /-- `x` is 𝓗-below `y` if `x ≤𝓡 y` and `x ≤𝓛 y` -/
-def HPreorder (a b : S) : Prop := a ≤𝓡 b ∧ a ≤𝓛 b
+def HPreorder (x y : S) : Prop := x ≤𝓡 y ∧ x ≤𝓛 y
 
 notation:50 f " ≤𝓗 " g:50 => HPreorder f g
 
@@ -259,7 +259,7 @@ end HPreorder
 /-- The symmetric closure of a preorder is an equivalence relation. -/
 -- The `_root_` prefix escapes the current `Semigroup` namespace
 def _root_.IsPreorder.SymmClosure {α : Type*} (p : α → α → Prop) [h : IsPreorder α p] :
-    Equivalence (fun a b ↦ p a b ∧ p b a) where
+    Equivalence (fun x y ↦ p x y ∧ p y x) where
   refl := by simp [h.refl]
   symm := by aesop
   trans {x y z : α} (h₁ : p x y ∧ p y x) (h₂ : p y z ∧ p z y) : p x z ∧ p z x := by
@@ -270,7 +270,7 @@ def _root_.IsPreorder.SymmClosure {α : Type*} (p : α → α → Prop) [h : IsP
 /-- Green's 𝓡 equivalence relation: the symmetric closure of the 𝓡-preorder. -/
 def REquiv (x y : S) : Prop := x ≤𝓡 y ∧ y ≤𝓡 x
 
-notation :50 a " 𝓡 " b:50 => REquiv a b
+notation :50 x " 𝓡 " y:50 => REquiv x y
 
 namespace REquiv
 
@@ -289,7 +289,7 @@ theorem isEquivalence : Equivalence (fun x y : S ↦ x 𝓡 y) := by
   REquiv.isEquivalence.trans h₁ h₂
 
 /-- The set of all elements 𝓡-related to `x`. -/
-@[simp] def set (x : S) : Set (S) := {a | a 𝓡 x}
+@[simp] def set (x : S) : Set (S) := {y | y 𝓡 x}
 
 notation "⟦" x "⟧𝓡" => set x
 
@@ -302,7 +302,7 @@ end REquiv
 /-- Green's 𝓛 equivalence relation: the symmetric closure of the 𝓛-preorder. -/
 def LEquiv (x y : S) : Prop := x ≤𝓛 y ∧ y ≤𝓛 x
 
-notation :50 a " 𝓛 " b:50 => LEquiv a b
+notation :50 x " 𝓛 " y:50 => LEquiv x y
 
 namespace LEquiv
 
@@ -321,7 +321,7 @@ theorem isEquivalence : Equivalence (fun x y : S ↦ x 𝓛 y) := by
   isEquivalence.trans h₁ h₂
 
 /-- The set of all elements 𝓛-related to `x`. -/
-@[simp] def set (x : S) : Set (S) := {a | a 𝓛 x}
+@[simp] def set (x : S) : Set (S) := {y | y 𝓛 x}
 
 notation "⟦" x "⟧𝓛" => set x
 
@@ -333,7 +333,7 @@ end LEquiv
 /-- Green's 𝓙 equivalence relation: the symmetric closure of the 𝓙-preorder. -/
 def JEquiv (x y : S) : Prop := x ≤𝓙 y ∧ y ≤𝓙 x
 
-notation :50 a " 𝓙 " b:50 => JEquiv a b
+notation :50 x " 𝓙 " y:50 => JEquiv x y
 
 namespace JEquiv
 
@@ -352,19 +352,19 @@ theorem isEquivalence : Equivalence (fun x y : S ↦ x 𝓙 y) := by
   isEquivalence.trans h₁ h₂
 
 /-- The set of all elements 𝓙-related to `x`. -/
-@[simp] def set (x : S) : Set (S) := {a | a 𝓙 x}
+@[simp] def set (x : S) : Set (S) := {y | y 𝓙 x}
 
 notation "⟦" x "⟧𝓙" => set x
 
-@[simp] lemma set_refl (x : S) : x ∈ ⟦x⟧𝓛 := by
-  apply LEquiv.refl
+@[simp] lemma set_refl (x : S) : x ∈ ⟦x⟧𝓙 := by
+  apply JEquiv.refl
 
 end JEquiv
 
 /-- Green's 𝓗 equivalence relation: the symmetric closure of the 𝓗-preorder. -/
 def HEquiv (x y : S) : Prop := x ≤𝓗 y ∧ y ≤𝓗 x
 
-notation :50 a " 𝓗 " b:50 => HEquiv a b
+notation :50 x " 𝓗 " y:50 => HEquiv x y
 
 namespace HEquiv
 
@@ -383,7 +383,7 @@ theorem isEquivalence : Equivalence (fun x y : S ↦ x 𝓗 y) := by
   isEquivalence.trans h₁ h₂
 
 /-- The set of all elements 𝓗-related to `x`. -/
-@[simp] def set (x : S) : Set (S) := {a | a 𝓗 x}
+@[simp] def set (x : S) : Set (S) := {y | y 𝓗 x}
 
 notation "⟦" x "⟧𝓗" => set x
 
@@ -545,7 +545,7 @@ theorem isEquivalence : Equivalence (fun x y : S => x 𝓓 y) where
   symm := symm
   trans := trans
 
-@[simp] def set (x : S) : Set (S) := {a | a 𝓓 x}
+@[simp] def set (x : S) : Set (S) := {y | y 𝓓 x}
 
 notation "⟦" x "⟧𝓓" => set x
 

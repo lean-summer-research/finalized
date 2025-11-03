@@ -10,7 +10,7 @@ This file defines properties related to idempotent elements in finite semigroups
 
 ## Main theorems
 
-let `S` be a finite semigroup and `x : S`
+Let `S` be a finite semigroup and `x : S`
 * `Semigroup.exists_idempotent_pow` - `∃ (m : ℕ+), IsIdempotentElem (x ^ m)`
 * `Monoid.exists_idempotent_pow` - `∃ (n : ℕ), IsIdempotentElem (x ^ n) ∧ n ≠ 0` in finite monoids.
 * `Monoid.exists_pow_sandwich_eq_self` - If `a = x * a * y`, then
