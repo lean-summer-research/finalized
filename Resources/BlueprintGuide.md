@@ -54,28 +54,12 @@ You need to install the leanblueprint tool and its dependencies. See the [leanbl
 
 ---
 
-## Editing the Blueprint
+## Adding a New LaTeX File
 
-### Adding a New LaTeX File
-
-1. **Create the LaTeX file** in the appropriate directory under `LaTeX/`:
-   ```bash
-   # Example: adding a new file for MyProject/NewTheory.lean
-   touch LaTeX/NewTheory.tex
-   ```
-
-2. **Add content to your LaTeX file** (see [Blueprint Entry Structure](#blueprint-entry-structure))
-
-3. **Include it in the main file** by editing `LaTeX/Chapters.tex`:
+After creating a new LaTeX file in `LaTeX/`, include it by editing `LaTeX/Chapters.tex`:
    ```latex
-   \input{NewTheory}
+\input{../../LaTeX/NewFile.tex}
    ```
-
-### Editing Existing Files
-
-Simply edit the `.tex` files in the `LaTeX/` directory. Each file corresponds to its matching `.lean` file and should document the mathematical content, theorems, and definitions found there.
-
----
 
 ## Blueprint Entry Structure
 
@@ -95,8 +79,7 @@ Simply edit the `.tex` files in the `LaTeX/` directory. Each file corresponds to
   \leanok  % Include if proof is complete in Lean
   \uses{proof_dep1, proof_dep2}  % Proof dependencies
   
-  Proof explanation goes here. This should be readable mathematical
-  exposition that explains the key ideas, even if abbreviated.
+  Proof explanation goes here. 
 \end{proof}
 ```
 
@@ -180,7 +163,7 @@ Lists LaTeX labels that are used in the surrounding environment (for dependency 
 Make your changes to files in the `LaTeX/` directory.
 
 ### 2. Compile Locally
-Open a terminal in VS Code (`Ctrl + ` ` `) and run:
+Open a terminal in VS Code (Ctrl + `) and run:
 
 ```bash
 leanblueprint all
