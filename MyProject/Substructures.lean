@@ -197,8 +197,8 @@ lemma one_eq {T₁ T₂ : Subgroup S} (heq : T₁.carrier = T₂.carrier) : T₁
   have h₄ := T₂.mul_one T₁.one h₁
   exact h₄.symm
 
-lemma inv_unique' {T : Subgroup S} {x y: S} (hx: x ∈ T.carrier) (hy : y ∈ T.carrier) (heq : T.one = x * y) :
-    T.inv y = x := by
+lemma inv_unique' {T : Subgroup S} {x y : S} (hx : x ∈ T.carrier)
+  (hy : y ∈ T.carrier) (heq : T.one = x * y) : T.inv y = x := by
   have h₁ := T.inv_mul hy
   rw [heq] at h₁
   have h₂ : T.inv y * y * T.inv y = x * (y * T.inv y) := by
@@ -209,12 +209,12 @@ lemma inv_unique' {T : Subgroup S} {x y: S} (hx: x ∈ T.carrier) (hy : y ∈ T.
   rw [h₃] at h₂
   rw [h₄] at h₂
   rw [T.one_mul, T.mul_one] at h₂
-  exact h₂
+  · exact h₂
   · exact hx
   · apply T.inv_mem hy
 
-lemma inv_unique {T : Subgroup S} {x y: S} (hx: x ∈ T.carrier) (hy : y ∈ T.carrier) (heq : T.one = x * y) :
-    T.inv x = y := by
+lemma inv_unique {T : Subgroup S} {x y : S} (hx : x ∈ T.carrier)
+  (hy : y ∈ T.carrier) (heq : T.one = x * y) : T.inv x = y := by
   have h := inv_unique' hx hy heq
   apply inv_unique'
   · exact hy
