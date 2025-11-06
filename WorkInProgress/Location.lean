@@ -67,18 +67,20 @@ theorem DEquiv.mul_in_inter_iff_equiv [Finite S] : x * y ∈ ⟦x⟧𝓡 ∩ ⟦
       · simp
       · apply JEquiv.trans hj₂ hj₁
 
+/-- `x * y` is 𝓡-equivalent to `x` and 𝓛-equivalent to `y` iff there exists an idempotent
+element in the intersection of the 𝓡-class of `y` and the 𝓛-class of `x`. -/
 theorem mul_in_inter_iff_exists_idempotent :
     x * y ∈ ⟦x⟧𝓡 ∩ ⟦y⟧𝓛 ↔ ∃ e, IsIdempotentElem e ∧ e ∈ ⟦y⟧𝓡 ∩ ⟦x⟧𝓛 := by
   constructor
   · simp_all [IsIdempotentElem]
     intro hr hl
-    -- We would like to show that `w ↦ w * y` is a bijection from `⟦x]𝓛 to ⟦y⟧𝓛`
-    -- however we need the fact that there exists a `u` such that `x = x * y * u`,
-    -- so we need to desctruct the witness of `x ≤𝓡 x * y`
+/- We would like to show that `w ↦ w * y` is a bijection from `⟦x]𝓛 to ⟦y⟧𝓛`, so that we can get
+the pre-image of `y` as our idempotent. However we need the fact that there exists a `u` such that
+`x = x * y * u`, so we need to destruct the witness of `x ≤𝓡 x * y` -/
     obtain ⟨u, hu⟩ := hr.2
     cases u with
     | one =>
-      -- In this case, `x = x * y`, so `y` is idempotent?
+      -- In this case, `x = x * y`, so `y` is idempotent
       use y
       simp_all
       have heq : x = x * y := by simpa [← WithOne.coe_mul] using hu
@@ -141,6 +143,7 @@ theorem mul_in_inter_iff_exists_idempotent :
     · nth_rw 2 [he₁]
       apply LEquiv.rmult_compat x e y hl.symm
 
+/-- The 𝓗-class of an idempotent element is closed under inverses. -/
 lemma HEquiv.exists_inverse_of_idempotent {e x : S} (he : IsIdempotentElem e) (hh : x ∈ ⟦e⟧𝓗) :
     ∃ y, y 𝓗 e ∧ x * y = e ∧ y * x = e := by
   have h₁ : x * e = x := by sorry
@@ -179,36 +182,47 @@ lemma HEquiv.exists_inverse_of_idempotent {e x : S} (he : IsIdempotentElem e) (h
       exact hh.symm
     · exact ⟨hInj, hz₂⟩
 
+/-- Idempotent-containing 𝓗-classes are closed under multiplication. -/
+lemma HEquiv.mul_closed_of_idempotent {e x y : S} (he : IsIdempotentElem e)
+    (hx : x ∈ ⟦e⟧𝓗) (hy : y ∈ ⟦e⟧𝓗) : x * y ∈ ⟦e⟧𝓗 := by
+  simp_all
+  have he : ∃ e, IsIdempotentElem e ∧ e ∈ ⟦y⟧𝓡 ∩ ⟦x⟧𝓛 := by
+    use e
+    simp_all [HEquiv.iff_rEquiv_and_lEquiv]
+  rw [← mul_in_inter_iff_exists_idempotent x y] at he
+  simp_all [HEquiv.iff_rEquiv_and_lEquiv]
+  constructor
+  · apply REquiv.trans he.1 hx.1
+  · apply LEquiv.trans he.2 hy.2
 
+/-- For all elements in the 𝓗-class of an idempotent, that idempotent acts as a
+left identity. -/
+lemma HEquiv.idempotent_mul {e : S} (he : IsIdempotentElem e) (x : S) (hx : x ∈ ⟦e⟧𝓗) :
+    e * x = x := by
+  simp at hx
+  symm
+  rw [← RPreorder.le_idempotent x he]
+  apply REquiv.le
+  simp [hx]
 
+/-- For all elements in the 𝓗-class of an idempotent, that idempotent acts as a
+right identity. -/
+lemma HEquiv.mul_idempotent {e : S} (he : IsIdempotentElem e) (x : S) (hx : x ∈ ⟦e⟧𝓗) :
+    x * e = x := by
+  simp at hx
+  symm
+  rw [← LPreorder.le_idempotent x he]
+  apply LEquiv.le
+  simp [hx]
 
-
+/-- The 𝓗-class of an idempotent element as a subgroup of the semigroup. -/
 noncomputable def HEquiv.subgroup_of_idempotent (e : S) (he : IsIdempotentElem e) : Subgroup S where
   carrier := ⟦e⟧𝓗
-  mul_mem {x y : S} (hx : x ∈ ⟦e⟧𝓗) (hy : y ∈ ⟦e⟧𝓗) := by
-    simp_all
-    have he : ∃ e, IsIdempotentElem e ∧ e ∈ ⟦y⟧𝓡 ∩ ⟦x⟧𝓛 := by
-      use e
-      simp_all [HEquiv.iff_rEquiv_and_lEquiv]
-    rw [← mul_in_inter_iff_exists_idempotent x y] at he
-    simp_all [HEquiv.iff_rEquiv_and_lEquiv]
-    constructor
-    · apply REquiv.trans he.1 hx.1
-    · apply LEquiv.trans he.2 hy.2
+  mul_mem := HEquiv.mul_closed_of_idempotent he
   one := e
   one_mem := by simp
-  one_mul {x : S} (hx : x ∈ ⟦e⟧𝓗) := by
-    simp at hx
-    symm
-    rw [← RPreorder.le_idempotent x he]
-    apply REquiv.le
-    simp [hx]
-  mul_one {x : S} (hx : x ∈ ⟦e⟧𝓗) := by
-    simp at hx
-    symm
-    rw [← LPreorder.le_idempotent x he]
-    apply LEquiv.le
-    simp [hx]
+  one_mul := HEquiv.idempotent_mul he
+  mul_one := HEquiv.mul_idempotent he
   inv (x : S) := by
     have hd : Decidable (x ∈ ⟦e⟧𝓗) := by exact Classical.propDecidable (x ∈ ⟦e⟧𝓗)
     exact (if hx : x ∈ ⟦e⟧𝓗
@@ -231,8 +245,15 @@ noncomputable def HEquiv.subgroup_of_idempotent (e : S) (he : IsIdempotentElem e
     have h := Classical.choose_spec (HEquiv.exists_inverse_of_idempotent he hx)
     exact h.2.1
 
+/-- The 𝓗-class of a semigroup as a Group on the subtype `{x : S // x ∈ ⟦e⟧𝓗}` -/
 noncomputable instance HEquiv.group_of_idempotent (e : S) (he : IsIdempotentElem e) :
     Group (HEquiv.subgroup_of_idempotent e he) := by
   infer_instance
+
+/-- The 𝓗-class of a semigroup as a Group on the subtype `{x : S // x ∈ ⟦e⟧𝓗}` -/
+noncomputable instance HEquiv.group_of_idempotent' (e : S) (he : IsIdempotentElem e) :
+    Group ({x // x ∈ ⟦e⟧𝓗}) := by
+  have h:= HEquiv.group_of_idempotent e he
+  exact h
 
 end Semigroup
