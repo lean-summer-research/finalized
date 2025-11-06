@@ -592,6 +592,16 @@ variable {x y z : S}
     rw [hw, hu]
     simp [← mul_assoc]
 
+/-- `x 𝓗 y` implies `x 𝓡 y` -/
+@[simp] lemma HEquiv.to_rEquiv (h : x 𝓗 y) : x 𝓡 y := by
+  rw [HEquiv.iff_rEquiv_and_lEquiv] at h
+  simp [h]
+
+/-- `x 𝓗 y` implies `x 𝓛 y` -/
+@[simp] lemma HEquiv.to_lEquiv (h : x 𝓗 y) : x 𝓛 y := by
+  rw [HEquiv.iff_rEquiv_and_lEquiv] at h
+  simp [h]
+
 /-- `x * y` is always 𝓡-below `x` -/
 @[simp] lemma RPreorder.mul_right_self : x * y ≤𝓡 x := by
   use y; rw [WithOne.coe_mul]

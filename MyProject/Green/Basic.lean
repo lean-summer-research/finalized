@@ -65,7 +65,7 @@ namespace Semigroup
 variable {S : Type*} [Semigroup S]
 
 /-- An element `x` is 𝓡-below an idempotent `e` if and only if `x = e * x`. -/
-theorem RPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
+theorem RPreorder.le_idempotent (x : S) {e : S} (h : IsIdempotentElem e) :
     (x ≤𝓡 e) ↔ (x = e * x) := by
   constructor
   · rintro ⟨u, hru⟩
@@ -76,7 +76,7 @@ theorem RPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
     rw [← WithOne.coe_inj] at hl; exact hl
 
 /-- An element `x` is 𝓛-below an idempotent `e` if and only if `x = x * e`. -/
-theorem LPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
+theorem LPreorder.le_idempotent (x : S) {e : S} (h : IsIdempotentElem e) :
     (x ≤𝓛 e) ↔ (x = x * e) := by
   constructor
   · rintro ⟨u, hru⟩
@@ -90,7 +90,7 @@ theorem LPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
 multiplication. -/
 theorem HPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
     (x ≤𝓗 e) ↔ (x = e * x ∧ x = x * e) := by
-  simp [HPreorder, RPreorder.le_idempotent x e h, LPreorder.le_idempotent x e h]
+  simp [HPreorder, RPreorder.le_idempotent x h, LPreorder.le_idempotent x h]
 
 /-- An element is 𝓗-below an idempotent if and only if it is a sandwich fixed point. -/
 theorem HPreorder.le_idempotent' (x e : S) (he : IsIdempotentElem e) :
