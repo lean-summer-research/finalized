@@ -294,8 +294,8 @@ theorem isEquivalence : Equivalence (fun x y : S ↦ x 𝓡 y) := by
 notation "⟦" x "⟧𝓡" => set x
 
 @[simp] lemma set_refl (x : S) : x ∈ ⟦x⟧𝓡 := by
-  simp
-  apply REquiv.refl
+  exact REquiv.refl x
+
 
 end REquiv
 

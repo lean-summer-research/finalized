@@ -143,45 +143,6 @@ the pre-image of `y` as our idempotent. However we need the fact that there exis
     · nth_rw 2 [he₁]
       apply LEquiv.rmult_compat x e y hl.symm
 
-/-- The 𝓗-class of an idempotent element is closed under inverses. -/
-lemma HEquiv.exists_inverse_of_idempotent {e x : S} (he : IsIdempotentElem e) (hh : x ∈ ⟦e⟧𝓗) :
-    ∃ y, y 𝓗 e ∧ x * y = e ∧ y * x = e := by
-  have h₁ : x * e = x := by sorry
-  have h₂ : e * x = x := by sorry
-  simp at hh
-  have hr₁ : e ≤𝓡 x := by simp [hh]
-  obtain ⟨y, hy⟩ := hr₁
-  cases y with
-  | one =>
-    simp at hy
-    subst hy
-    use e
-  | coe y =>
-    have heq : e = x * y := by simpa [← WithOne.coe_mul] using hy
-    have hSurj := REquiv.surj_on_lClass heq h₂.symm
-    have he₂ : e ∈ ⟦x⟧𝓛 := by simp [hh]
-    specialize hSurj he₂
-    obtain ⟨z, ⟨hz₁, hz₂⟩⟩ := hSurj
-    simp at hz₂
-    use z
-    have hInj := REquiv.inj_on_lClass heq h₂.symm
-    have h₃ : x * z ∈ ⟦e⟧𝓛 := by
-      simp
-      have hpres := LEquiv.bij_on_rClass hz₂.symm h₁.symm
-      sorry
-    have h₄ : e ∈ ⟦e⟧𝓛 := by simp
-    specialize hInj h₃ h₄
-    simp at hInj
-    rw [mul_assoc, hz₂, h₁, h₂] at hInj
-    simp at hInj
-    constructor
-    · have hz₃ : e 𝓛 z := by symm; simp_all
-      have hpres := REquiv.bij_on_lClass_pres_hClass heq h₂.symm hz₁.symm h₄
-      rw [hpres]
-      rw [hz₂, h₂]
-      exact hh.symm
-    · exact ⟨hInj, hz₂⟩
-
 /-- Idempotent-containing 𝓗-classes are closed under multiplication. -/
 lemma HEquiv.mul_closed_of_idempotent {e x y : S} (he : IsIdempotentElem e)
     (hx : x ∈ ⟦e⟧𝓗) (hy : y ∈ ⟦e⟧𝓗) : x * y ∈ ⟦e⟧𝓗 := by
@@ -215,6 +176,37 @@ lemma HEquiv.mul_idempotent {e : S} (he : IsIdempotentElem e) (x : S) (hx : x �
   apply LEquiv.le
   simp [hx]
 
+/-- The 𝓗-class of an idempotent element is closed under inverses. -/
+lemma HEquiv.exists_inverse_of_idempotent {e x : S} (he : IsIdempotentElem e) (hh : x ∈ ⟦e⟧𝓗) :
+    ∃ y, y 𝓗 e ∧ x * y = e ∧ y * x = e := by
+  have h₁ : x * e = x := by sorry
+  have h₂ : e * x = x := by sorry
+  simp at hh
+  have hr₁ : e ≤𝓡 x := by simp [hh]
+  obtain ⟨y, hy⟩ := hr₁
+  cases y with
+  | one =>
+    simp at hy
+    subst hy
+    use e
+  | coe y =>
+    have heq : e = x * y := by simpa [← WithOne.coe_mul] using hy
+    use y
+    have hh : y 𝓗 e := by sorry
+    have h_idem_eq : ∀ z, z 𝓗 e ∧ IsIdempotentElem z → z = e := by sorry
+    refine ⟨hh, heq.symm, ?_⟩
+    apply h_idem_eq
+    have hyx : y * x = e := by
+
+    have h_eq : y * x = e := by
+      specialize h_idem_eq (y * x)
+      apply h_idem_eq
+      constructor
+      · sorry
+      · simp [IsIdempotentElem]
+        nth_rw 3 [← h₂]
+        rw [heq]
+        simp [← mul_assoc]
 /-- The 𝓗-class of an idempotent element as a subgroup of the semigroup. -/
 noncomputable def HEquiv.subgroup_of_idempotent (e : S) (he : IsIdempotentElem e) : Subgroup S where
   carrier := ⟦e⟧𝓗
@@ -255,5 +247,17 @@ noncomputable instance HEquiv.group_of_idempotent' (e : S) (he : IsIdempotentEle
     Group ({x // x ∈ ⟦e⟧𝓗}) := by
   have h:= HEquiv.group_of_idempotent e he
   exact h
+
+
+example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) : x 𝓡 y := by sorry
+
+example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) : REquiv x y := by sorry
+
+example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) :
+  @REquiv S _ x y := by sorry
+
+example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) :
+    @REquiv T _ x y := by
+
 
 end Semigroup
