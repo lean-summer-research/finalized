@@ -176,6 +176,11 @@ lemma HEquiv.mul_idempotent {e : S} (he : IsIdempotentElem e) (x : S) (hx : x �
   apply LEquiv.le
   simp [hx]
 
+lemma HEquiv.idempotent_eq {e x : S} (hh : x 𝓗 e)
+  (he : IsIdempotentElem e) (hx : IsIdempotentElem x) : e = x := by
+  sorry
+
+
 /-- The 𝓗-class of an idempotent element is closed under inverses. -/
 lemma HEquiv.exists_inverse_of_idempotent {e x : S} (he : IsIdempotentElem e) (hh : x ∈ ⟦e⟧𝓗) :
     ∃ y, y 𝓗 e ∧ x * y = e ∧ y * x = e := by
@@ -192,21 +197,15 @@ lemma HEquiv.exists_inverse_of_idempotent {e x : S} (he : IsIdempotentElem e) (h
   | coe y =>
     have heq : e = x * y := by simpa [← WithOne.coe_mul] using hy
     use y
-    have hh : y 𝓗 e := by sorry
+    have hh₂ : y 𝓗 e := by
     have h_idem_eq : ∀ z, z 𝓗 e ∧ IsIdempotentElem z → z = e := by sorry
-    refine ⟨hh, heq.symm, ?_⟩
+    refine ⟨hh₂, heq.symm, ?_⟩
     apply h_idem_eq
-    have hyx : y * x = e := by
+    constructor
+    · apply HEquiv.mul_closed_of_idempotent he hh₂ hh
+    · simp [IsIdempotentElem]
+      rw [← mul_assoc, mul_assoc y, ← heq, mul_assoc, h₂]
 
-    have h_eq : y * x = e := by
-      specialize h_idem_eq (y * x)
-      apply h_idem_eq
-      constructor
-      · sorry
-      · simp [IsIdempotentElem]
-        nth_rw 3 [← h₂]
-        rw [heq]
-        simp [← mul_assoc]
 /-- The 𝓗-class of an idempotent element as a subgroup of the semigroup. -/
 noncomputable def HEquiv.subgroup_of_idempotent (e : S) (he : IsIdempotentElem e) : Subgroup S where
   carrier := ⟦e⟧𝓗
@@ -248,16 +247,6 @@ noncomputable instance HEquiv.group_of_idempotent' (e : S) (he : IsIdempotentEle
   have h:= HEquiv.group_of_idempotent e he
   exact h
 
-
-example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) : x 𝓡 y := by sorry
-
-example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) : REquiv x y := by sorry
-
-example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) :
-  @REquiv S _ x y := by sorry
-
-example {S : Type*} [Semigroup S] (T : Subsemigroup S) (x y : T) :
-    @REquiv T _ x y := by
 
 
 end Semigroup
