@@ -164,8 +164,8 @@ namespace Semigroup
 
 variable {S} [Semigroup S]
 
-/-- `x` is 𝓡-below `y` if `x = y` or there exists a `z : S` such that `x = y * z` -/
-def RPreorder (x y : S) : Prop := ∃ z : WithOne S , ↑x = ↑y * z
+/-- `x` is 𝓡-below `y` if `x = y` or there exists a `z : S` such that `y * z = x` -/
+def RPreorder (x y : S) : Prop := ∃ z : WithOne S , ↑y * z = ↑x
 
 infix:50 " ≤𝓡 " => RPreorder
 
@@ -177,7 +177,7 @@ namespace RPreorder
   rcases hxy with ⟨w, hw⟩
   rcases hyz with ⟨v, hv⟩
   use (v * w)
-  rw [← mul_assoc, ← hv, ← hw]
+  rw [← mul_assoc, hv, hw]
 
 /-- `≤𝓡` is a Preorder -/
 instance isPreorder : IsPreorder S RPreorder where
@@ -186,8 +186,8 @@ instance isPreorder : IsPreorder S RPreorder where
 
 end RPreorder
 
-/-- `x` is 𝓛-below `y` if `x = y` or there exists a `z : S` such that `x = z * y` -/
-def LPreorder (x y : S) : Prop := ∃ z : WithOne S, ↑x = z * ↑y
+/-- `x` is 𝓛-below `y` if `x = y` or there exists a `z : S` such that `z * y = x` -/
+def LPreorder (x y : S) : Prop := ∃ z : WithOne S, z * ↑y = ↑x
 
 infix:50 " ≤𝓛 " => LPreorder
 
@@ -199,7 +199,7 @@ namespace LPreorder
   rcases hxy with ⟨u, hu⟩
   rcases hyz with ⟨v, hv⟩
   use u * v
-  rw [hu, hv, mul_assoc]
+  rw [← hu, ← hv, mul_assoc]
 
 /-- `≤𝓛` is a Preorder -/
 instance isPreorder : IsPreorder S LPreorder where
@@ -208,8 +208,8 @@ instance isPreorder : IsPreorder S LPreorder where
 
 end LPreorder
 
-/-- `x` is 𝓙-below `y` if there exists `w v : WithOne S` such that `↑x = w * ↑y * v` -/
-def JPreorder (x y : S) : Prop := ∃ w v : WithOne S, ↑x = w * ↑y * v
+/-- `x` is 𝓙-below `y` if there exists `w v : WithOne S` such that `w * ↑y * v = ↑x` -/
+def JPreorder (x y : S) : Prop := ∃ w v : WithOne S, w * ↑y * v = ↑x
 
 infix:50 " ≤𝓙 " => JPreorder
 
@@ -221,7 +221,7 @@ namespace JPreorder
   rcases hxy with ⟨u₁, v₁, hu⟩
   rcases hyz with ⟨u₂, v₂, hv⟩
   use u₁ * u₂, v₂ * v₁
-  rw [hu, hv]
+  rw [← hu, ← hv]
   simp [mul_assoc]
 
 /-- The 𝓙-preorder is a preorder. -/
@@ -400,22 +400,22 @@ end HEquiv
 /-! ### 𝓡 𝓛 Theorems -/
 
 /-- The 𝓡-preorder is compatible with left multiplication. -/
-@[simp] lemma RPreorder.lmult_compat (x y z : S) (h : x ≤𝓡 y) : z * x ≤𝓡 z * y := by
+@[simp] lemma RPreorder.lmult_compat {x y : S} (h : x ≤𝓡 y) (z : S) : z * x ≤𝓡 z * y := by
   obtain ⟨u, hu⟩ := h; use u
   simp [mul_assoc, hu]
 
 /-- The 𝓡 equivalence is compatible with left multiplication. -/
-@[simp] lemma REquiv.lmult_compat (x y z : S) (h : x 𝓡 y) : z * x 𝓡 z * y := by
+@[simp] lemma REquiv.lmult_compat {x y : S} (h : x 𝓡 y) (z : S) : z * x 𝓡 z * y := by
   simp_all [REquiv]
 
 /-- The 𝓛-preorder is compatible with right multiplication. -/
-@[simp] lemma LPreorder.rmult_compat (x y z : S) (h : x ≤𝓛 y) : x * z ≤𝓛 y * z := by
+@[simp] lemma LPreorder.rmult_compat {x y : S} (h : x ≤𝓛 y) (z : S) : x * z ≤𝓛 y * z := by
   rcases h with ⟨u, hu⟩
   use u
   simp [← mul_assoc, hu]
 
 /-- The 𝓛 equivalence is compatible with right multiplication. -/
-@[simp] lemma LEquiv.rmult_compat (x y z : S) (h : x 𝓛 y) : x * z 𝓛 y * z := by
+@[simp] lemma LEquiv.rmult_compat {x y : S} (h : x 𝓛 y) (z : S) : x * z 𝓛 y * z := by
   simp_all [LEquiv]
 
 /-- The 𝓡 and 𝓛 relations commute under composition. -/
@@ -449,7 +449,7 @@ theorem rEquiv_lEquiv_comm (x y : S) : (∃ z, x 𝓡 z ∧ z 𝓛 y) ↔ (∃ z
           <;> constructor
         · use w₂ -- `x ≤𝓛 v₂ * z * w₁`
           simp [← mul_assoc]
-          rw [mul_assoc w₂, ← hv₂, ← hw₂, hw₁]
+          rw [mul_assoc w₂, hv₂, hw₂, ← hw₁]
         · use v₂ -- `v₂ * z * w₁ ≤𝓛 x`
           simp [mul_assoc]
           rw [← hw₁]
@@ -457,7 +457,7 @@ theorem rEquiv_lEquiv_comm (x y : S) : (∃ z, x 𝓡 z ∧ z 𝓛 y) ↔ (∃ z
           simp [hv₂]
         · use v₁ -- `y ≤𝓡 v₂ * z * w₁`
           simp [mul_assoc v₂]
-          rw [← hw₁, hv₂, hv₁]
+          rw [hw₁, ← hv₂, ← hv₁]
           simp [mul_assoc]
   · rintro ⟨z, ⟨hl, hr⟩⟩
     have hr₁ := hr
@@ -486,16 +486,15 @@ theorem rEquiv_lEquiv_comm (x y : S) : (∃ z, x 𝓡 z ∧ z 𝓛 y) ↔ (∃ z
         constructor
           <;> constructor
         · use w₁; simp -- `x ≤𝓡 w₂ * z * v₁`
-          nth_rw 1 [hw₂, hw₁, hv₁]
-          simp [← mul_assoc]
+          nth_rw 1 [← hw₂]
+          conv => lhs; lhs; rw [mul_assoc, hv₁]
+          rw [mul_assoc, hw₁]
         · use v₁ -- `w₂ * z * v₁ ≤𝓡 x`
           simp [hw₂]
         · use w₂ -- `w₂ * z * v₁ ≤𝓛 y`
-          simp [hv₁, ← mul_assoc]
+          simp [← hv₁, ← mul_assoc]
         · use v₂ -- `y ≤𝓛 w₂ * z * v₁`
-          simp [hv₁]
-          nth_rw 1 [hv₂, hw₂]
-          simp [← mul_assoc]
+          simp [hw₂, ← mul_assoc, hv₂, hv₁]
 
 /-! ### Green's D relation -/
 
@@ -587,9 +586,9 @@ variable {x y z : S}
   rcases hl₁ with ⟨⟨v, hv⟩, ⟨w, hw⟩⟩
   constructor
   · use v, o
-    rw [← hv, ho]
+    rw [hv, ho]
   · use w, u
-    rw [hw, hu]
+    rw [← hw, ← hu]
     simp [← mul_assoc]
 
 /-- `x 𝓗 y` implies `x 𝓡 y` -/
@@ -640,7 +639,7 @@ variable {x y z : S}
   obtain ⟨⟨u, hu⟩, _⟩ := h
   use u * y
   simp_rw [WithOne.coe_mul, ← mul_assoc] at *
-  rw [← hu]
+  rw [hu]
 
 /-- If `x 𝓛 z * y * x`, then `x 𝓛 y * x`. -/
 @[simp] lemma LEquiv.left_cancel (h : x 𝓛 z * y * x) : x 𝓛 y * x := by
@@ -656,8 +655,8 @@ variable {x y z : S}
   obtain ⟨u, hu⟩ := h
   use y * u
   simp_rw [WithOne.coe_mul, ← mul_assoc] at *
-  nth_rw 1 [hu]
-  simp [mul_assoc]
+  have hrw : ↑y * u * ↑z * ↑y * ↑x  = ↑y * (u * ↑z * ↑y * ↑x) := by simp [← mul_assoc]
+  rw [hrw, hu]
 
 /-! #### `le` and `ge` lemmas -/
 

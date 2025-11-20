@@ -71,21 +71,20 @@ instance _root_.WithOne.finite : Finite (WithOne S) := by
 @[simp] lemma JEquiv.to_dEquiv (hj : x 𝓙 y) : x 𝓓 y := by
   have hj₁ := hj
   obtain ⟨⟨s, t, ha⟩, ⟨u, v, hb⟩⟩ := hj₁
-  have hab : ↑x = s * u * x * (v * t) := by
-    rw [hb, ← mul_assoc, ← mul_assoc, mul_assoc _ v t] at ha
-    exact ha
+  have hab : s * u * x * (v * t) = ↑x := by
+    have hrw : s * u * ↑x * (v * t) = s * (u * ↑x * v * t) := by simp [mul_assoc]
+    rw [hrw, hb, ← mul_assoc, ha]
   obtain ⟨k, ⟨l, ⟨hkne, hlne, heq₁, heq₂⟩⟩⟩ := Monoid.exists_pow_sandwich_eq_self hab
   cases v with
   | one =>
     use x
-    simp
+    simp at ⊢ hb heq₂ hab
     constructor -- we prove `x 𝓛 y`
     · use (s * u)^(k-1) * s
       have hk : k - 1 + 1 = k := by exact Nat.succ_pred_eq_of_ne_zero hkne
-      simp_rw [hb, ← mul_assoc, mul_assoc _ s u, ← _root_.pow_succ, hk]
+      simp_rw [← hb, ← mul_assoc, mul_assoc _ s u, ← _root_.pow_succ, hk]
       simp [heq₁]
     · use u
-      simp [hb]
   | coe v =>
     use x * v
     simp [REquiv, LEquiv]
@@ -97,17 +96,15 @@ instance _root_.WithOne.finite : Finite (WithOne S) := by
       rw [hl, heq₂]
     · constructor
       · use (s * u)^(k-1) * s -- `x * v ≤𝓛 y`
-        rw [hb]
-        conv => rhs; rw [← mul_assoc, ← mul_assoc, mul_assoc _ s u]
+        rw [← hb]
         have hk : k - 1 + 1 = k := by exact Nat.succ_pred_eq_of_ne_zero hkne
+        conv => lhs; rw [← mul_assoc, ← mul_assoc, mul_assoc _ s u]
         rw [WithOne.coe_mul, ← _root_.pow_succ, hk, heq₁]
       · use u -- `y ≤𝓛 x * v`
-        simp [hb, mul_assoc]
-
-set_option linter.unusedSectionVars false
+        simp [← mul_assoc, hb]
 
 /-- In finite semigroups, the 𝓓-relation equals the 𝓙-relation. -/
-theorem dEquiv_iff_jEquiv [Finite S] : x 𝓓 y ↔ x 𝓙 y := by
+theorem dEquiv_iff_jEquiv : x 𝓓 y ↔ x 𝓙 y := by
   constructor
   · apply DEquiv.to_jEquiv
   · apply JEquiv.to_dEquiv
@@ -149,7 +146,7 @@ theorem REquiv.of_rPreorder_and_jEquiv (hr : x ≤𝓡 y) (hj : x 𝓙 y) : x �
     have heq : x = y := by simp_all
     subst x; simp
   | coe z =>
-    have heq : x = y * z := by
+    have heq : y * z = x := by
       rw [← WithOne.coe_inj, WithOne.coe_mul]
       exact hz
     subst x
@@ -164,9 +161,8 @@ theorem LEquiv.of_lPreorder_and_jEquiv (hl : x ≤𝓛 y) (hj : x 𝓙 y) : x �
     have heq : x = y := by simp_all
     subst x; simp
   | coe z =>
-    have heq : x = z * y := by
-      rw [← WithOne.coe_inj, WithOne.coe_mul]
-      exact hz
+    have heq : z * y = x := by
+      rwa [← WithOne.coe_inj, WithOne.coe_mul]
     subst x
     symm
     apply LEquiv.of_jEquiv_mul_left hj.symm
@@ -175,7 +171,7 @@ theorem LEquiv.of_lPreorder_and_jEquiv (hl : x ≤𝓛 y) (hj : x 𝓙 y) : x �
 
 /-- In finite semigroups, an element sandwiched between two factors is 𝓗-related to its
 left and right partial products. -/
-theorem HEquiv.of_eq_sandwich (h : x = u * x * v) : x 𝓗 u * x ∧ x 𝓗 x * v := by
+theorem HEquiv.of_eq_sandwich (h : u * x * v = x) : x 𝓗 u * x ∧ x 𝓗 x * v := by
   simp [HEquiv.iff_rEquiv_and_lEquiv]
   constructor <;> constructor
   · apply REquiv.of_rPreorder_and_jEquiv

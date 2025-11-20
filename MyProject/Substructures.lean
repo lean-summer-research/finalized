@@ -1,4 +1,4 @@
-import Mathlib.Algebra.Group.Defs
+import Mathlib.Algebra.Group.Equiv.Defs
 import Mathlib.Data.SetLike.Basic
 
 /-!
@@ -71,6 +71,7 @@ variable {T : Subsemigroup S}
 
 @[simp] theorem mul_def (x y : T) :
     x * y = ⟨x * y, T.mul_mem x.2 y.2⟩ := rfl
+
 
 /-- A subsemigroup is a semigroup on its subtype -/
 instance toSemigroup : Semigroup T where
@@ -316,6 +317,46 @@ instance : Group T where
     apply T.inv_mul
     simp
 
+/-- A maximal subgroup is a subgroup that is not properly contained in any other subgroup. -/
+def isMaximal (H : Subgroup S) : Prop := ∀ (K : Subgroup S), H ≤ K → H = K
+
+lemma mem_def (x : S) : x ∈ T ↔ x ∈ T.carrier := Iff.rfl
+
+/-- Lift a bijection on the carriers of two subgroups to a bijection on their
+subtypes. -/
+def bijOn_toEquiv {H T : Subgroup S} (f : S → S) (hbij : Set.BijOn f H.carrier T.carrier) :
+    Function.Bijective (fun x : ↑H ↦ (⟨f x.val, hbij.1 x.prop⟩ : ↑ T)) := by
+  constructor
+  · intro a b hab
+    simp at hab
+    have hinj := hbij.2.1
+    specialize hinj a.prop b.prop
+    simp at hinj
+    apply hinj
+    exact hab
+  · intro y
+    have hsurj := hbij.2.2
+    specialize hsurj y.prop
+    obtain ⟨z, ⟨hz₁, hz₂⟩⟩ := hsurj
+    simp
+    use z
+    use hz₁
+    simp_all
+
+/-- Lift a bijection on the carriers of two subgroups that maps multiplication to
+an isomorphism between the groups. -/
+noncomputable def hom_of_bijOn (H T : Subgroup S) (f : S → S)
+  (hbij : Set.BijOn f H.carrier T.carrier)
+  (hmap : ∀ x y : S, x ∈ H → y ∈ H → f (x * y) = f x * f y) : H ≃* T where
+  toFun := fun x : ↑H ↦ ⟨f x.val, hbij.1 x.prop⟩
+  invFun := Function.surjInv (bijOn_toEquiv f hbij).surjective
+  left_inv := Function.leftInverse_surjInv (bijOn_toEquiv f hbij)
+  right_inv := Function.rightInverse_surjInv _
+  map_mul' := by
+    intros a b
+    simp
+    specialize hmap a b a.prop b.prop
+    exact hmap
 
 end Subgroup
 

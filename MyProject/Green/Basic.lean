@@ -65,44 +65,44 @@ namespace Semigroup
 variable {S : Type*} [Semigroup S]
 
 /-- An element `x` is 𝓡-below an idempotent `e` if and only if `x = e * x`. -/
-theorem RPreorder.le_idempotent (x : S) {e : S} (h : IsIdempotentElem e) :
-    (x ≤𝓡 e) ↔ (x = e * x) := by
+theorem RPreorder.le_idempotent {e : S} (h : IsIdempotentElem e) (x : S) :
+    (x ≤𝓡 e) ↔ (e * x = x) := by
   constructor
   · rintro ⟨u, hru⟩
     unfold IsIdempotentElem at h
     rw [← WithOne.coe_inj, WithOne.coe_mul] at h ⊢
-    rw [hru, ← mul_assoc, h]
+    rw [← hru, ← mul_assoc, h]
   · intro hl; use x
-    rw [← WithOne.coe_inj] at hl; exact hl
+    rw [← WithOne.coe_inj] at hl
+    exact hl
 
 /-- An element `x` is 𝓛-below an idempotent `e` if and only if `x = x * e`. -/
-theorem LPreorder.le_idempotent (x : S) {e : S} (h : IsIdempotentElem e) :
-    (x ≤𝓛 e) ↔ (x = x * e) := by
+theorem LPreorder.le_idempotent {e : S} (h : IsIdempotentElem e) (x : S) :
+    (x ≤𝓛 e) ↔ (x * e = x) := by
   constructor
   · rintro ⟨u, hru⟩
     unfold IsIdempotentElem at h
     rw [← WithOne.coe_inj, WithOne.coe_mul] at h ⊢
-    rw [hru, mul_assoc, h]
+    rw [← hru, mul_assoc, h]
   · intro hl; use x
-    rw [← WithOne.coe_inj] at hl; exact hl
-
-/-- An element is 𝓗-below an idempotent if and only if it is fixed by both left and right
-multiplication. -/
-theorem HPreorder.le_idempotent (x e : S) (h : IsIdempotentElem e) :
-    (x ≤𝓗 e) ↔ (x = e * x ∧ x = x * e) := by
-  simp [HPreorder, RPreorder.le_idempotent x h, LPreorder.le_idempotent x h]
+    rw [← WithOne.coe_inj] at hl
+    exact hl
 
 /-- An element is 𝓗-below an idempotent if and only if it is a sandwich fixed point. -/
-theorem HPreorder.le_idempotent' (x e : S) (he : IsIdempotentElem e) :
+theorem HPreorder.le_idempotent' {e : S} (he : IsIdempotentElem e) (x : S) :
     x ≤𝓗 e ↔ e * x * e = x := by
-  rw [HPreorder.le_idempotent x e he]
   constructor
-  · rintro ⟨h₁, h₂⟩; rw [← h₁, ← h₂]
+  · rintro ⟨hr, hl⟩
+    rw [RPreorder.le_idempotent he] at hr
+    rw [LPreorder.le_idempotent he] at hl
+    rw [hr, hl]
   · intro h; constructor
-    · nth_rw 2 [← h]
-      simp_rw [← mul_assoc]; rw [he, h]
-    · nth_rw 2 [← h]
-      rw [mul_assoc, he, h]
+    · rw [← h]
+      use x * e
+      simp [← WithOne.coe_mul, ← mul_assoc]
+    · rw [← h]
+      use e * x
+      simp [← WithOne.coe_mul]
 
 /-!
 ### Morphisms
@@ -122,7 +122,7 @@ theorem RPreorder.hom_pres (f : F) (x y : S) (h : x ≤𝓡 y) : f x ≤𝓡 f y
   | coe z =>
     have heq : x = y * z := by
       rw [← WithOne.coe_inj, WithOne.coe_mul]
-      exact hz
+      exact hz.symm
     rw [← WithOne.coe_mul, WithOne.coe_inj] at hz
     subst x
     simp
@@ -135,7 +135,7 @@ theorem LPreorder.hom_pres (f : F) (x y : S) (h : x ≤𝓛 y) : f x ≤𝓛 f y
   | coe z =>
     have heq : x = z * y := by
       rw [← WithOne.coe_inj, WithOne.coe_mul]
-      exact hz
+      exact hz.symm
     rw [← WithOne.coe_mul, WithOne.coe_inj] at hz
     subst x
     simp
@@ -150,7 +150,7 @@ theorem JPreorder.hom_pres (f : F) (x y : S) (h : x ≤𝓙 y) : f x ≤𝓙 f y
     | coe v =>
       have heq : x = y * v := by
         rw [← WithOne.coe_inj, WithOne.coe_mul]
-        exact huv
+        exact huv.symm
       subst x
       simp
   | coe u =>
@@ -158,13 +158,13 @@ theorem JPreorder.hom_pres (f : F) (x y : S) (h : x ≤𝓙 y) : f x ≤𝓙 f y
     | one =>
       have heq : x = u * y := by
         rw [← WithOne.coe_inj, WithOne.coe_mul]
-        exact huv
+        exact huv.symm
       subst x
       simp
     | coe v =>
       have heq : x = u * y * v := by
         rw [← WithOne.coe_inj, WithOne.coe_mul]
-        exact huv
+        exact huv.symm
       subst x
       simp
 
