@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Green’s Lemma</title>
+<link rel="next" href="sect0006.html" title="Subgroups of Semigroups" />
+<link rel="prev" href="sect0004.html" title="Green’s Relations in Finite Semigroups" />
+<link rel="up" href="index.html" title="finalized" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">finalized</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Idempotent Elements in Finite Semigroups</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Green’s Relations</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Basic Properties of Green’s Relations</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Green’s Relations in Finite Semigroups</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Green’s Lemma</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">Subgroups of Semigroups</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000006">5 Green’s Lemma</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:greens-lemma">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">12</span>
+    <span class="lemma_thmtitle">Green’s Lemma</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:greens-lemma">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000021"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#lem:greens-relations-mul-compat">Lemma 4</a></li>
+          
+          <li><a href="sect0002.html#lem:greens-relations-mul-compat">Lemma 4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.bijOn_lClass" class="lean_decl">Semigroup.REquiv.bijOn_lClass</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.bijOn_lClass_pres_hClass" class="lean_decl">Semigroup.REquiv.bijOn_lClass_pres_hClass</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.bijOn_rClass" class="lean_decl">Semigroup.LEquiv.bijOn_rClass</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.bijOn_rClass_pres_hClass" class="lean_decl">Semigroup.LEquiv.bijOn_rClass_pres_hClass</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  Let \(S\) be a semigroup and suppose \(x \mathcal{R} y\) with witnesses \(u, v \in S\) such that \(x \cdot v = y\) and \(y \cdot u = x\). Then: </p>
+<ol class="enumerate">
+  <li><p>The map \(\rho _v : w \mapsto w \cdot v\) is a bijection from the \(\mathcal{L}\)-class of \(x\) to the \(\mathcal{L}\)-class of \(y\). </p>
+</li>
+  <li><p>The map \(\rho _u : w \mapsto w \cdot u\) is the inverse of \(\rho _v\). </p>
+</li>
+  <li><p>These bijections preserve \(\mathcal{H}\)-classes: for any \(a, b\) in the \(\mathcal{L}\)-class of \(x\), we have \(a \mathcal{H} b\) if and only if \(a \cdot v \mathcal{H} b \cdot v\). </p>
+</li>
+</ol>
+<p> Dually, if \(x \mathcal{L} y\) with witnesses \(u, v\) such that \(v \cdot x = y\) and \(u \cdot y = x\), then left translation \(\lambda _v : w \mapsto v \cdot w\) is a bijection from the \(\mathcal{R}\)-class of \(x\) to the \(\mathcal{R}\)-class of \(y\), with inverse \(\lambda _u\), and these bijections preserve \(\mathcal{H}\)-classes.   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000021">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>We prove the result for \(\mathcal{R}\)-equivalent elements; the dual statement for \(\mathcal{L}\)-equivalent elements follows by a symmetric argument. </p>
+<p>Suppose \(x \mathcal{R} y\) with \(x \cdot v = y\) and \(y \cdot u = x\). We show that \(\rho _v : w \mapsto w \cdot v\) is a bijection from \([x]_{\mathcal{L}}\) to \([y]_{\mathcal{L}}\) by establishing that it maps into the correct set, is injective, is surjective, and has \(\rho _u\) as its inverse. </p>
+<p><b class="bfseries">Translation Identity.</b> The key observation is that for any \(w \mathcal{L} x\), right translation by \(v\) followed by \(u\) returns \(w\) to itself: \(w \cdot v \cdot u = w\). To see this, since \(w \mathcal{L} x\), there exists \(z\) such that \(w = z \cdot x\). Then: </p>
+<div class="displaymath" id="a0000000022">
+  \[  w \cdot v \cdot u = z \cdot x \cdot v \cdot u = z \cdot y \cdot u = z \cdot x = w  \]
+</div>
+<p> This identity is central to all parts of the proof. </p>
+<p><b class="bfseries">Maps To (\(\rho _v\) maps \([x]_{\mathcal{L}}\) to \([y]_{\mathcal{L}}\)).</b> Let \(w \mathcal{L} x\). By <a href="sect0002.html#lem:greens-relations-mul-compat">4</a>, right multiplication preserves \(\mathcal{L}\)-equivalence, so \(w \cdot v \mathcal{L} x \cdot v = y\). Thus \(\rho _v\) maps the \(\mathcal{L}\)-class of \(x\) into the \(\mathcal{L}\)-class of \(y\). </p>
+<p><b class="bfseries">Injectivity.</b> Suppose \(w, z \in [x]_{\mathcal{L}}\) and \(w \cdot v = z \cdot v\). By the translation identity, \(w = w \cdot v \cdot u = z \cdot v \cdot u = z\). Thus \(\rho _v\) is injective on \([x]_{\mathcal{L}}\). </p>
+<p><b class="bfseries">Surjectivity.</b> Let \(z \in [y]_{\mathcal{L}}\). We claim that \(z \cdot u \in [x]_{\mathcal{L}}\) and \(\rho _v(z \cdot u) = z\). First, since \(z \mathcal{L} y\) and \(y \cdot u = x\), by <a href="sect0002.html#lem:greens-relations-mul-compat">4</a> we have \(z \cdot u \mathcal{L} y \cdot u = x\). Second, by the translation identity (applied with the roles of \(u\) and \(v\) swapped, using \(z \mathcal{L} y\)), we have \((z \cdot u) \cdot v = z\). Thus \(\rho _v\) is surjective. </p>
+<p><b class="bfseries">Inverse (\(\rho _u\) is the inverse of \(\rho _v\)).</b> The translation identity shows that for \(w \in [x]_{\mathcal{L}}\), we have \(\rho _u(\rho _v(w)) = w \cdot v \cdot u = w\). Symmetrically, for \(z \in [y]_{\mathcal{L}}\), we have \(\rho _v(\rho _u(z)) = z \cdot u \cdot v = z\). Thus \(\rho _u\) and \(\rho _v\) are inverses on the respective \(\mathcal{L}\)-classes. </p>
+<p><b class="bfseries">Preservation of \(\mathcal{H}\)-classes.</b> Let \(a, b \in [x]_{\mathcal{L}}\). We show \(a \mathcal{H} b \Leftrightarrow a \cdot v \mathcal{H} b \cdot v\). Recall that \(\mathcal{H} = \mathcal{R} \cap \mathcal{L}\). </p>
+<p>For the \(\mathcal{L}\)-part: by <a href="sect0002.html#lem:greens-relations-mul-compat">4</a>, \(a \mathcal{L} b\) implies \(a \cdot v \mathcal{L} b \cdot v\), and conversely, \(a \cdot v \mathcal{L} b \cdot v\) implies \(a \cdot v \cdot u \mathcal{L} b \cdot v \cdot u\), i.e., \(a \mathcal{L} b\). </p>
+<p>For the \(\mathcal{R}\)-part: since \(a, b \in [x]_{\mathcal{L}}\), we have \(a \cdot v \cdot u = a\) and \(b \cdot v \cdot u = b\). This means \(a \cdot v \mathcal{R} a\) (witnessed by \(u\)) and \(b \mathcal{R} b \cdot v\) (witnessed by \(u\)). Thus \(a \mathcal{R} b\) if and only if \(a \cdot v \mathcal{R} b \cdot v\), by transitivity through these intermediate equivalences. </p>
+<p><b class="bfseries">Dual Version.</b> For \(x \mathcal{L} y\) with \(v \cdot x = y\) and \(u \cdot y = x\), the proof is entirely symmetric: left translation \(\lambda _v : w \mapsto v \cdot w\) is a bijection from \([x]_{\mathcal{R}}\) to \([y]_{\mathcal{R}}\), with inverse \(\lambda _u\), and preserves \(\mathcal{H}\)-classes.  </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0004.html" title="Green’s Relations in Finite Semigroups"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="finalized"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0006.html" title="Subgroups of Semigroups"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

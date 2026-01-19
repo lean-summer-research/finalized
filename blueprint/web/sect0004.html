@@ -13,6 +13,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Green’s Relations in Finite Semigroups</title>
+<link rel="next" href="sect0005.html" title="Green’s Lemma" />
 <link rel="prev" href="sect0003.html" title="Basic Properties of Green’s Relations" />
 <link rel="up" href="index.html" title="finalized" />
 <link rel="stylesheet" href="styles/theme-white.css" />
@@ -43,6 +44,12 @@
 <li class=" active current">
   <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Green’s Relations in Finite Semigroups</span></a>
  </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Green’s Lemma</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">Subgroups of Semigroups</span></a>
+ </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
 </nav>
@@ -70,7 +77,7 @@
 
     <a class="icon proof" href="sect0004.html#lem:d-j-theorem">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000013"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000017"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -129,7 +136,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000013">
+<div class="proof_wrapper" id="a0000000017">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -138,7 +145,11 @@
   </div>
   <div class="proof_content">
   <p>The forward direction, that \(x \mathcal{D} y\) implies \(x \mathcal{J} y\), holds in any semigroup, not just finite ones. This is because if \(x \mathcal{D} y\), there exists \(z\) such that \(x \mathcal{R} z\) and \(z \mathcal{L} y\). These relations imply \(x \leq _{\mathcal{J}} z\) and \(z \leq _{\mathcal{J}} y\), and by transitivity, \(x \leq _{\mathcal{J}} y\). A symmetric argument shows \(y \leq _{\mathcal{J}} x\), so \(x \mathcal{J} y\). </p>
-<p>The reverse direction relies on the semigroup being finite. TODO: FINISH PROOF  </p>
+<p>The reverse direction relies on the semigroup being finite. Suppose \(x \mathcal{J} y\). Then there exist \(s, t, u, v\) such that \(x = syt\) and \(y = uxv\). Substituting, we get \(x = s \cdot u \cdot x \cdot v \cdot t\), showing that \(x\) satisfies a sandwich equation. By <a href="sect0001.html#lem:exists-pow-sandwich">2</a>, there exist positive integers \(k\) and \(\ell \) such that \((su)^k x = x\) and \(x(vt)^\ell = x\). </p>
+<p>We use \(z = xv\) as the intermediate element to show \(x \mathcal{D} y\). We need to prove \(x \mathcal{R} xv\) and \(xv \mathcal{L} y\). </p>
+<p>For \(x \mathcal{R} xv\): clearly \(xv \leq _{\mathcal{R}} x\) since \(xv = x \cdot v\). For the reverse, we have \(x = x(vt)^\ell = xv \cdot t(vt)^{\ell -1}\), so \(x \leq _{\mathcal{R}} xv\). Thus \(x \mathcal{R} xv\). </p>
+<p>\(xv \mathcal{L} y\) follows similarly. </p>
+<p>Therefore \(x \mathcal{R} xv\) and \(xv \mathcal{L} y\), which means \(x \mathcal{D} y\).  </p>
 
   </div>
 </div>
@@ -158,7 +169,7 @@
 
     <a class="icon proof" href="sect0004.html#lem:j-strengthening">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000014"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000018"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -221,7 +232,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000014">
+<div class="proof_wrapper" id="a0000000018">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -229,7 +240,14 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Suppose \(x \mathcal{J} y\) and \(x \leq _{\mathcal{R}} y\). Since we are in a finite semigroup, \(x \mathcal{J} y\) implies \(x \mathcal{D} y\) by <a href="sect0004.html#lem:d-j-theorem">9</a>. TODO: FINISH PROOF  </p>
+  <p>Suppose \(x \mathcal{J} y\) and \(x \leq _{\mathcal{R}} y\). The preorder \(x \leq _{\mathcal{R}} y\) means there exists \(z\) such that \(x = yz\). If \(z = 1\) (in the monoid extension), then \(x = y\) and we are done. Otherwise, \(z\) is a proper element and \(x = yz\). </p>
+<p>We need to show \(y \leq _{\mathcal{R}} x\), i.e., that \(y = xt\) for some \(t\). From \(x \mathcal{J} y\), there exist \(u, v\) such that \(y = uxv\). Substituting \(x = yz\), we get \(y = u \cdot y \cdot zv\), so \(y\) satisfies a sandwich equation. By <a href="sect0001.html#lem:exists-pow-sandwich">2</a>, there exists a positive integer \(n\) such that \(y(zv)^n = y\). </p>
+<p>Now we have: </p>
+<div class="displaymath" id="a0000000019">
+  \[  y = y(zv)^n = yz \cdot v(zv)^{n-1} = x \cdot v(zv)^{n-1}  \]
+</div>
+<p> Thus \(y \leq _{\mathcal{R}} x\), and combined with \(x \leq _{\mathcal{R}} y\), we get \(x \mathcal{R} y\). </p>
+<p>The argument for \(\mathcal{L}\) is symmetric.  </p>
 
   </div>
 </div>
@@ -249,7 +267,7 @@
 
     <a class="icon proof" href="sect0004.html#lem:h-of-sandwich">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000015"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000020"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -310,7 +328,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000015">
+<div class="proof_wrapper" id="a0000000020">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -318,7 +336,14 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>TODO  </p>
+  <p>Recall that \(x \mathcal{H} y\) if and only if \(x \mathcal{R} y\) and \(x \mathcal{L} y\). We prove both \(x \mathcal{H} ux\) and \(x \mathcal{H} xv\). </p>
+<p><b class="bfseries">Showing \(x \mathcal{H} ux\):</b> We need \(x \mathcal{R} ux\) and \(x \mathcal{L} ux\). </p>
+<p>For \(x \mathcal{R} ux\): We have \(ux \leq _{\mathcal{R}} x\) trivially (since \(ux = u \cdot x\)). From \(x = uxv\), we see \(x \leq _{\mathcal{R}} ux\) (via \(v\)). Also, \(x \mathcal{J} ux\) since \(x = ux \cdot v\) (so \(x \leq _{\mathcal{J}} ux\)) and \(ux = u \cdot x \cdot 1\) gives \(ux \leq _{\mathcal{J}} x\). By <a href="sect0004.html#lem:j-strengthening">10</a>, the \(\mathcal{R}\)-preorder strengthens to \(x \mathcal{R} ux\). </p>
+<p>For \(x \mathcal{L} ux\): We have \(x \mathcal{J} ux\) as shown above. Since \(ux = u \cdot x\), we have \(ux \leq _{\mathcal{L}} x\). By <a href="sect0004.html#lem:j-strengthening">10</a>, this strengthens to \(ux \mathcal{L} x\). </p>
+<p><b class="bfseries">Showing \(x \mathcal{H} xv\):</b> We need \(x \mathcal{R} xv\) and \(x \mathcal{L} xv\). </p>
+<p>For \(x \mathcal{R} xv\): We have \(xv \leq _{\mathcal{R}} x\) trivially. Also \(x \mathcal{J} xv\) since \(x = u \cdot xv\) (so \(x \leq _{\mathcal{J}} xv\)) and \(xv \leq _{\mathcal{J}} x\). By <a href="sect0004.html#lem:j-strengthening">10</a>, this strengthens to \(x \mathcal{R} xv\). </p>
+<p>For \(x \mathcal{L} xv\): We have \(x = uxv = u \cdot xv\), so \(x \leq _{\mathcal{L}} xv\). Also, \(xv = x \cdot v\) gives \(xv \leq _{\mathcal{L}} x\). With \(x \mathcal{J} xv\), by <a href="sect0004.html#lem:j-strengthening">10</a>, we get \(x \mathcal{L} xv\). </p>
+<p>Therefore \(x \mathcal{H} ux\) and \(x \mathcal{H} xv\).  </p>
 
   </div>
 </div>
@@ -336,6 +361,8 @@
   <a href="sect0003.html" title="Basic Properties of Green’s Relations"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="finalized"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0005.html" title="Green’s Lemma"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

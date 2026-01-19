@@ -1,0 +1,41 @@
+\chapter{Subgroups of Semigroups}
+
+% Begin MyProject/Semigroup/Substructures.lean
+
+In this chapter, we define the notion of a subgroup within a semigroup. Unlike the standard definition in group theory where subgroups are subsets of groups, here we consider subgroups as subsets of semigroups that themselves form groups under the inherited operation.
+
+\begin{definition}[Subgroup of a Semigroup]
+\label{def:subgroup-of-semigroup}
+Let $S$ be a semigroup. A \emph{subgroup} of $S$ is a subset $H \subseteq S$ equipped with:
+\begin{enumerate}
+    \item A \emph{carrier set} $H \subseteq S$;
+    \item \textbf{Closure under multiplication:} For all $a, b \in H$, we have $a \cdot b \in H$;
+    \item An \emph{identity element} $e \in H$ such that:
+    \begin{itemize}
+        \item $e \in H$ (the identity is in the carrier);
+        \item For all $x \in H$, $e \cdot x = x$ (left identity);
+        \item For all $x \in H$, $x \cdot e = x$ (right identity);
+    \end{itemize}
+    \item An \emph{inverse function} $\mathrm{inv} : S \to S$ such that:
+    \begin{itemize}
+        \item For all $x \in H$, $\mathrm{inv}(x) \in H$ (closure under inverses);
+        \item For all $x \in H$, $\mathrm{inv}(x) \cdot x = e$ (left inverse);
+        \item For all $x \in H$, $x \cdot \mathrm{inv}(x) = e$ (right inverse).
+    \end{itemize}
+\end{enumerate}
+With these properties, the carrier $H$ forms a group under the multiplication inherited from $S$.
+
+Note that the identity element $e$ is uniquely determined by the carrier set: if $e_1$ and $e_2$ are both identities for the same carrier $H$, then $e_1 = e_1 \cdot e_2 = e_2$. Similarly, the inverse function is uniquely determined by the carrier and identity.
+\lean{Semigroup.Subgroup}
+\leanok
+\end{definition}
+
+\begin{definition}[Maximal Subgroup]
+\label{def:maximal-subgroup}
+A subgroup $H$ of a semigroup $S$ is called \emph{maximal} if it is not properly contained in any other subgroup of $S$. That is, $H$ is maximal if for every subgroup $K$ of $S$ with $H \subseteq K$, we have $H = K$.
+\lean{Semigroup.Subgroup.isMaximal}
+\leanok
+\uses{def:subgroup-of-semigroup}
+\end{definition}
+
+% End MyProject/Semigroup/Substructures.lean

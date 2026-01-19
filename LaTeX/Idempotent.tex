@@ -13,7 +13,19 @@ Semigroup.exists_idempotent_pow}
 
 \begin{proof}
 \leanok
-Since the semigroup $S$ is finite, for any $x \in S$, the set of its powers $\{x^1, x^2, x^3, \dots\}$ must also be finite. By the pigeonhole principle, there must exist distinct positive integers $m, n$ such that $x^m = x^n$. Let's assume $m < n$. Then we can write $x^m = x^m x^{n-m}$. This shows that powers of $x$ eventually enter a cycle. From this cyclic part, we can extract a power $k$ such that $x^k$ is idempotent. The proof of uniqueness follows by showing that if $x^a$ and $x^b$ are both idempotents, then $x^a = x^b$.
+Since the semigroup $S$ is finite, for any $x \in S$, the set of its powers $\{x^1, x^2, x^3, \dots\}$ must also be finite. By the pigeonhole principle, there must exist distinct positive integers $m, n$ with $m < n$ such that $x^m = x^n$. This gives us $x^m = x^m \cdot x^{n-m}$, showing that powers of $x$ eventually enter a cycle of length $\ell = n - m$ after an initial ``tail'' of length $m$.
+
+To construct an idempotent, we choose the exponent $k = 2m\ell$. This exponent is chosen to satisfy two key properties: (1) it is beyond the pre-period $m$, ensuring we are in the cyclic part, and (2) it is a multiple of the cycle length $\ell$. Since $k > m$ and adding multiples of $\ell$ to an exponent beyond $m$ does not change the result, we have:
+\[
+(x^k)^2 = x^{2k} = x^{k + k} = x^{k + 2m\ell} = x^k
+\]
+where the last equality follows from the loop property applied with $2m$ additional cycles of length $\ell$. Thus $x^k$ is idempotent.
+
+For uniqueness, suppose $x^a$ and $x^b$ are both idempotent. Since idempotent elements satisfy $e^n = e$ for all positive $n$, we have:
+\[
+x^a = (x^a)^b = x^{ab} = (x^b)^a = x^b
+\]
+Here we use that $x^a$ raised to the power $b$ equals $x^{ab}$ (by associativity and the idempotent property), and similarly for $x^b$ raised to the power $a$. Since both expressions equal $x^{ab}$, the two idempotent powers must be equal.
 \end{proof}
 
 \begin{lemma}[Sandwich Property in Finite Monoids]

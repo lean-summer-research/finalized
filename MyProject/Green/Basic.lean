@@ -32,16 +32,15 @@ TODO
 
 ## Blueprint
 
-* One entry for the characterization lemmas of elements below idempotents.
+* Characterization of Elements Below Idempotents
 Label : le-idempotent
 Tagged Lean lemmas :
  - `Semigroup.RPreorder.le_idempotent`
  - `Semigroup.LPreorder.le_idempotent`
  - `Semigroup.HPreorder.le_idempotent`
-Content : prove it for R and H, say L holds by a similar argument to R
 Dependencies : greens-relations
 
-* One entry for the morphism preservation lemmas.
+* Preservation of Green's Relations by Morphisms
 Label : greens-relations-hom-pres
 Tagged Lean lemmas :
  - `Semigroup.RPreorder.hom_pres`
@@ -53,7 +52,6 @@ Tagged Lean lemmas :
  - `Semigroup.JEquiv.hom_pres`
  - `Semigroup.HEquiv.hom_pres`
  - `Semigroup.DEquiv.hom_pres`
-Content : prove ≤R and 𝓡, say ≤L and 𝓛 holds by a similar argument.
 Then, prove ≤𝓙 and 𝓙, then ≤𝓗 and 𝓗, then 𝓓.
 Dependencies : greens-relations
 -/
@@ -89,7 +87,7 @@ theorem LPreorder.le_idempotent {e : S} (h : IsIdempotentElem e) (x : S) :
     exact hl
 
 /-- An element is 𝓗-below an idempotent if and only if it is a sandwich fixed point. -/
-theorem HPreorder.le_idempotent' {e : S} (he : IsIdempotentElem e) (x : S) :
+theorem HPreorder.le_idempotent {e : S} (he : IsIdempotentElem e) (x : S) :
     x ≤𝓗 e ↔ e * x * e = x := by
   constructor
   · rintro ⟨hr, hl⟩

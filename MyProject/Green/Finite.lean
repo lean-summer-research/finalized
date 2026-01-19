@@ -22,28 +22,25 @@ TODO
 
 ## Blueprint
 
-* One LEMMA entry for the DJ theorem
+* Equivalence of 𝓓 and 𝓙 in Finite Semigroups
 Label : d-j-theorem
 Lean lemmas to tag :
   - `Semigroup.JEquiv.to_dEquiv`
   - `Semigroup.dEquiv_iff_jEquiv`
-Content : Prove the J D theorem, explain both directions
-Dependencies : exists-pow-sandwich
+Dependencies : exists-pow-sandwich, def:greens-relations
 
-* One entry for the lemmas showing how `J` "strengthens" preorders
+* J-Equivalence Strengthening Preorders
 Label : j-strengthening
 Lean lemmas to tag :
   - `Semigroup.REquiv.of_rPreorder_and_jEquiv`
   - `Semigroup.LEquiv.of_lPreorder_and_jEquiv`
-Content: Prove for R, say L holds by a similar argument
-Dependencies : exists-pow-sandwich
+Dependencies : exists-pow-sandwich, def:greens-relations
 
-* One entry for `Semigroup.HEquiv.of_eq_sandwich`
+* H-Equivalence from Sandwiching
 Label : h-of-sandwich
 Lean lemmas to tag :
   - `Semigroup.HEquiv.of_eq_sandwich`
-Content : Prove it
-Dependencies : j-strengthening
+Dependencies : j-strengthening, lem:exists-pow-sandwich, def:greens-relations
 
 -/
 

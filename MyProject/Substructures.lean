@@ -15,20 +15,27 @@ so we put all definitions in the `Semigroup` namespace to avoid conflict
 * `Semigroup.Submonoid.toMonoid` The `Monoid` instance on the subtype of a submonoid
 * `Semigroup.Subgroup`
 * `Semigroup.Subgroup.toGroup` The `Group` instance on the subtype of a submonoid
+* `Semigroup.Subgroup.isMaximal` A maximal subgroup is a subgroup that is not properly
+contained in any other subgroup.
+* `Semigroup.hom_of_bijOn` - Noncomputably lift a bijection on the carriers of two subgroups that
+maps multiplication to an isomorphism between the groups.
 
-## Main Theorems
-
-TODO
-
-## Refrences
+## References
 See https://avigad.github.io/mathematics_in_lean/C08_Hierarchies.html#sub-objects
 
 ## TODO
 Redefine group with only left inverse requirement not both.
 
 ## Blueprint
+Definition entry: Subgroup of a Semigroup
+Label: def:subgroup-of-semigroup
+Lean definition to tag: `Semigroup.Subgroup`
+dependencies: None
 
-TODO
+Definition: Maximal Subgroup
+label: def:maximal-subgroup
+Lean definition to tag: `Semigroup.Subgroup.isMaximal`
+Dependencies: `def:subgroup-of-semigroup`
 -/
 
 /-!

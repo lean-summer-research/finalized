@@ -15,7 +15,15 @@ In a finite semigroup, the $\mathcal{D}$ and $\mathcal{J}$ relations are equival
 \leanok
 The forward direction, that $x \mathcal{D} y$ implies $x \mathcal{J} y$, holds in any semigroup, not just finite ones. This is because if $x \mathcal{D} y$, there exists $z$ such that $x \mathcal{R} z$ and $z \mathcal{L} y$. These relations imply $x \leq_{\mathcal{J}} z$ and $z \leq_{\mathcal{J}} y$, and by transitivity, $x \leq_{\mathcal{J}} y$. A symmetric argument shows $y \leq_{\mathcal{J}} x$, so $x \mathcal{J} y$.
 
-The reverse direction relies on the semigroup being finite. TODO: FINISH PROOF
+The reverse direction relies on the semigroup being finite. Suppose $x \mathcal{J} y$. Then there exist $s, t, u, v$ such that $x = syt$ and $y = uxv$. Substituting, we get $x = s \cdot u \cdot x \cdot v \cdot t$, showing that $x$ satisfies a sandwich equation. By \ref{lem:exists-pow-sandwich}, there exist positive integers $k$ and $\ell$ such that $(su)^k x = x$ and $x(vt)^\ell = x$.
+
+We use $z = xv$ as the intermediate element to show $x \mathcal{D} y$. We need to prove $x \mathcal{R} xv$ and $xv \mathcal{L} y$.
+
+For $x \mathcal{R} xv$: clearly $xv \leq_{\mathcal{R}} x$ since $xv = x \cdot v$. For the reverse, we have $x = x(vt)^\ell = xv \cdot t(vt)^{\ell-1}$, so $x \leq_{\mathcal{R}} xv$. Thus $x \mathcal{R} xv$.
+
+$xv \mathcal{L} y$ follows similarly.
+
+Therefore $x \mathcal{R} xv$ and $xv \mathcal{L} y$, which means $x \mathcal{D} y$.
 \uses{def:greens-relations, lem:exists-pow-sandwich}
 \end{proof}
 
@@ -29,7 +37,17 @@ In a finite semigroup, if two elements are $\mathcal{J}$-equivalent, then a one-
 
 \begin{proof}
 \leanok
-Suppose $x \mathcal{J} y$ and $x \leq_{\mathcal{R}} y$. Since we are in a finite semigroup, $x \mathcal{J} y$ implies $x \mathcal{D} y$ by \ref{lem:d-j-theorem}. TODO: FINISH PROOF 
+Suppose $x \mathcal{J} y$ and $x \leq_{\mathcal{R}} y$. The preorder $x \leq_{\mathcal{R}} y$ means there exists $z$ such that $x = yz$. If $z = 1$ (in the monoid extension), then $x = y$ and we are done. Otherwise, $z$ is a proper element and $x = yz$.
+
+We need to show $y \leq_{\mathcal{R}} x$, i.e., that $y = xt$ for some $t$. From $x \mathcal{J} y$, there exist $u, v$ such that $y = uxv$. Substituting $x = yz$, we get $y = u \cdot y \cdot zv$, so $y$ satisfies a sandwich equation. By \ref{lem:exists-pow-sandwich}, there exists a positive integer $n$ such that $y(zv)^n = y$.
+
+Now we have:
+\[
+y = y(zv)^n = yz \cdot v(zv)^{n-1} = x \cdot v(zv)^{n-1}
+\]
+Thus $y \leq_{\mathcal{R}} x$, and combined with $x \leq_{\mathcal{R}} y$, we get $x \mathcal{R} y$.
+
+The argument for $\mathcal{L}$ is symmetric.
 \uses{def:greens-relations, lem:d-j-theorem, lem:exists-pow-sandwich}
 \end{proof}
 
@@ -43,7 +61,21 @@ In a finite semigroup, if an element $x$ can be written as $x = uxv$ for some $u
 
 \begin{proof}
 \leanok
-TODO
+Recall that $x \mathcal{H} y$ if and only if $x \mathcal{R} y$ and $x \mathcal{L} y$. We prove both $x \mathcal{H} ux$ and $x \mathcal{H} xv$.
+
+\textbf{Showing $x \mathcal{H} ux$:} We need $x \mathcal{R} ux$ and $x \mathcal{L} ux$.
+
+For $x \mathcal{R} ux$: We have $ux \leq_{\mathcal{R}} x$ trivially (since $ux = u \cdot x$). From $x = uxv$, we see $x \leq_{\mathcal{R}} ux$ (via $v$). Also, $x \mathcal{J} ux$ since $x = ux \cdot v$ (so $x \leq_{\mathcal{J}} ux$) and $ux = u \cdot x \cdot 1$ gives $ux \leq_{\mathcal{J}} x$. By \ref{lem:j-strengthening}, the $\mathcal{R}$-preorder strengthens to $x \mathcal{R} ux$.
+
+For $x \mathcal{L} ux$: We have $x \mathcal{J} ux$ as shown above. Since $ux = u \cdot x$, we have $ux \leq_{\mathcal{L}} x$. By \ref{lem:j-strengthening}, this strengthens to $ux \mathcal{L} x$.
+
+\textbf{Showing $x \mathcal{H} xv$:} We need $x \mathcal{R} xv$ and $x \mathcal{L} xv$.
+
+For $x \mathcal{R} xv$: We have $xv \leq_{\mathcal{R}} x$ trivially. Also $x \mathcal{J} xv$ since $x = u \cdot xv$ (so $x \leq_{\mathcal{J}} xv$) and $xv \leq_{\mathcal{J}} x$. By \ref{lem:j-strengthening}, this strengthens to $x \mathcal{R} xv$.
+
+For $x \mathcal{L} xv$: We have $x = uxv = u \cdot xv$, so $x \leq_{\mathcal{L}} xv$. Also, $xv = x \cdot v$ gives $xv \leq_{\mathcal{L}} x$. With $x \mathcal{J} xv$, by \ref{lem:j-strengthening}, we get $x \mathcal{L} xv$.
+
+Therefore $x \mathcal{H} ux$ and $x \mathcal{H} xv$.
 \uses{def:greens-relations, lem:j-strengthening, lem:exists-pow-sandwich}
 \end{proof}
 

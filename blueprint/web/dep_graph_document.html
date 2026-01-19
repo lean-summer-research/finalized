@@ -149,6 +149,94 @@
 
 
     
+    <div class="dep-modal-container" id="def:maximal-subgroup_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:maximal-subgroup" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">14</span><span class="definition_thmtitle">Maximal Subgroup</span></div>
+    <div class="thm_thmcontent"><p>  A subgroup \(H\) of a semigroup \(S\) is called <em>maximal</em> if it is not properly contained in any other subgroup of \(S\). That is, \(H\) is maximal if for every subgroup \(K\) of \(S\) with \(H \subseteq K\), we have \(H = K\).   </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#def:maximal-subgroup">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.Subgroup.isMaximal">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:subgroup-of-semigroup_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:subgroup-of-semigroup" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">13</span><span class="definition_thmtitle">Subgroup of a Semigroup</span></div>
+    <div class="thm_thmcontent"><p>  Let \(S\) be a semigroup. A <em>subgroup</em> of \(S\) is a subset \(H \subseteq S\) equipped with: </p>
+<ol class="enumerate">
+  <li><p>A <em>carrier set</em> \(H \subseteq S\); </p>
+</li>
+  <li><p><b class="bfseries">Closure under multiplication:</b> For all \(a, b \in H\), we have \(a \cdot b \in H\); </p>
+</li>
+  <li><p>An <em>identity element</em> \(e \in H\) such that: </p>
+<ul class="itemize">
+  <li><p>\(e \in H\) (the identity is in the carrier); </p>
+</li>
+  <li><p>For all \(x \in H\), \(e \cdot x = x\) (left identity); </p>
+</li>
+  <li><p>For all \(x \in H\), \(x \cdot e = x\) (right identity); </p>
+</li>
+</ul>
+</li>
+  <li><p>An <em>inverse function</em> \(\mathrm{inv} : S \to S\) such that: </p>
+<ul class="itemize">
+  <li><p>For all \(x \in H\), \(\mathrm{inv}(x) \in H\) (closure under inverses); </p>
+</li>
+  <li><p>For all \(x \in H\), \(\mathrm{inv}(x) \cdot x = e\) (left inverse); </p>
+</li>
+  <li><p>For all \(x \in H\), \(x \cdot \mathrm{inv}(x) = e\) (right inverse). </p>
+</li>
+</ul>
+</li>
+</ol>
+<p> With these properties, the carrier \(H\) forms a group under the multiplication inherited from \(S\). </p>
+<p>Note that the identity element \(e\) is uniquely determined by the carrier set: if \(e_1\) and \(e_2\) are both identities for the same carrier \(H\), then \(e_1 = e_1 \cdot e_2 = e_2\). Similarly, the inverse function is uniquely determined by the carrier and identity.  </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#def:subgroup-of-semigroup">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.Subgroup">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:d-equiv-closed_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -284,6 +372,58 @@
            <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.pow_idempotent_unique" class="lean_decl">Semigroup.pow_idempotent_unique</a></li>
         
            <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.exists_idempotent_pow" class="lean_decl">Semigroup.exists_idempotent_pow</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:greens-lemma_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:greens-lemma" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">12</span><span class="lemma_thmtitle">Green’s Lemma</span></div>
+    <div class="thm_thmcontent"><p>  Let \(S\) be a semigroup and suppose \(x \mathcal{R} y\) with witnesses \(u, v \in S\) such that \(x \cdot v = y\) and \(y \cdot u = x\). Then: </p>
+<ol class="enumerate">
+  <li><p>The map \(\rho _v : w \mapsto w \cdot v\) is a bijection from the \(\mathcal{L}\)-class of \(x\) to the \(\mathcal{L}\)-class of \(y\). </p>
+</li>
+  <li><p>The map \(\rho _u : w \mapsto w \cdot u\) is the inverse of \(\rho _v\). </p>
+</li>
+  <li><p>These bijections preserve \(\mathcal{H}\)-classes: for any \(a, b\) in the \(\mathcal{L}\)-class of \(x\), we have \(a \mathcal{H} b\) if and only if \(a \cdot v \mathcal{H} b \cdot v\). </p>
+</li>
+</ol>
+<p> Dually, if \(x \mathcal{L} y\) with witnesses \(u, v\) such that \(v \cdot x = y\) and \(u \cdot y = x\), then left translation \(\lambda _v : w \mapsto v \cdot w\) is a bijection from the \(\mathcal{R}\)-class of \(x\) to the \(\mathcal{R}\)-class of \(y\), with inverse \(\lambda _u\), and these bijections preserve \(\mathcal{H}\)-classes.   </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:greens-lemma">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.bijOn_lClass" class="lean_decl">Semigroup.REquiv.bijOn_lClass</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.REquiv.bijOn_lClass_pres_hClass" class="lean_decl">Semigroup.REquiv.bijOn_lClass_pres_hClass</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.bijOn_rClass" class="lean_decl">Semigroup.LEquiv.bijOn_rClass</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.LEquiv.bijOn_rClass_pres_hClass" class="lean_decl">Semigroup.LEquiv.bijOn_rClass_pres_hClass</a></li>
         
       </ul>
   </div>
@@ -550,7 +690,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"lem:exists-pow-sandwich"	[color=green,		fillcolor="#1CAC78",		label="exists-pow-sandwich",		shape=ellipse,		style=filled];	"lem:d-j-theorem"	[color=green,		fillcolor="#1CAC78",		label="d-j-theorem",		shape=ellipse,		style=filled];	"lem:exists-pow-sandwich" -> "lem:d-j-theorem"	[style=dashed];	"lem:j-strengthening"	[color=green,		fillcolor="#1CAC78",		label="j-strengthening",		shape=ellipse,		style=filled];	"lem:d-j-theorem" -> "lem:j-strengthening"	[style=dashed];	"lem:h-of-sandwich"	[color=green,		fillcolor="#1CAC78",		label="h-of-sandwich",		shape=ellipse,		style=filled];	"lem:j-strengthening" -> "lem:h-of-sandwich"	[style=dashed];	"lem:greens-relations-mul-compat"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-mul-compat",		shape=ellipse,		style=filled];	"lem:r-l-comm"	[color=green,		fillcolor="#1CAC78",		label="r-l-comm",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:r-l-comm"	[style=dashed];	"lem:d-equiv-closed"	[color=green,		fillcolor="#1CAC78",		label="d-equiv-closed",		shape=ellipse,		style=filled];	"lem:r-l-comm" -> "lem:d-equiv-closed";	"def:greens-relations"	[color=green,		fillcolor="#B0ECA3",		label="greens-relations",		shape=box,		style=filled];	"def:greens-relations" -> "lem:d-j-theorem"	[style=dashed];	"def:greens-relations" -> "lem:greens-relations-mul-compat"	[style=dashed];	"lem:le-idempotent"	[color=green,		fillcolor="#1CAC78",		label="le-idempotent",		shape=ellipse,		style=filled];	"def:greens-relations" -> "lem:le-idempotent"	[style=dashed];	"lem:greens-relations-hom-pres"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-hom-pres",		shape=ellipse,		style=filled];	"def:greens-relations" -> "lem:greens-relations-hom-pres"	[style=dashed];	"lem:exists-unique-idempotent-pow"	[color=green,		fillcolor="#1CAC78",		label="exists-unique-idempotent-pow",		shape=ellipse,		style=filled];	"lem:exists-unique-idempotent-pow" -> "lem:exists-pow-sandwich"	[style=dashed];}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"lem:exists-pow-sandwich"	[color=green,		fillcolor="#1CAC78",		label="exists-pow-sandwich",		shape=ellipse,		style=filled];	"lem:d-j-theorem"	[color=green,		fillcolor="#1CAC78",		label="d-j-theorem",		shape=ellipse,		style=filled];	"lem:exists-pow-sandwich" -> "lem:d-j-theorem"	[style=dashed];	"lem:j-strengthening"	[color=green,		fillcolor="#1CAC78",		label="j-strengthening",		shape=ellipse,		style=filled];	"lem:d-j-theorem" -> "lem:j-strengthening"	[style=dashed];	"lem:h-of-sandwich"	[color=green,		fillcolor="#1CAC78",		label="h-of-sandwich",		shape=ellipse,		style=filled];	"lem:j-strengthening" -> "lem:h-of-sandwich"	[style=dashed];	"def:subgroup-of-semigroup"	[color=green,		fillcolor="#B0ECA3",		label="subgroup-of-semigroup",		shape=box,		style=filled];	"def:maximal-subgroup"	[color=green,		fillcolor="#B0ECA3",		label="maximal-subgroup",		shape=box,		style=filled];	"def:subgroup-of-semigroup" -> "def:maximal-subgroup"	[style=dashed];	"lem:greens-relations-mul-compat"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-mul-compat",		shape=ellipse,		style=filled];	"lem:r-l-comm"	[color=green,		fillcolor="#1CAC78",		label="r-l-comm",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:r-l-comm"	[style=dashed];	"lem:greens-lemma"	[color=green,		fillcolor="#1CAC78",		label="greens-lemma",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:greens-lemma"	[style=dashed];	"lem:d-equiv-closed"	[color=green,		fillcolor="#1CAC78",		label="d-equiv-closed",		shape=ellipse,		style=filled];	"lem:r-l-comm" -> "lem:d-equiv-closed";	"lem:le-idempotent"	[color=green,		fillcolor="#1CAC78",		label="le-idempotent",		shape=ellipse,		style=filled];	"lem:greens-relations-hom-pres"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-hom-pres",		shape=ellipse,		style=filled];	"def:greens-relations"	[color=green,		fillcolor="#B0ECA3",		label="greens-relations",		shape=box,		style=filled];	"def:greens-relations" -> "lem:d-j-theorem"	[style=dashed];	"def:greens-relations" -> "lem:greens-relations-mul-compat"	[style=dashed];	"def:greens-relations" -> "lem:le-idempotent"	[style=dashed];	"def:greens-relations" -> "lem:greens-relations-hom-pres"	[style=dashed];	"lem:exists-unique-idempotent-pow"	[color=green,		fillcolor="#1CAC78",		label="exists-unique-idempotent-pow",		shape=ellipse,		style=filled];	"lem:exists-unique-idempotent-pow" -> "lem:exists-pow-sandwich"	[style=dashed];}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {

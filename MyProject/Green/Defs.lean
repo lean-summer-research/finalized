@@ -103,7 +103,7 @@ TODO
 
 ## Blueprint
 
-* One blueprint DEF entry for Green's Preorders and Equivalence Relations.
+* Green's Preorder and Equivalence Relations
 Label : greens-relations
 Tagged Lean defs :
   - `Semigroup.RPreorder`
@@ -124,36 +124,28 @@ Tagged Lean defs :
   - `Semigroup.JEquiv.isEquivalence`
   - `Semigroup.HEquiv.isEquivalence`
   - `Semigroup.DEquiv.isEquivalence`
-Content :
-  - Explain definitions of the relations
-  - introduce notation for preorders, equivalence, and equivalence classes
-  - Explain that the preorders are reflexive and transitive (preorders)
-  - Explain that the equivalences are reflexive, symmetric, and transitive (equivalence relations)
 Dependencies : None
 
-* One Lemma entry for the right/left mul compatibility lemmas.
+* Multiplication Compatibility of Green's relations
 Label : greens-relations-mul-compat
 tagged lean lemmas :
   - `Semigroup.RPreorder.lmult_compat`
   - `Semigroup.REquiv.lmult_compat`
   - `Semigroup.LPreorder.rmult_compat`
   - `Semigroup.LEquiv.rmult_compat`
-Content : Prove it for ≤𝓡, then for 𝓡, then say a similar arguement holds for ≤𝓛 and 𝓛
 Dependencies : greens-relations
 
-* One Lemma entry for the commutation of 𝓡 and 𝓛.
+* Communitcation of 𝓡 and 𝓛 Relations
 Label : r-l-comm
 tagged lean lemmas :
   - `Semigroup.rEquiv_lEquiv_comm`
-Content : Prove it and mention that this is used to prove that 𝓓 is symmetric.
 Dependencies : greens-relations-mul-compat
 
-* One Lemma entry for the closure of 𝓓 under 𝓡 and 𝓛.
+* Closure of 𝓓 under 𝓡 and 𝓛
 label : d-equiv-closed
 tagged lean lemmas :
   - `Semigroup.DEquiv.closed_under_lEquiv`
   - `Semigroup.DEquiv.closed_under_rEquiv`
-Content : Prove closure under 𝓛, then say a similar argument holds for closure under 𝓡.
 Dependencies : greens-relations
 
 -/

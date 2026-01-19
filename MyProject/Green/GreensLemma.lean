@@ -35,6 +35,11 @@ TODO
 
 * One lemma entry for the 𝓡-class bijection and its properties.
 label : greens-lemma
+Lean lemmas to tag :
+  - `Semigroup.REquiv.bijOn_lClass`
+  - `Semigroup.REquiv.bijOn_lClass_pres_hClass`
+  - `Semigroup.LEquiv.bijOn_rClass`
+  - `Semigroup.LEquiv.bijOn_rClass_pres_hClass`
 dependencies : todo
 -/
 

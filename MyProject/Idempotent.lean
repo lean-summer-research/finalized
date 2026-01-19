@@ -23,7 +23,7 @@ is needed in terms of `ℕ` powers greater than `0` rather than `ℕ+` powers.
 
 ## Blueprint
 
-* One blueprint entry for `Semigroup.exists_idempotent_pow` and `Semigroup.pow_idempotent_unique`.
+* Existance of Idempotent powers
 Label : exists-unique-idempotent-pow
 Tagged Lean lemmas :
  - `Semigroup.exists_repeating_pow`
@@ -31,12 +31,11 @@ Tagged Lean lemmas :
  - `Semigroup.exists_idempotent_pow`
 Dependencies: None
 
-* One entry for `Monoid.exists_pow_sandwich_eq_self`.
+* Sandwich Property in Finite Monoids
 Label : exists-pow-sandwhich
 Tagged Lean lemmas :
  - `Monoid.exists_pow_sandwich_eq_self`
 Dependencies: exists-unique-idempotent-pow
-
 -/
 
 namespace Semigroup

@@ -1,0 +1,52 @@
+\chapter{Green's Lemma}
+
+% Begin MyProject/Semigroup/Green/GreensLemma.lean
+
+\begin{lemma}[Green's Lemma]
+\label{lem:greens-lemma}
+Let $S$ be a semigroup and suppose $x \mathcal{R} y$ with witnesses $u, v \in S$ such that $x \cdot v = y$ and $y \cdot u = x$. Then:
+\begin{enumerate}
+    \item The map $\rho_v : w \mapsto w \cdot v$ is a bijection from the $\mathcal{L}$-class of $x$ to the $\mathcal{L}$-class of $y$.
+    \item The map $\rho_u : w \mapsto w \cdot u$ is the inverse of $\rho_v$.
+    \item These bijections preserve $\mathcal{H}$-classes: for any $a, b$ in the $\mathcal{L}$-class of $x$, we have $a \mathcal{H} b$ if and only if $a \cdot v \mathcal{H} b \cdot v$.
+\end{enumerate}
+Dually, if $x \mathcal{L} y$ with witnesses $u, v$ such that $v \cdot x = y$ and $u \cdot y = x$, then left translation $\lambda_v : w \mapsto v \cdot w$ is a bijection from the $\mathcal{R}$-class of $x$ to the $\mathcal{R}$-class of $y$, with inverse $\lambda_u$, and these bijections preserve $\mathcal{H}$-classes.
+\lean{Semigroup.REquiv.bijOn_lClass, 
+Semigroup.REquiv.bijOn_lClass_pres_hClass, 
+Semigroup.LEquiv.bijOn_rClass, 
+Semigroup.LEquiv.bijOn_rClass_pres_hClass}
+\leanok
+\uses{lem:greens-relations-mul-compat}
+\end{lemma}
+
+\begin{proof}
+\leanok
+We prove the result for $\mathcal{R}$-equivalent elements; the dual statement for $\mathcal{L}$-equivalent elements follows by a symmetric argument.
+
+Suppose $x \mathcal{R} y$ with $x \cdot v = y$ and $y \cdot u = x$. We show that $\rho_v : w \mapsto w \cdot v$ is a bijection from $[x]_{\mathcal{L}}$ to $[y]_{\mathcal{L}}$ by establishing that it maps into the correct set, is injective, is surjective, and has $\rho_u$ as its inverse.
+
+\textbf{Translation Identity.} The key observation is that for any $w \mathcal{L} x$, right translation by $v$ followed by $u$ returns $w$ to itself: $w \cdot v \cdot u = w$. To see this, since $w \mathcal{L} x$, there exists $z$ such that $w = z \cdot x$. Then:
+\[
+w \cdot v \cdot u = z \cdot x \cdot v \cdot u = z \cdot y \cdot u = z \cdot x = w
+\]
+This identity is central to all parts of the proof.
+
+\textbf{Maps To ($\rho_v$ maps $[x]_{\mathcal{L}}$ to $[y]_{\mathcal{L}}$).} Let $w \mathcal{L} x$. By \ref{lem:greens-relations-mul-compat}, right multiplication preserves $\mathcal{L}$-equivalence, so $w \cdot v \mathcal{L} x \cdot v = y$. Thus $\rho_v$ maps the $\mathcal{L}$-class of $x$ into the $\mathcal{L}$-class of $y$.
+
+\textbf{Injectivity.} Suppose $w, z \in [x]_{\mathcal{L}}$ and $w \cdot v = z \cdot v$. By the translation identity, $w = w \cdot v \cdot u = z \cdot v \cdot u = z$. Thus $\rho_v$ is injective on $[x]_{\mathcal{L}}$.
+
+\textbf{Surjectivity.} Let $z \in [y]_{\mathcal{L}}$. We claim that $z \cdot u \in [x]_{\mathcal{L}}$ and $\rho_v(z \cdot u) = z$. First, since $z \mathcal{L} y$ and $y \cdot u = x$, by \ref{lem:greens-relations-mul-compat} we have $z \cdot u \mathcal{L} y \cdot u = x$. Second, by the translation identity (applied with the roles of $u$ and $v$ swapped, using $z \mathcal{L} y$), we have $(z \cdot u) \cdot v = z$. Thus $\rho_v$ is surjective.
+
+\textbf{Inverse ($\rho_u$ is the inverse of $\rho_v$).} The translation identity shows that for $w \in [x]_{\mathcal{L}}$, we have $\rho_u(\rho_v(w)) = w \cdot v \cdot u = w$. Symmetrically, for $z \in [y]_{\mathcal{L}}$, we have $\rho_v(\rho_u(z)) = z \cdot u \cdot v = z$. Thus $\rho_u$ and $\rho_v$ are inverses on the respective $\mathcal{L}$-classes.
+
+\textbf{Preservation of $\mathcal{H}$-classes.} Let $a, b \in [x]_{\mathcal{L}}$. We show $a \mathcal{H} b \Leftrightarrow a \cdot v \mathcal{H} b \cdot v$. Recall that $\mathcal{H} = \mathcal{R} \cap \mathcal{L}$.
+
+For the $\mathcal{L}$-part: by \ref{lem:greens-relations-mul-compat}, $a \mathcal{L} b$ implies $a \cdot v \mathcal{L} b \cdot v$, and conversely, $a \cdot v \mathcal{L} b \cdot v$ implies $a \cdot v \cdot u \mathcal{L} b \cdot v \cdot u$, i.e., $a \mathcal{L} b$.
+
+For the $\mathcal{R}$-part: since $a, b \in [x]_{\mathcal{L}}$, we have $a \cdot v \cdot u = a$ and $b \cdot v \cdot u = b$. This means $a \cdot v \mathcal{R} a$ (witnessed by $u$) and $b \mathcal{R} b \cdot v$ (witnessed by $u$). Thus $a \mathcal{R} b$ if and only if $a \cdot v \mathcal{R} b \cdot v$, by transitivity through these intermediate equivalences.
+
+\textbf{Dual Version.} For $x \mathcal{L} y$ with $v \cdot x = y$ and $u \cdot y = x$, the proof is entirely symmetric: left translation $\lambda_v : w \mapsto v \cdot w$ is a bijection from $[x]_{\mathcal{R}}$ to $[y]_{\mathcal{R}}$, with inverse $\lambda_u$, and preserves $\mathcal{H}$-classes.
+\uses{lem:greens-relations-mul-compat}
+\end{proof}
+
+% end MyProject/Semigroup/Green/GreensLemma.lean
