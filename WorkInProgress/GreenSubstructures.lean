@@ -18,6 +18,10 @@ def REquiv.ofSubsemigroup : Prop :=
 
 notation s₁ " 𝓡{" T "} " s₂ => REquiv.ofSubsemigroup T s₁ s₂
 
+#check SetLike.coe_eq_coe
+#check Finset.card_eq_of_equiv_fin
+#check Finset.subtype
+
 lemma RPreorder.ofSubsemigroup_if {s₁ s₂ : S} {h₁ : s₁ ∈ T} {h₂ : s₂ ∈ T}
     (hr : (⟨s₁, h₁⟩ : T) ≤𝓡 ⟨s₂, h₂⟩) : s₁ ≤𝓡 s₂ := by
   obtain ⟨z, hz⟩ := hr
@@ -61,6 +65,8 @@ section DClass
 /-!
 prop 1.8:
 All maximal subgroups within a D class are isomorphic
+
+NOTE : I dont think this is possible as a `def`
 -/
 
 variable {S : Type*} [Semigroup S] {x y : S}
@@ -71,6 +77,9 @@ def DEquiv.maximalSubgroupsEquiv {G₁ G₂ : Subgroup S}
   invFun := sorry
   map_mul' := by sorry
 
+
+#check GroupWithZero
+#check WithZero
 
 end DClass
 

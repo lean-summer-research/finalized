@@ -444,6 +444,7 @@ Let `t` be the witness of `f ≤𝓛 s` such that `t * s = f`.
 let `u` be the witness of `e ≤𝓡 s` such that `s * u = e`.
 Then, the map `x ↦ t * x * s` is a bijection which preserves multiplication (like a morphism). -/
 
+-- TODO - try to use this lemma in the trivial cases
 lemma DEquiv.bij_on_hClass_map_mul {e f s t x y : S} (_ : IsIdempotentElem e)
   (hf : IsIdempotentElem f) (hr : e 𝓡 s) (hl : s 𝓛 f) (ht : t * s = f)
   (_ : x 𝓗 e) (hy : y 𝓗 e) :
@@ -488,16 +489,6 @@ lemma DEquiv.hClass_equiv' {e f : S} (he : IsIdempotentElem e)
   cases t with
   | one =>
     simp at ht; subst ht -- trivial case where `f = s`
-    /-
-    obtain ⟨f, hbij⟩ := hr.exists_bij_on_hClass
-    apply Nonempty.intro
-    refine Subgroup.hom_of_bijOn
-      (HEquiv.subgroup_of_idempotent he) -- `⟦e⟧𝓗`
-      (HEquiv.subgroup_of_idempotent hf) -- `⟦f⟧𝓗`
-      f ?_ ?_
-      -/
-
-
     -- let `u` be the witness of `f ≤𝓡 e` such that `e * u = f`
     obtain ⟨u, hu⟩ := hr.ge
     cases u with
@@ -520,7 +511,14 @@ lemma DEquiv.hClass_equiv' {e f : S} (he : IsIdempotentElem e)
         apply hr.bijOn_hClass hu
       · intros x y hx hy
         simp
+        symm;
+        have ht : e * x = x := by sorry
+        have hs : s * s = s := by sorry
+        have hf' : s * s = s := by sorry
+        have h_bij := DEquiv.bij_on_hClass_map_mul he hf hr hl hf' hx hy
+        simp_all
         sorry --was this the correct bijection? is this provable?
+
   | coe t =>
     simp [← WithOne.coe_mul] at ht
     apply Nonempty.intro
@@ -533,9 +531,40 @@ lemma DEquiv.hClass_equiv' {e f : S} (he : IsIdempotentElem e)
     · intros x y hx hy
       symm; exact DEquiv.bij_on_hClass_map_mul he hf hr hl ht hx hy
 
+
 /-- Two maximal subgroups of a 𝓓-class are isomorphic. -/
-def DEquiv.maximal_subgroups_equiv {x y : S} {H K : Subgroup S}
-  (hH : H.isMaximal) (hK : K.isMaximal) (hx : x ∈ H) (hy : x ∈ K) (hd : x 𝓓 y) : Nonempty (H ≃* K) := by
-  sorry
+theorem DEquiv.maximal_subgroups_equiv {x y : S} {H K : Subgroup S}
+  (hH : H.isMaximal) (hK : K.isMaximal) (hx : x ∈ H) (hy : x ∈ K) (hd : x 𝓓 y) :
+    Nonempty (H ≃* K) := by
+  obtain ⟨e₁, hi₁, h₁⟩ := HEquiv.hClass_of_subgroup hH
+  obtain ⟨e₂, hi₂, h₂⟩ := HEquiv.hClass_of_subgroup hK
+  have he : e₁ 𝓓 e₂ := by sorry
+  obtain h₃ := he.hClass_equiv' hi₁ hi₂
+  obtain ⟨f⟩ := h₃
+  apply Nonempty.intro
+  refine MulEquiv.mk
+
+
+
+  have f := Nonempty.elim h₃
+
+  have h₄ := HEquiv.subgroup_of_idempotent_carrier_def hi₁
+  simp [h₄]
+
+
+  rw [h₁]
 
 end Semigroup
+
+#check Set.card_empty
+/-
+Meeting notes
+
+How to talk about cardinality of finite (or infinite) sets
+and converting finset to set.
+
+Add lemma, that mul by idempotent in hclass is the identit
+
+todo: prove that greens lemma bigjections are multiplicitive
+y
+-/

@@ -1,0 +1,13 @@
+add simppp lemmas for greens equivalences (z = y * z imples x is rrrr below y) and prove for subsemigroup
+quotient semigroup defined by the quotient of a SET (everything in the set foes to zerio
+
+something about zerio simple SUBsemigroups (instance as a zero simple semigroup)
+
+Books for TA : Theorem proving in lean, hichhikers guide, the mechanics of proof, math in lean, formalizing math
+
+How to share a dev container
+
+New todos:
+
+Get blueprint caught up.
+Summerize what is in the project so far
