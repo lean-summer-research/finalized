@@ -40,7 +40,9 @@ Lean lemmas to tag :
   - `Semigroup.REquiv.bijOn_lClass_pres_hClass`
   - `Semigroup.LEquiv.bijOn_rClass`
   - `Semigroup.LEquiv.bijOn_rClass_pres_hClass`
-dependencies : todo
+dependencies :
+  - greens-relations-mul-compat
+  -
 -/
 
 namespace Semigroup

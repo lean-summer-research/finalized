@@ -46,7 +46,8 @@ Semigroup.LEquiv.of_lPreorder_and_jEquiv
 Semigroup.HEquiv.of_eq_sandwich
 Semigroup.REquiv.bijOn_lClass
 Semigroup.REquiv.bijOn_lClass_pres_hClass
+Semigroup.REquiv.bijOn_hClass
 Semigroup.LEquiv.bijOn_rClass
-Semigroup.LEquiv.bijOn_rClass_pres_hClass
+Semigroup.LEquiv.bijOn_hClass
 Semigroup.Subgroup
 Semigroup.Subgroup.isMaximal

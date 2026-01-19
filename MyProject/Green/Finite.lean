@@ -41,7 +41,6 @@ Label : h-of-sandwich
 Lean lemmas to tag :
   - `Semigroup.HEquiv.of_eq_sandwich`
 Dependencies : j-strengthening, lem:exists-pow-sandwich, def:greens-relations
-
 -/
 
 namespace Semigroup
