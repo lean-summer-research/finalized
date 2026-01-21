@@ -104,7 +104,7 @@ TODO
 ## Blueprint
 
 * Green's Preorder and Equivalence Relations
-Label : greens-relations
+Label : def:greens-relations
 Tagged Lean defs :
   - `Semigroup.RPreorder`
   - `Semigroup.LPreorder`
@@ -127,26 +127,26 @@ Tagged Lean defs :
 Dependencies : None
 
 * Multiplication Compatibility of Green's relations
-Label : greens-relations-mul-compat
+Label : lem:greens-relations-mul-compat
 tagged lean lemmas :
   - `Semigroup.RPreorder.lmult_compat`
   - `Semigroup.REquiv.lmult_compat`
   - `Semigroup.LPreorder.rmult_compat`
   - `Semigroup.LEquiv.rmult_compat`
-Dependencies : greens-relations
+Dependencies : def:greens-relations
 
 * Communitcation of 𝓡 and 𝓛 Relations
-Label : r-l-comm
+Label : lem:r-l-comm
 tagged lean lemmas :
   - `Semigroup.rEquiv_lEquiv_comm`
-Dependencies : greens-relations-mul-compat
+Dependencies : lem:greens-relations-mul-compat
 
 * Closure of 𝓓 under 𝓡 and 𝓛
-label : d-equiv-closed
+label : lem:d-equiv-closed
 tagged lean lemmas :
   - `Semigroup.DEquiv.closed_under_lEquiv`
   - `Semigroup.DEquiv.closed_under_rEquiv`
-Dependencies : greens-relations
+Dependencies : def:greens-relations
 
 -/
 
@@ -550,16 +550,24 @@ end DEquiv
 variable {x y z : S}
 
 /-- `x ≤𝓡 y` implies `x ≤𝓙 y` -/
-@[simp] lemma RPreorder.to_jEquiv (h : x ≤𝓡 y) : x ≤𝓙 y := by
+@[simp] lemma RPreorder.to_jPreorder (h : x ≤𝓡 y) : x ≤𝓙 y := by
   obtain ⟨u, hu⟩ := h
   use 1, u
   simp_all
 
 /-- `x ≤𝓛 y` implies `x ≤𝓙 y` -/
-@[simp] lemma LPreorder.to_jEquiv (h : x ≤𝓛 y) : x ≤𝓙 y := by
+@[simp] lemma LPreorder.to_jPreorder (h : x ≤𝓛 y) : x ≤𝓙 y := by
   obtain ⟨u, hu⟩ := h
   use u, 1
   simp_all
+
+@[simp] lemma HPreorder.to_rPreorder (h : x ≤𝓗 y) : x ≤𝓡 y := by
+  rw [HPreorder] at h
+  simp [h.left]
+
+@[simp] lemma HPreorder.to_lPreorder (h : x ≤𝓗 y) : x ≤𝓛 y := by
+  rw [HPreorder] at h
+  simp [h.right]
 
 /-- `x 𝓡 y` implies `x 𝓙 y` -/
 @[simp] lemma REquiv.to_jEquiv (h : x 𝓡 y) : x 𝓙 y := by
@@ -583,6 +591,10 @@ variable {x y z : S}
     rw [← hw, ← hu]
     simp [← mul_assoc]
 
+@[simp] lemma HEquiv.to_jEquiv (h : x 𝓗 y) : x 𝓙 y := by
+  rw [HEquiv.iff_rEquiv_and_lEquiv] at h
+  simp_all [JEquiv, REquiv]
+
 /-- `x 𝓗 y` implies `x 𝓡 y` -/
 @[simp] lemma HEquiv.to_rEquiv (h : x 𝓗 y) : x 𝓡 y := by
   rw [HEquiv.iff_rEquiv_and_lEquiv] at h
@@ -592,6 +604,22 @@ variable {x y z : S}
 @[simp] lemma HEquiv.to_lEquiv (h : x 𝓗 y) : x 𝓛 y := by
   rw [HEquiv.iff_rEquiv_and_lEquiv] at h
   simp [h]
+
+@[simp] lemma HEquiv.to_dEquiv (h : x 𝓗 y) : x 𝓓 y := by
+  rw [HEquiv.iff_rEquiv_and_lEquiv] at h
+  simp [DEquiv]
+  use x
+  simp_all
+
+@[simp] lemma REquiv.to_dEquiv (h : x 𝓡 y) : x 𝓓 y := by
+  simp [DEquiv]
+  use y
+  simp_all
+
+@[simp] lemma LEquiv.to_dEquiv (h : x 𝓛 y) : x 𝓓 y := by
+  simp [DEquiv]
+  use x
+  simp_all
 
 /-- `x * y` is always 𝓡-below `x` -/
 @[simp] lemma RPreorder.mul_right_self : x * y ≤𝓡 x := by

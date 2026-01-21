@@ -50,6 +50,9 @@
 <li class="">
   <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">Subgroups of Semigroups</span></a>
  </li>
+<li class="">
+  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Location Theorem and Maximal Subgroups in a D-class</span></a>
+ </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
 </nav>
@@ -76,7 +79,7 @@
 
     <a class="icon proof" href="sect0001.html#lem:exists-unique-idempotent-pow">#</a>
     
-    <a class="icon proof" href="sect0001.html#a0000000008"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0001.html#a0000000009"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -111,7 +114,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000008">
+<div class="proof_wrapper" id="a0000000009">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -121,12 +124,12 @@
   <div class="proof_content">
   <p>Since the semigroup \(S\) is finite, for any \(x \in S\), the set of its powers \(\{ x^1, x^2, x^3, \dots \} \) must also be finite. By the pigeonhole principle, there must exist distinct positive integers \(m, n\) with \(m {\lt} n\) such that \(x^m = x^n\). This gives us \(x^m = x^m \cdot x^{n-m}\), showing that powers of \(x\) eventually enter a cycle of length \(\ell = n - m\) after an initial “tail” of length \(m\). </p>
 <p>To construct an idempotent, we choose the exponent \(k = 2m\ell \). This exponent is chosen to satisfy two key properties: (1) it is beyond the pre-period \(m\), ensuring we are in the cyclic part, and (2) it is a multiple of the cycle length \(\ell \). Since \(k {\gt} m\) and adding multiples of \(\ell \) to an exponent beyond \(m\) does not change the result, we have: </p>
-<div class="displaymath" id="a0000000009">
+<div class="displaymath" id="a0000000010">
   \[  (x^k)^2 = x^{2k} = x^{k + k} = x^{k + 2m\ell } = x^k  \]
 </div>
 <p> where the last equality follows from the loop property applied with \(2m\) additional cycles of length \(\ell \). Thus \(x^k\) is idempotent. </p>
 <p>For uniqueness, suppose \(x^a\) and \(x^b\) are both idempotent. Since idempotent elements satisfy \(e^n = e\) for all positive \(n\), we have: </p>
-<div class="displaymath" id="a0000000010">
+<div class="displaymath" id="a0000000011">
   \[  x^a = (x^a)^b = x^{ab} = (x^b)^a = x^b  \]
 </div>
 <p> Here we use that \(x^a\) raised to the power \(b\) equals \(x^{ab}\) (by associativity and the idempotent property), and similarly for \(x^b\) raised to the power \(a\). Since both expressions equal \(x^{ab}\), the two idempotent powers must be equal. </p>
@@ -149,7 +152,7 @@
 
     <a class="icon proof" href="sect0001.html#lem:exists-pow-sandwich">#</a>
     
-    <a class="icon proof" href="sect0001.html#a0000000011"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0001.html#a0000000012"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -202,7 +205,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000011">
+<div class="proof_wrapper" id="a0000000012">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof

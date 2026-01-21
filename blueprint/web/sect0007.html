@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Location Theorem and Maximal Subgroups in a D-class</title>
+<link rel="prev" href="sect0006.html" title="Subgroups of Semigroups" />
+<link rel="up" href="index.html" title="finalized" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">finalized</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Idempotent Elements in Finite Semigroups</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Green’s Relations</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Basic Properties of Green’s Relations</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Green’s Relations in Finite Semigroups</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Green’s Lemma</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">Subgroups of Semigroups</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Location Theorem and Maximal Subgroups in a D-class</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000008">7 Location Theorem and Maximal Subgroups in a D-class</h1>
+<p>The Location Theorem characterizes when the product of two elements lies in the intersection of their respective \(\mathcal{R}\) and \(\mathcal{L}\)-classes. This theorem has important consequences for the structure of \(\mathcal{D}\)-classes, particularly regarding the existence and properties of maximal subgroups. </p>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:location-theorem">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">15</span>
+    <span class="lemma_thmtitle">Location Theorem</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#lem:location-theorem">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#lem:d-j-theorem">Lemma 9</a></li>
+          
+          <li><a href="sect0004.html#lem:j-strengthening">Lemma 10</a></li>
+          
+          <li><a href="sect0005.html#lem:greens-lemma">Lemma 12</a></li>
+          
+          <li><a href="sect0003.html#lem:le-idempotent">Lemma 7</a></li>
+          
+          <li><a href="sect0004.html#lem:d-j-theorem">Lemma 9</a></li>
+          
+          <li><a href="sect0004.html#lem:j-strengthening">Lemma 10</a></li>
+          
+          <li><a href="sect0005.html#lem:greens-lemma">Lemma 12</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.mul_in_inter_iff_equiv" class="lean_decl">Semigroup.DEquiv.mul_in_inter_iff_equiv</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.mul_in_inter_iff_exists_idempotent" class="lean_decl">Semigroup.mul_in_inter_iff_exists_idempotent</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  Let \(S\) be a semigroup and let \(x, y \in S\). The following conditions are equivalent: </p>
+<ol class="enumerate">
+  <li><p>\(x \cdot y \in [x]_{\mathcal{R}} \cap [y]_{\mathcal{L}}\) (i.e., \(x \cdot y \mathcal{R} x\) and \(x \cdot y \mathcal{L} y\)). </p>
+</li>
+  <li><p>There exists an idempotent \(e \in [y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}\). </p>
+</li>
+</ol>
+<p> Moreover, in a finite semigroup, these conditions are equivalent to: </p>
+<ol class="enumerate">
+  <li><p>\(x \mathcal{D} y\) and \(x \cdot y \mathcal{D} x\). </p>
+</li>
+</ol>
+
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000024">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(1) \(\Rightarrow \) (2):</b> Suppose \(x \cdot y \mathcal{R} x\) and \(x \cdot y \mathcal{L} y\). By Green’s Lemma (<a href="sect0005.html#lem:greens-lemma">12</a>), right multiplication by \(y\) induces a bijection from \([x]_{\mathcal{L}}\) to \([x \cdot y]_{\mathcal{L}} = [y]_{\mathcal{L}}\). In particular, this map is surjective, so there exists \(w \in [x]_{\mathcal{L}} \cap [y]_{\mathcal{R}}\) with \(w \cdot y = y\). </p>
+<p>Now we show \(w\) is idempotent. Since \(w \mathcal{R} y\), there exists \(u\) with \(y \cdot u = w\). Then: </p>
+<div class="displaymath" id="a0000000025">
+  \[  w \cdot w = w \cdot (y \cdot u) = (w \cdot y) \cdot u = y \cdot u = w  \]
+</div>
+<p> Thus \(w\) is an idempotent in \([y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}\). </p>
+<p><b class="bfseries">(2) \(\Rightarrow \) (1):</b> Suppose there exists an idempotent \(e \in [y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}\). By <a href="sect0003.html#lem:le-idempotent">7</a>, since \(e\) is idempotent and \(y \mathcal{R} e\), we have \(y = e \cdot y\). Similarly, since \(x \mathcal{L} e\), we have \(x = x \cdot e\). </p>
+<p>For \(x \cdot y \mathcal{R} x\): we have \(x \cdot y = x \cdot e \cdot y\) (since \(x = x \cdot e\) and \(y = e \cdot y\)). By compatibility of \(\mathcal{R}\) with left multiplication (<a href="sect0002.html#lem:greens-relations-mul-compat">4</a>), \(x \cdot e \mathcal{R} x \cdot y\) follows from \(e \mathcal{R} y\). </p>
+<p>For \(x \cdot y \mathcal{L} y\): similarly, \(x \cdot y = x \cdot e \cdot y\), and by compatibility of \(\mathcal{L}\) with right multiplication, \(x \cdot y \mathcal{L} y\) follows from \(x \mathcal{L} e\). </p>
+<p><b class="bfseries">(1) \(\Leftrightarrow \) (3) in finite semigroups:</b> In a finite semigroup, \(\mathcal{D} = \mathcal{J}\) by <a href="sect0004.html#lem:d-j-theorem">9</a>. </p>
+<p>For the forward direction, if \(x \cdot y \mathcal{R} x\) and \(x \cdot y \mathcal{L} y\), then \(x \cdot y \mathcal{D} x\) (via the intermediate element \(x \cdot y\) itself) and \(x \mathcal{D} y\) (via \(x \cdot y\)). </p>
+<p>For the reverse direction, suppose \(x \mathcal{D} y\) and \(x \cdot y \mathcal{D} x\). Since \(\mathcal{D} = \mathcal{J}\), we have \(x \cdot y \mathcal{J} x\). Since \(x \cdot y \leq _{\mathcal{R}} x\) trivially, by <a href="sect0004.html#lem:j-strengthening">10</a>, \(x \cdot y \mathcal{R} x\). Similarly, \(x \cdot y \leq _{\mathcal{L}} y\) and \(x \cdot y \mathcal{J} y\) (by transitivity through \(x\)), so \(x \cdot y \mathcal{L} y\).  </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:hclass-subgroup">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">16</span>
+    <span class="lemma_thmtitle">\(\mathcal{H}\)-class of an Idempotent is a Maximal Subgroup</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#lem:hclass-subgroup">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000026"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0007.html#lem:location-theorem">Lemma 15</a></li>
+          
+          <li><a href="sect0006.html#def:maximal-subgroup">Definition 14</a></li>
+          
+          <li><a href="sect0003.html#lem:le-idempotent">Lemma 7</a></li>
+          
+          <li><a href="sect0007.html#lem:location-theorem">Lemma 15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.subgroup_of_idempotent" class="lean_decl">Semigroup.HEquiv.subgroup_of_idempotent</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.group_of_idempotent" class="lean_decl">Semigroup.HEquiv.group_of_idempotent</a></li>
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.hClass_of_subgroup" class="lean_decl">Semigroup.HEquiv.hClass_of_subgroup</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  Let \(S\) be a semigroup and let \(e \in S\) be an idempotent element. Then: </p>
+<ol class="enumerate">
+  <li><p>The \(\mathcal{H}\)-class \([e]_{\mathcal{H}}\) is closed under multiplication. </p>
+</li>
+  <li><p>The element \(e\) acts as an identity on \([e]_{\mathcal{H}}\): for all \(x \in [e]_{\mathcal{H}}\), \(e \cdot x = x\) and \(x \cdot e = x\). </p>
+</li>
+  <li><p>Every element \(x \in [e]_{\mathcal{H}}\) has an inverse \(y \in [e]_{\mathcal{H}}\) satisfying \(x \cdot y = e\) and \(y \cdot x = e\). </p>
+</li>
+  <li><p>The \(\mathcal{H}\)-class \([e]_{\mathcal{H}}\) forms a subgroup of \(S\) with identity \(e\). </p>
+</li>
+  <li><p>Every maximal subgroup of \(S\) is the \(\mathcal{H}\)-class of some idempotent. </p>
+</li>
+</ol>
+
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000026">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(1) Closure under multiplication:</b> Let \(x, y \in [e]_{\mathcal{H}}\). By the Location Theorem (<a href="sect0007.html#lem:location-theorem">15</a>), \(x \cdot y \in [x]_{\mathcal{R}} \cap [y]_{\mathcal{L}}\) if and only if there exists an idempotent in \([y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}\). Since \(x \mathcal{H} e\) and \(y \mathcal{H} e\), we have \([y]_{\mathcal{R}} = [e]_{\mathcal{R}}\) and \([x]_{\mathcal{L}} = [e]_{\mathcal{L}}\), so \(e \in [y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}\). Thus \(x \cdot y \mathcal{R} x \mathcal{R} e\) and \(x \cdot y \mathcal{L} y \mathcal{L} e\), giving \(x \cdot y \in [e]_{\mathcal{H}}\). </p>
+<p><b class="bfseries">(2) Identity property:</b> For \(x \in [e]_{\mathcal{H}}\), we have \(x \mathcal{R} e\), so \(x \leq _{\mathcal{R}} e\). By <a href="sect0003.html#lem:le-idempotent">7</a>, since \(e\) is idempotent, \(e \cdot x = x\). Similarly, \(x \mathcal{L} e\) gives \(x \cdot e = x\). </p>
+<p><b class="bfseries">(3) Existence of inverses:</b> Let \(x \in [e]_{\mathcal{H}}\). Since \(x \mathcal{R} e\), there exists \(y\) with \(x \cdot y = e\). By Green’s Lemma, right multiplication by \(x\) is a bijection on \([e]_{\mathcal{L}}\) (since \(e \cdot x = x\) from part (2)). This bijection maps \([e]_{\mathcal{H}}\) to itself. Since \(e \in [e]_{\mathcal{L}}\), there exists \(z \in [e]_{\mathcal{L}}\) with \(z \cdot x = e\). We can show \(z \in [e]_{\mathcal{H}}\) and that the same element works for both left and right inverse. </p>
+<p><b class="bfseries">(4) Subgroup structure:</b> Parts (1)-(3) establish that \([e]_{\mathcal{H}}\) satisfies all the axioms of a subgroup with identity \(e\). </p>
+<p><b class="bfseries">(5) Maximal subgroups are \(\mathcal{H}\)-classes:</b> Let \(H\) be a maximal subgroup with identity element \(e_H\). The identity \(e_H\) is idempotent (since \(e_H \cdot e_H = e_H\)). All elements of \(H\) are \(\mathcal{H}\)-equivalent to \(e_H\): for \(x, y \in H\), we have \(x = x \cdot e_H\) and \(y = e_H \cdot y\), giving the required \(\mathcal{R}\) and \(\mathcal{L}\) relations. Thus \(H \subseteq [e_H]_{\mathcal{H}}\). Since \([e_H]_{\mathcal{H}}\) is itself a subgroup containing \(H\), maximality of \(H\) implies \(H = [e_H]_{\mathcal{H}}\).  </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:maximal-subgroups-isomorphic">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">17</span>
+    <span class="lemma_thmtitle">Maximal Subgroups of a \(\mathcal{D}\)-class are Isomorphic</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#lem:maximal-subgroups-isomorphic">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000027"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0007.html#lem:hclass-subgroup">Lemma 16</a></li>
+          
+          <li><a href="sect0007.html#lem:hclass-subgroup">Lemma 16</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.maximal_subgroups_equiv" class="lean_decl">Semigroup.DEquiv.maximal_subgroups_equiv</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  Let \(S\) be a semigroup and let \(H\) and \(K\) be maximal subgroups of \(S\). If there exist \(x \in H\) and \(y \in K\) with \(x \mathcal{D} y\), then \(H\) and \(K\) are isomorphic as groups.   </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000027">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By <a href="sect0007.html#lem:hclass-subgroup">16</a>, \(H = [e]_{\mathcal{H}}\) and \(K = [f]_{\mathcal{H}}\) for some idempotents \(e, f \in S\). Since \(x \in H\) and \(y \in K\), we have \(x \mathcal{H} e\) and \(y \mathcal{H} f\). From \(x \mathcal{D} y\), we get \(e \mathcal{D} f\) by transitivity. </p>
+<p>Since \(e \mathcal{D} f\), there exists \(s \in S\) with \(e \mathcal{R} s\) and \(s \mathcal{L} f\). Let \(t\) be a witness of \(f \leq _{\mathcal{L}} s\), so \(t \cdot s = f\). </p>
+<p>We claim the map \(\phi : [e]_{\mathcal{H}} \to [f]_{\mathcal{H}}\) defined by \(\phi (x) = t \cdot x \cdot s\) is a group isomorphism. </p>
+<p><b class="bfseries">Well-defined and bijective:</b> By Green’s Lemma (<a href="sect0005.html#lem:greens-lemma">12</a>), right multiplication by \(s\) gives a bijection from \([e]_{\mathcal{H}}\) to \([s]_{\mathcal{H}}\) (since \(e \mathcal{R} s\)). Similarly, left multiplication by \(t\) gives a bijection from \([s]_{\mathcal{H}}\) to \([f]_{\mathcal{H}}\) (since \(s \mathcal{L} f\)). The composition \(x \mapsto t \cdot x \cdot s\) is therefore a bijection from \([e]_{\mathcal{H}}\) to \([f]_{\mathcal{H}}\). </p>
+<p><b class="bfseries">Preserves multiplication:</b> We need to show \(\phi (x) \cdot \phi (y) = \phi (x \cdot y)\) for \(x, y \in [e]_{\mathcal{H}}\). That is: </p>
+<div class="displaymath" id="a0000000028">
+  \[  (t \cdot x \cdot s) \cdot (t \cdot y \cdot s) = t \cdot (x \cdot y) \cdot s  \]
+</div>
+<p> The key observation is that \(s \cdot t\) is idempotent: since \(s \mathcal{L} f\) and \(t \cdot s = f\), we have \(s \cdot t \cdot s \cdot t = s \cdot f \cdot t = s \cdot t\) (using \(s \cdot f = s\) which follows from \(s \mathcal{L} f\) and \(f\) being idempotent). </p>
+<p>Furthermore, for \(y \in [e]_{\mathcal{H}}\), we have \(y \mathcal{R} e \mathcal{R} s\), so \(s \cdot t \cdot y = y\) (since \(s \cdot t\) is an idempotent in the \(\mathcal{R}\)-class of \(y\)). Therefore: </p>
+<div class="displaymath" id="a0000000029">
+  \[  (t \cdot x \cdot s) \cdot (t \cdot y \cdot s) = t \cdot x \cdot (s \cdot t \cdot y) \cdot s = t \cdot x \cdot y \cdot s = \phi (x \cdot y)  \]
+</div>
+<p> Thus \(\phi \) is a group isomorphism.  </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0006.html" title="Subgroups of Semigroups"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="finalized"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+\chapter{Location Theorem and Maximal Subgroups in a D-class}
+
+% Begin MyProject/Semigroup/Green/Location.lean
+
+The Location Theorem characterizes when the product of two elements lies in the intersection of their respective $\mathcal{R}$ and $\mathcal{L}$-classes. This theorem has important consequences for the structure of $\mathcal{D}$-classes, particularly regarding the existence and properties of maximal subgroups.
+
+\begin{lemma}[Location Theorem]
+\label{lem:location-theorem}
+Let $S$ be a semigroup and let $x, y \in S$. The following conditions are equivalent:
+\begin{enumerate}
+    \item $x \cdot y \in [x]_{\mathcal{R}} \cap [y]_{\mathcal{L}}$ (i.e., $x \cdot y \mathcal{R} x$ and $x \cdot y \mathcal{L} y$).
+    \item There exists an idempotent $e \in [y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}$.
+\end{enumerate}
+Moreover, in a finite semigroup, these conditions are equivalent to:
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item $x \mathcal{D} y$ and $x \cdot y \mathcal{D} x$.
+\end{enumerate}
+\lean{Semigroup.DEquiv.mul_in_inter_iff_equiv, 
+Semigroup.mul_in_inter_iff_exists_idempotent}
+\leanok
+\uses{lem:d-j-theorem, lem:j-strengthening, lem:greens-lemma, lem:le-idempotent}
+\end{lemma}
+
+\begin{proof}
+\leanok
+\textbf{(1) $\Rightarrow$ (2):} Suppose $x \cdot y \mathcal{R} x$ and $x \cdot y \mathcal{L} y$. By Green's Lemma (\ref{lem:greens-lemma}), right multiplication by $y$ induces a bijection from $[x]_{\mathcal{L}}$ to $[x \cdot y]_{\mathcal{L}} = [y]_{\mathcal{L}}$. In particular, this map is surjective, so there exists $w \in [x]_{\mathcal{L}} \cap [y]_{\mathcal{R}}$ with $w \cdot y = y$.
+
+Now we show $w$ is idempotent. Since $w \mathcal{R} y$, there exists $u$ with $y \cdot u = w$. Then:
+\[
+w \cdot w = w \cdot (y \cdot u) = (w \cdot y) \cdot u = y \cdot u = w
+\]
+Thus $w$ is an idempotent in $[y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}$.
+
+\textbf{(2) $\Rightarrow$ (1):} Suppose there exists an idempotent $e \in [y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}$. By \ref{lem:le-idempotent}, since $e$ is idempotent and $y \mathcal{R} e$, we have $y = e \cdot y$. Similarly, since $x \mathcal{L} e$, we have $x = x \cdot e$.
+
+For $x \cdot y \mathcal{R} x$: we have $x \cdot y = x \cdot e \cdot y$ (since $x = x \cdot e$ and $y = e \cdot y$). By compatibility of $\mathcal{R}$ with left multiplication (\ref{lem:greens-relations-mul-compat}), $x \cdot e \mathcal{R} x \cdot y$ follows from $e \mathcal{R} y$.
+
+For $x \cdot y \mathcal{L} y$: similarly, $x \cdot y = x \cdot e \cdot y$, and by compatibility of $\mathcal{L}$ with right multiplication, $x \cdot y \mathcal{L} y$ follows from $x \mathcal{L} e$.
+
+\textbf{(1) $\Leftrightarrow$ (3) in finite semigroups:} In a finite semigroup, $\mathcal{D} = \mathcal{J}$ by \ref{lem:d-j-theorem}.
+
+For the forward direction, if $x \cdot y \mathcal{R} x$ and $x \cdot y \mathcal{L} y$, then $x \cdot y \mathcal{D} x$ (via the intermediate element $x \cdot y$ itself) and $x \mathcal{D} y$ (via $x \cdot y$).
+
+For the reverse direction, suppose $x \mathcal{D} y$ and $x \cdot y \mathcal{D} x$. Since $\mathcal{D} = \mathcal{J}$, we have $x \cdot y \mathcal{J} x$. Since $x \cdot y \leq_{\mathcal{R}} x$ trivially, by \ref{lem:j-strengthening}, $x \cdot y \mathcal{R} x$. Similarly, $x \cdot y \leq_{\mathcal{L}} y$ and $x \cdot y \mathcal{J} y$ (by transitivity through $x$), so $x \cdot y \mathcal{L} y$.
+\uses{lem:d-j-theorem, lem:j-strengthening, lem:greens-lemma}
+\end{proof}
+
+\begin{lemma}[$\mathcal{H}$-class of an Idempotent is a Maximal Subgroup]
+\label{lem:hclass-subgroup}
+Let $S$ be a semigroup and let $e \in S$ be an idempotent element. Then:
+\begin{enumerate}
+    \item The $\mathcal{H}$-class $[e]_{\mathcal{H}}$ is closed under multiplication.
+    \item The element $e$ acts as an identity on $[e]_{\mathcal{H}}$: for all $x \in [e]_{\mathcal{H}}$, $e \cdot x = x$ and $x \cdot e = x$.
+    \item Every element $x \in [e]_{\mathcal{H}}$ has an inverse $y \in [e]_{\mathcal{H}}$ satisfying $x \cdot y = e$ and $y \cdot x = e$.
+    \item The $\mathcal{H}$-class $[e]_{\mathcal{H}}$ forms a subgroup of $S$ with identity $e$.
+    \item Every maximal subgroup of $S$ is the $\mathcal{H}$-class of some idempotent.
+\end{enumerate}
+\lean{Semigroup.HEquiv.subgroup_of_idempotent, 
+Semigroup.HEquiv.group_of_idempotent, 
+Semigroup.HEquiv.hClass_of_subgroup}
+\leanok
+\uses{lem:location-theorem, def:maximal-subgroup, lem:le-idempotent}
+\end{lemma}
+
+\begin{proof}
+\leanok
+\textbf{(1) Closure under multiplication:} Let $x, y \in [e]_{\mathcal{H}}$. By the Location Theorem (\ref{lem:location-theorem}), $x \cdot y \in [x]_{\mathcal{R}} \cap [y]_{\mathcal{L}}$ if and only if there exists an idempotent in $[y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}$. Since $x \mathcal{H} e$ and $y \mathcal{H} e$, we have $[y]_{\mathcal{R}} = [e]_{\mathcal{R}}$ and $[x]_{\mathcal{L}} = [e]_{\mathcal{L}}$, so $e \in [y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}$. Thus $x \cdot y \mathcal{R} x \mathcal{R} e$ and $x \cdot y \mathcal{L} y \mathcal{L} e$, giving $x \cdot y \in [e]_{\mathcal{H}}$.
+
+\textbf{(2) Identity property:} For $x \in [e]_{\mathcal{H}}$, we have $x \mathcal{R} e$, so $x \leq_{\mathcal{R}} e$. By \ref{lem:le-idempotent}, since $e$ is idempotent, $e \cdot x = x$. Similarly, $x \mathcal{L} e$ gives $x \cdot e = x$.
+
+\textbf{(3) Existence of inverses:} Let $x \in [e]_{\mathcal{H}}$. Since $x \mathcal{R} e$, there exists $y$ with $x \cdot y = e$. By Green's Lemma, right multiplication by $x$ is a bijection on $[e]_{\mathcal{L}}$ (since $e \cdot x = x$ from part (2)). This bijection maps $[e]_{\mathcal{H}}$ to itself. Since $e \in [e]_{\mathcal{L}}$, there exists $z \in [e]_{\mathcal{L}}$ with $z \cdot x = e$. We can show $z \in [e]_{\mathcal{H}}$ and that the same element works for both left and right inverse.
+
+\textbf{(4) Subgroup structure:} Parts (1)-(3) establish that $[e]_{\mathcal{H}}$ satisfies all the axioms of a subgroup with identity $e$.
+
+\textbf{(5) Maximal subgroups are $\mathcal{H}$-classes:} Let $H$ be a maximal subgroup with identity element $e_H$. The identity $e_H$ is idempotent (since $e_H \cdot e_H = e_H$). All elements of $H$ are $\mathcal{H}$-equivalent to $e_H$: for $x, y \in H$, we have $x = x \cdot e_H$ and $y = e_H \cdot y$, giving the required $\mathcal{R}$ and $\mathcal{L}$ relations. Thus $H \subseteq [e_H]_{\mathcal{H}}$. Since $[e_H]_{\mathcal{H}}$ is itself a subgroup containing $H$, maximality of $H$ implies $H = [e_H]_{\mathcal{H}}$.
+\uses{lem:location-theorem}
+\end{proof}
+
+\begin{lemma}[Maximal Subgroups of a $\mathcal{D}$-class are Isomorphic]
+\label{lem:maximal-subgroups-isomorphic}
+Let $S$ be a semigroup and let $H$ and $K$ be maximal subgroups of $S$. If there exist $x \in H$ and $y \in K$ with $x \mathcal{D} y$, then $H$ and $K$ are isomorphic as groups.
+\lean{Semigroup.DEquiv.maximal_subgroups_equiv}
+\leanok
+\uses{lem:hclass-subgroup}
+\end{lemma}
+
+\begin{proof}
+\leanok
+By \ref{lem:hclass-subgroup}, $H = [e]_{\mathcal{H}}$ and $K = [f]_{\mathcal{H}}$ for some idempotents $e, f \in S$. Since $x \in H$ and $y \in K$, we have $x \mathcal{H} e$ and $y \mathcal{H} f$. From $x \mathcal{D} y$, we get $e \mathcal{D} f$ by transitivity.
+
+Since $e \mathcal{D} f$, there exists $s \in S$ with $e \mathcal{R} s$ and $s \mathcal{L} f$. Let $t$ be a witness of $f \leq_{\mathcal{L}} s$, so $t \cdot s = f$.
+
+We claim the map $\phi : [e]_{\mathcal{H}} \to [f]_{\mathcal{H}}$ defined by $\phi(x) = t \cdot x \cdot s$ is a group isomorphism.
+
+\textbf{Well-defined and bijective:} By Green's Lemma (\ref{lem:greens-lemma}), right multiplication by $s$ gives a bijection from $[e]_{\mathcal{H}}$ to $[s]_{\mathcal{H}}$ (since $e \mathcal{R} s$). Similarly, left multiplication by $t$ gives a bijection from $[s]_{\mathcal{H}}$ to $[f]_{\mathcal{H}}$ (since $s \mathcal{L} f$). The composition $x \mapsto t \cdot x \cdot s$ is therefore a bijection from $[e]_{\mathcal{H}}$ to $[f]_{\mathcal{H}}$.
+
+\textbf{Preserves multiplication:} We need to show $\phi(x) \cdot \phi(y) = \phi(x \cdot y)$ for $x, y \in [e]_{\mathcal{H}}$. That is:
+\[
+(t \cdot x \cdot s) \cdot (t \cdot y \cdot s) = t \cdot (x \cdot y) \cdot s
+\]
+The key observation is that $s \cdot t$ is idempotent: since $s \mathcal{L} f$ and $t \cdot s = f$, we have $s \cdot t \cdot s \cdot t = s \cdot f \cdot t = s \cdot t$ (using $s \cdot f = s$ which follows from $s \mathcal{L} f$ and $f$ being idempotent). 
+
+Furthermore, for $y \in [e]_{\mathcal{H}}$, we have $y \mathcal{R} e \mathcal{R} s$, so $s \cdot t \cdot y = y$ (since $s \cdot t$ is an idempotent in the $\mathcal{R}$-class of $y$). Therefore:
+\[
+(t \cdot x \cdot s) \cdot (t \cdot y \cdot s) = t \cdot x \cdot (s \cdot t \cdot y) \cdot s = t \cdot x \cdot y \cdot s = \phi(x \cdot y)
+\]
+Thus $\phi$ is a group isomorphism.
+\uses{lem:hclass-subgroup}
+\end{proof}
+
+% End MyProject/Semigroup/Green/Location.lean

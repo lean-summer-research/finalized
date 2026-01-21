@@ -34,15 +34,14 @@ TODO
 ## Blueprint
 
 * One lemma entry for the 𝓡-class bijection and its properties.
-label : greens-lemma
+label : lem:greens-lemma
 Lean lemmas to tag :
   - `Semigroup.REquiv.bijOn_lClass`
   - `Semigroup.REquiv.bijOn_lClass_pres_hClass`
   - `Semigroup.LEquiv.bijOn_rClass`
   - `Semigroup.LEquiv.bijOn_rClass_pres_hClass`
 dependencies :
-  - greens-relations-mul-compat
-  -
+  - lem:greens-relations-mul-compat
 -/
 
 namespace Semigroup
@@ -205,6 +204,28 @@ lemma REquiv.bijOn_lClass_pres_hClass (hr : x 𝓡 y) (hv : x * v = y) {a b : S}
       · refine REquiv.trans hr₂.symm ?_
         apply REquiv.trans hr₁ hr₃.symm
       · apply LEquiv.trans hw hz.symm
+
+/-- If `x 𝓡 y` such that `x * v = y`, then for all `z 𝓛 x`,
+`z 𝓡 z * v`. -/
+lemma REquiv.bijOn_lClass_rEquiv (hr : x 𝓡 y) (hv : x * v = y) {z : S} (hz : z 𝓛 x) :
+    z 𝓡 z * v := by
+  rcases hr.le with ⟨u, hu⟩
+  cases u with
+  | one =>
+    simp at hu; subst hu -- trivial case where `x = y`
+    obtain ⟨a, ha⟩ := hz.le
+    have hyv : ↑y * ↑v = (↑y : WithOne S) := by
+      simp [← WithOne.coe_mul, hv]
+    simp [REquiv]
+    use 1
+    simp [← ha, mul_assoc, hyv]
+  | coe u =>
+    simp [← WithOne.coe_mul] at hu
+    obtain ⟨a, ha⟩ := hz.le
+    simp [REquiv]
+    use u
+    simp [← WithOne.coe_mul]
+    apply REquiv.translation_id hv hu hz
 
 lemma REquiv.mapsTo_hClass (hr : x 𝓡 y) (hv : x * v = y) :
     Set.MapsTo (fun w ↦ w * v) ⟦x⟧𝓗 ⟦y⟧𝓗 := by
@@ -443,6 +464,28 @@ theorem LEquiv.exists_bijOn_rClass (hl : x 𝓛 y) : ∃ f : S → S, Set.BijOn 
     simp [← WithOne.coe_mul] at hv
     use fun w ↦ v * w
     apply hl.bijOn_rClass hv
+
+/-- If `x 𝓛 y` such that `v * x = y`, then for all `z 𝓡 x`,
+`z 𝓛 v * z`. -/
+lemma LEquiv.bijOn_rClass_lEquiv (hr : x 𝓛 y) (hv : v * x = y) {z : S} (hz : z 𝓡 x) :
+    z 𝓛 v * z := by
+  rcases hr.le with ⟨u, hu⟩
+  cases u with
+  | one =>
+    simp at hu; subst hu -- trivial case where `x = y`
+    obtain ⟨a, ha⟩ := hz.le
+    have hyv : ↑v * ↑y = (↑y : WithOne S) := by
+      simp [← WithOne.coe_mul, hv]
+    simp [LEquiv]
+    use 1
+    simp [← ha, ← mul_assoc, hyv]
+  | coe u =>
+    simp [← WithOne.coe_mul] at hu
+    obtain ⟨a, ha⟩ := hz.le
+    simp [LEquiv]
+    use u
+    simp [← WithOne.coe_mul, ← mul_assoc]
+    apply LEquiv.translation_id hv hu hz
 
 lemma LEquiv.mapsTo_hClass (hl : x 𝓛 y) (hv : v * x = y) :
     Set.MapsTo (fun w ↦ v * w) ⟦x⟧𝓗 ⟦y⟧𝓗 := by

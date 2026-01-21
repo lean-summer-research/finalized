@@ -34,11 +34,45 @@ as a group on the subtype `{x : S // x ∈ ⟦e⟧𝓗}`
 iff there exists an idempotent element in `⟦x⟧𝓡 ∩ ⟦y⟧𝓛`. This proves the equivalence of statments
 1 and 2 above.
 
+* `DEquiv.maximal_subgroups_equiv` - Two maximal subgroups of a 𝓓-class are isomorphic.
+
+* `HEquiv.hClass_of_subgroup` - Every maximal subgroup is the 𝓗-class of an idempotent element.
+
 ## Refrences
 
 TODO
 
-## TODO/Notes
+## Blueprint
+
+Location Theorem
+Lablel : lem:location-theorem
+Lean lemmas to tag:
+  - `Semigroup.DEquiv.mul_in_inter_iff_equiv`
+  - `Semigroup.mul_in_inter_iff_exists_idempotent`
+Dependencies:
+- `lem:d-j-theorem`
+- `lem:j-strengthening`
+- `lem:greens-lemma`
+- `lem:le-idempotent`
+
+H-class of Idempotent is a Maximal Subgroup
+label : lem:hclass-subgroup
+Lean Lemmas to tag:
+  - `Semigroup.HEquiv.subgroup_of_idempotent`
+  - `Semigroup.HEquiv.group_of_idempotent`
+  - `Semigroup.HEquiv.hClass_of_subgroup`
+Dependencies:
+  - `lem:location-theorem`
+  - `def:maximal-subgroup`
+
+Two Maximal Subgroups of a D-Class are Isomorphic
+Label: `lem:maximal-subgroups-isomorphic`
+lean lemmas to tag:
+  - `Semigroup.DEquiv.maximal_subgroups_equiv`
+dependencies:
+  - `lem:hclass-subgroup`
+
+## TODO
 
 Should We prove the finite condition or just leave it talking about `J` equivalence?
 -/
@@ -75,98 +109,46 @@ theorem mul_in_inter_iff_exists_idempotent :
   · simp_all [IsIdempotentElem]
     intro hr hl
     have heq : x * y = x * y := by rfl
+    -- Mult on the right by y is a bijection from ⟦x⟧𝓛 to ⟦y⟧𝓛
+    -- which preserves 𝓗-classes
     have hsurj := hr.symm.surjOn_lClass heq
     specialize hsurj hl.symm
+    -- w * y = y with
     rcases hsurj with ⟨w, hw, hw_eq⟩
     simp at hw_eq hw
+    have hwRy : w 𝓡 y := by
+      rw [← hw_eq]
+      apply hr.symm.bijOn_lClass_rEquiv heq hw
     use w
-    refine ⟨?_, ⟨?_, hw⟩⟩
-    · sorry
-    · sorry
-    have hid := REquiv.translation_id heq₂ heq₁ hw.symm
-    simp at hw_eq
-    nth_rw 2 [← hid]
-    rw [hw_eq, ← mul_assoc, hid]
-    simp
     constructor
-    · constructor
-      · use u
-        simp [← WithOne.coe_mul]
-        rw [← hw_eq, hid]
-      · use y
-        simp [← WithOne.coe_mul]
-        rw [hw_eq]
-    · exact hw
-
-
-/- We would like to show that `w ↦ w * y` is a bijection from `⟦x]𝓛 to ⟦y⟧𝓛`, so that we can get
-the pre-image of `y` as our idempotent. However we need the fact that there exists a `u` such that
-`x = x * y * u`, so we need to destruct the witness of `x ≤𝓡 x * y` -/
-    obtain ⟨u, hu⟩ := hr.2
-    cases u with
-    | one =>
-      -- In this case, `x = x * y`, so `y` is idempotent
-      use y
-      simp_all
-      have heq : x * y = x := by simpa [← WithOne.coe_mul] using hu
-      have hl' := hl
-      obtain ⟨_, ⟨a, ha⟩⟩ := hl'
-      cases a with
-      | one => -- trivial case where x = y
-        simp at ha
-        have heq' : x * y  = y := by simpa [← WithOne.coe_mul] using ha
-        have heq'' : x = y := by rw [← heq]; nth_rw 2 [← heq']
-        subst heq''
-        simp [heq']
-      | coe a =>
-        rw [← heq] at hr
-        simp [← mul_assoc] at ha
-        have heq' : a * x * y = y := by simpa [← WithOne.coe_mul] using ha
-        have hy : y * y = y := by
-          nth_rw 1 [← heq', mul_assoc a, ← heq, ← heq']
-        refine ⟨hy, ?_⟩
-        rw [← heq]
-        exact hl.symm
-    | coe u =>
-      have heq₁ : x * y = x * y := by rfl
-      have heq₂ : x * y * u = x := by
-        rw [← WithOne.coe_inj, WithOne.coe_mul]
-        exact hu
-      have hsurj := hr.surjOn_lClass heq₂
-      have hu' : y ∈ ⟦x * y⟧𝓛 := by
-        simp; exact hl.symm
-      specialize hsurj hu'
-      rcases hsurj with ⟨w, hw, hw_eq⟩
-      use w
-      have hid := REquiv.translation_id heq₂ heq₁ hw.symm
-      simp at hw_eq
-      nth_rw 2 [← hid]
-      rw [hw_eq, ← mul_assoc, hid]
-      simp
-      constructor
-      · constructor
-        · use u
-          simp [← WithOne.coe_mul]
-          rw [← hw_eq, hid]
-        · use y
-          simp [← WithOne.coe_mul]
-          rw [hw_eq]
-      · exact hw
+      -- there exists a `u` s.t. `y * u = w`
+    · obtain ⟨u, hu⟩ := hwRy.le
+      cases u with
+      | one =>
+        simp at hu; subst hu
+        exact hw_eq
+      | coe u =>
+        simp [← WithOne.coe_mul] at hu
+        nth_rw 2 [← hu]
+        rw [← mul_assoc, hw_eq, hu]
+    · exact ⟨hwRy, hw⟩
   · simp_all
     intro e hi hr hl
     have he₁ : y = e * y := by
       have hr₁ : y ≤𝓡 e := hr.2
-      have he := RPreorder.le_idempotent y hi
-      rwa [he] at hr₁
+      have he := RPreorder.le_idempotent hi y
+      rw [he] at hr₁
+      exact hr₁.symm
     have he₂ : x = x * e := by
       have hl₁ : x ≤𝓛 e := hl.2
-      have he := LPreorder.le_idempotent x hi
-      rwa [he] at hl₁
+      have he := LPreorder.le_idempotent hi x
+      rw [he] at hl₁
+      exact hl₁.symm
     constructor
     · nth_rw 2 [he₂]
-      apply REquiv.lmult_compat y e x hr.symm
+      apply REquiv.lmult_compat hr.symm
     · nth_rw 2 [he₁]
-      apply LEquiv.rmult_compat x e y hl.symm
+      apply LEquiv.rmult_compat hl.symm
 
 /-- Idempotent-containing 𝓗-classes are closed under multiplication. -/
 lemma HEquiv.mul_closed_of_idempotent {e x y : S} (he : IsIdempotentElem e)
@@ -363,6 +345,7 @@ theorem DEquiv.idempotent_in_lClass {e x : S} (he : IsIdempotentElem e) (hx : x 
     · simp [IsIdempotentElem, ← mul_assoc]
       rw [mul_assoc u, hu, mul_assoc, her]
 
+/-- All elements within a subgroup are 𝓗-related. -/
 lemma HEquiv.ofSubgroup {x y : S} {H : Subgroup S} (hx : x ∈ H) (hy : y ∈ H) : x 𝓗 y := by
   simp_all [HEquiv.iff_rEquiv_and_lEquiv, REquiv, LEquiv]
   constructor
@@ -443,7 +426,6 @@ Let `e 𝓓 f` such that we have a `s` with `e 𝓡 s` and `s 𝓛 f`.
 Let `t` be the witness of `f ≤𝓛 s` such that `t * s = f`.
 let `u` be the witness of `e ≤𝓡 s` such that `s * u = e`.
 Then, the map `x ↦ t * x * s` is a bijection which preserves multiplication (like a morphism). -/
-
 -- TODO - try to use this lemma in the trivial cases
 lemma DEquiv.bij_on_hClass_map_mul {e f s t x y : S} (_ : IsIdempotentElem e)
   (hf : IsIdempotentElem f) (hr : e 𝓡 s) (hl : s 𝓛 f) (ht : t * s = f)
@@ -468,7 +450,9 @@ lemma DEquiv.bij_on_hClass_map_mul {e f s t x y : S} (_ : IsIdempotentElem e)
   nth_rw 2 [← hsty]
   simp [← mul_assoc]
 
-noncomputable def DEquiv.hClass_equiv {e f s t : S} (he : IsIdempotentElem e)
+/-- For idempotents `e, f`, with `e 𝓓 f` such that `e 𝓡 s` and `s 𝓛 f` such that
+`t * s = f`, the isomorphism between `⟦e⟧𝓗` and `⟦f⟧𝓗` -/
+noncomputable def DEquiv.hClass_equiv' {e f s t : S} (he : IsIdempotentElem e)
   (hf : IsIdempotentElem f) (hr : e 𝓡 s) (hl : s 𝓛 f) (ht : t * s = f) :
     HEquiv.subgroup_of_idempotent he ≃* HEquiv.subgroup_of_idempotent hf := by
   refine Subgroup.hom_of_bijOn
@@ -480,7 +464,9 @@ noncomputable def DEquiv.hClass_equiv {e f s t : S} (he : IsIdempotentElem e)
     symm
     exact DEquiv.bij_on_hClass_map_mul he hf hr hl ht hw hz
 
-lemma DEquiv.hClass_equiv' {e f : S} (he : IsIdempotentElem e)
+/-- For idempotents `e, f`, if `e 𝓓 f`, then `⟦e⟧𝓗` and `⟦f⟧𝓗` are isomorphic
+subgroups. -/
+lemma DEquiv.hClass_equiv {e f : S} (he : IsIdempotentElem e)
   (hf : IsIdempotentElem f) (hd : e 𝓓 f) :
     Nonempty (HEquiv.subgroup_of_idempotent he ≃* HEquiv.subgroup_of_idempotent hf) := by
   obtain ⟨s, hr, hl⟩ := hd
@@ -503,22 +489,7 @@ lemma DEquiv.hClass_equiv' {e f : S} (he : IsIdempotentElem e)
       simp [← WithOne.coe_mul] at hu
       -- ` f = e * u` and `e 𝓡 f`
       apply Nonempty.intro
-      refine Subgroup.hom_of_bijOn
-        (HEquiv.subgroup_of_idempotent he) -- `⟦e⟧𝓗`
-        (HEquiv.subgroup_of_idempotent hf) -- `⟦f⟧𝓗`
-        (fun x ↦ x * u) ?_ ?_
-      · simp
-        apply hr.bijOn_hClass hu
-      · intros x y hx hy
-        simp
-        symm;
-        have ht : e * x = x := by sorry
-        have hs : s * s = s := by sorry
-        have hf' : s * s = s := by sorry
-        have h_bij := DEquiv.bij_on_hClass_map_mul he hf hr hl hf' hx hy
-        simp_all
-        sorry --was this the correct bijection? is this provable?
-
+      exact DEquiv.hClass_equiv' he hf hr hl hf
   | coe t =>
     simp [← WithOne.coe_mul] at ht
     apply Nonempty.intro
@@ -531,40 +502,25 @@ lemma DEquiv.hClass_equiv' {e f : S} (he : IsIdempotentElem e)
     · intros x y hx hy
       symm; exact DEquiv.bij_on_hClass_map_mul he hf hr hl ht hx hy
 
-
 /-- Two maximal subgroups of a 𝓓-class are isomorphic. -/
 theorem DEquiv.maximal_subgroups_equiv {x y : S} {H K : Subgroup S}
-  (hH : H.isMaximal) (hK : K.isMaximal) (hx : x ∈ H) (hy : x ∈ K) (hd : x 𝓓 y) :
+  (hH : H.isMaximal) (hK : K.isMaximal) (hx : x ∈ H) (hy : y ∈ K) (hd : x 𝓓 y) :
     Nonempty (H ≃* K) := by
   obtain ⟨e₁, hi₁, h₁⟩ := HEquiv.hClass_of_subgroup hH
   obtain ⟨e₂, hi₂, h₂⟩ := HEquiv.hClass_of_subgroup hK
-  have he : e₁ 𝓓 e₂ := by sorry
-  obtain h₃ := he.hClass_equiv' hi₁ hi₂
-  obtain ⟨f⟩ := h₃
-  apply Nonempty.intro
-  refine MulEquiv.mk
-
-
-
-  have f := Nonempty.elim h₃
-
-  have h₄ := HEquiv.subgroup_of_idempotent_carrier_def hi₁
-  simp [h₄]
-
-
-  rw [h₁]
+  simp [Subgroup.mem_def, h₁, h₂] at hx hy
+  have he : e₁ 𝓓 e₂ := by
+    apply HEquiv.to_dEquiv at hx
+    apply HEquiv.to_dEquiv at hy
+    apply DEquiv.trans hx.symm
+    apply DEquiv.trans hd hy
+  have heq₁ : H = HEquiv.subgroup_of_idempotent hi₁ := by
+    apply SetLike.ext
+    simp [Subgroup.mem_def, h₁]
+  have heq₂ : K = HEquiv.subgroup_of_idempotent hi₂ := by
+    apply SetLike.ext
+    simp [Subgroup.mem_def, h₂]
+  rw [heq₁, heq₂]
+  exact DEquiv.hClass_equiv hi₁ hi₂ he
 
 end Semigroup
-
-#check Set.card_empty
-/-
-Meeting notes
-
-How to talk about cardinality of finite (or infinite) sets
-and converting finset to set.
-
-Add lemma, that mul by idempotent in hclass is the identit
-
-todo: prove that greens lemma bigjections are multiplicitive
-y
--/

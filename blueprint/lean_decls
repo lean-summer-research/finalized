@@ -51,3 +51,9 @@ Semigroup.LEquiv.bijOn_rClass
 Semigroup.LEquiv.bijOn_hClass
 Semigroup.Subgroup
 Semigroup.Subgroup.isMaximal
+Semigroup.DEquiv.mul_in_inter_iff_equiv
+Semigroup.mul_in_inter_iff_exists_idempotent
+Semigroup.HEquiv.subgroup_of_idempotent
+Semigroup.HEquiv.group_of_idempotent
+Semigroup.HEquiv.hClass_of_subgroup
+Semigroup.DEquiv.maximal_subgroups_equiv

@@ -24,7 +24,7 @@ is needed in terms of `ℕ` powers greater than `0` rather than `ℕ+` powers.
 ## Blueprint
 
 * Existance of Idempotent powers
-Label : exists-unique-idempotent-pow
+Label : lem:exists-unique-idempotent-pow
 Tagged Lean lemmas :
  - `Semigroup.exists_repeating_pow`
  - `Semigroup.pow_idempotent_unique`
@@ -32,10 +32,10 @@ Tagged Lean lemmas :
 Dependencies: None
 
 * Sandwich Property in Finite Monoids
-Label : exists-pow-sandwhich
+Label : lem:exists-pow-sandwhich
 Tagged Lean lemmas :
  - `Monoid.exists_pow_sandwich_eq_self`
-Dependencies: exists-unique-idempotent-pow
+Dependencies: lem:exists-unique-idempotent-pow
 -/
 
 namespace Semigroup

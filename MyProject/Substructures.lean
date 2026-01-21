@@ -27,12 +27,12 @@ See https://avigad.github.io/mathematics_in_lean/C08_Hierarchies.html#sub-object
 Redefine group with only left inverse requirement not both.
 
 ## Blueprint
-Definition entry: Subgroup of a Semigroup
+Subgroup of a Semigroup
 Label: def:subgroup-of-semigroup
 Lean definition to tag: `Semigroup.Subgroup`
 dependencies: None
 
-Definition: Maximal Subgroup
+Maximal Subgroup
 label: def:maximal-subgroup
 Lean definition to tag: `Semigroup.Subgroup.isMaximal`
 Dependencies: `def:subgroup-of-semigroup`

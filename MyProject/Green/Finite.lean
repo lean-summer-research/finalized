@@ -23,24 +23,24 @@ TODO
 ## Blueprint
 
 * Equivalence of 𝓓 and 𝓙 in Finite Semigroups
-Label : d-j-theorem
+Label : lem:d-j-theorem
 Lean lemmas to tag :
   - `Semigroup.JEquiv.to_dEquiv`
   - `Semigroup.dEquiv_iff_jEquiv`
-Dependencies : exists-pow-sandwich, def:greens-relations
+Dependencies : lem:exists-pow-sandwich, def:greens-relations
 
 * J-Equivalence Strengthening Preorders
-Label : j-strengthening
+Label : lem:j-strengthening
 Lean lemmas to tag :
   - `Semigroup.REquiv.of_rPreorder_and_jEquiv`
   - `Semigroup.LEquiv.of_lPreorder_and_jEquiv`
-Dependencies : exists-pow-sandwich, def:greens-relations
+Dependencies : lem:exists-pow-sandwich, def:greens-relations
 
 * H-Equivalence from Sandwiching
-Label : h-of-sandwich
+Label : lem:h-of-sandwich
 Lean lemmas to tag :
   - `Semigroup.HEquiv.of_eq_sandwich`
-Dependencies : j-strengthening, lem:exists-pow-sandwich, def:greens-relations
+Dependencies : lem:j-strengthening, lem:exists-pow-sandwich, def:greens-relations
 -/
 
 namespace Semigroup

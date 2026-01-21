@@ -566,6 +566,60 @@
 
 
     
+    <div class="dep-modal-container" id="lem:hclass-subgroup_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:hclass-subgroup" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">16</span><span class="lemma_thmtitle">\(\mathcal{H}\)-class of an Idempotent is a Maximal Subgroup</span></div>
+    <div class="thm_thmcontent"><p>  Let \(S\) be a semigroup and let \(e \in S\) be an idempotent element. Then: </p>
+<ol class="enumerate">
+  <li><p>The \(\mathcal{H}\)-class \([e]_{\mathcal{H}}\) is closed under multiplication. </p>
+</li>
+  <li><p>The element \(e\) acts as an identity on \([e]_{\mathcal{H}}\): for all \(x \in [e]_{\mathcal{H}}\), \(e \cdot x = x\) and \(x \cdot e = x\). </p>
+</li>
+  <li><p>Every element \(x \in [e]_{\mathcal{H}}\) has an inverse \(y \in [e]_{\mathcal{H}}\) satisfying \(x \cdot y = e\) and \(y \cdot x = e\). </p>
+</li>
+  <li><p>The \(\mathcal{H}\)-class \([e]_{\mathcal{H}}\) forms a subgroup of \(S\) with identity \(e\). </p>
+</li>
+  <li><p>Every maximal subgroup of \(S\) is the \(\mathcal{H}\)-class of some idempotent. </p>
+</li>
+</ol>
+
+</div>
+
+    <a class="latex_link" href="sect0007.html#lem:hclass-subgroup">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.subgroup_of_idempotent" class="lean_decl">Semigroup.HEquiv.subgroup_of_idempotent</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.group_of_idempotent" class="lean_decl">Semigroup.HEquiv.group_of_idempotent</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.HEquiv.hClass_of_subgroup" class="lean_decl">Semigroup.HEquiv.hClass_of_subgroup</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:j-strengthening_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -646,6 +700,87 @@
 
 
     
+    <div class="dep-modal-container" id="lem:location-theorem_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:location-theorem" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">15</span><span class="lemma_thmtitle">Location Theorem</span></div>
+    <div class="thm_thmcontent"><p>  Let \(S\) be a semigroup and let \(x, y \in S\). The following conditions are equivalent: </p>
+<ol class="enumerate">
+  <li><p>\(x \cdot y \in [x]_{\mathcal{R}} \cap [y]_{\mathcal{L}}\) (i.e., \(x \cdot y \mathcal{R} x\) and \(x \cdot y \mathcal{L} y\)). </p>
+</li>
+  <li><p>There exists an idempotent \(e \in [y]_{\mathcal{R}} \cap [x]_{\mathcal{L}}\). </p>
+</li>
+</ol>
+<p> Moreover, in a finite semigroup, these conditions are equivalent to: </p>
+<ol class="enumerate">
+  <li><p>\(x \mathcal{D} y\) and \(x \cdot y \mathcal{D} x\). </p>
+</li>
+</ol>
+
+</div>
+
+    <a class="latex_link" href="sect0007.html#lem:location-theorem">LaTeX</a>
+    
+    
+  <div class="tooltip">
+      <span class="lean_link">Lean</span>
+      <ul class="tooltip_list">
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.mul_in_inter_iff_equiv" class="lean_decl">Semigroup.DEquiv.mul_in_inter_iff_equiv</a></li>
+        
+           <li><a href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.mul_in_inter_iff_exists_idempotent" class="lean_decl">Semigroup.mul_in_inter_iff_exists_idempotent</a></li>
+        
+      </ul>
+  </div>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:maximal-subgroups-isomorphic_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:maximal-subgroups-isomorphic" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">17</span><span class="lemma_thmtitle">Maximal Subgroups of a \(\mathcal{D}\)-class are Isomorphic</span></div>
+    <div class="thm_thmcontent"><p>  Let \(S\) be a semigroup and let \(H\) and \(K\) be maximal subgroups of \(S\). If there exist \(x \in H\) and \(y \in K\) with \(x \mathcal{D} y\), then \(H\) and \(K\) are isomorphic as groups.   </p>
+</div>
+
+    <a class="latex_link" href="sect0007.html#lem:maximal-subgroups-isomorphic">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lean-summer-research.github.io/finalized/docs/find/#doc/Semigroup.DEquiv.maximal_subgroups_equiv">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:r-l-comm_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -692,7 +827,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"lem:exists-pow-sandwich"	[color=green,		fillcolor="#1CAC78",		label="exists-pow-sandwich",		shape=ellipse,		style=filled];	"lem:d-j-theorem"	[color=green,		fillcolor="#1CAC78",		label="d-j-theorem",		shape=ellipse,		style=filled];	"lem:exists-pow-sandwich" -> "lem:d-j-theorem"	[style=dashed];	"lem:j-strengthening"	[color=green,		fillcolor="#1CAC78",		label="j-strengthening",		shape=ellipse,		style=filled];	"lem:d-j-theorem" -> "lem:j-strengthening"	[style=dashed];	"lem:h-of-sandwich"	[color=green,		fillcolor="#1CAC78",		label="h-of-sandwich",		shape=ellipse,		style=filled];	"lem:j-strengthening" -> "lem:h-of-sandwich"	[style=dashed];	"lem:greens-relations-mul-compat"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-mul-compat",		shape=ellipse,		style=filled];	"lem:r-l-comm"	[color=green,		fillcolor="#1CAC78",		label="r-l-comm",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:r-l-comm"	[style=dashed];	"lem:greens-lemma"	[color=green,		fillcolor="#1CAC78",		label="greens-lemma",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:greens-lemma"	[style=dashed];	"lem:d-equiv-closed"	[color=green,		fillcolor="#1CAC78",		label="d-equiv-closed",		shape=ellipse,		style=filled];	"lem:r-l-comm" -> "lem:d-equiv-closed";	"lem:le-idempotent"	[color=green,		fillcolor="#1CAC78",		label="le-idempotent",		shape=ellipse,		style=filled];	"lem:greens-relations-hom-pres"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-hom-pres",		shape=ellipse,		style=filled];	"def:greens-relations"	[color=green,		fillcolor="#B0ECA3",		label="greens-relations",		shape=box,		style=filled];	"def:greens-relations" -> "lem:d-j-theorem"	[style=dashed];	"def:greens-relations" -> "lem:greens-relations-mul-compat"	[style=dashed];	"def:greens-relations" -> "lem:le-idempotent"	[style=dashed];	"def:greens-relations" -> "lem:greens-relations-hom-pres"	[style=dashed];	"lem:exists-unique-idempotent-pow"	[color=green,		fillcolor="#1CAC78",		label="exists-unique-idempotent-pow",		shape=ellipse,		style=filled];	"lem:exists-unique-idempotent-pow" -> "lem:exists-pow-sandwich"	[style=dashed];	"def:maximal-subgroup"	[color=green,		fillcolor="#B0ECA3",		label="maximal-subgroup",		shape=box,		style=filled];	"def:subgroup-of-semigroup"	[color=green,		fillcolor="#B0ECA3",		label="subgroup-of-semigroup",		shape=box,		style=filled];	"def:subgroup-of-semigroup" -> "def:maximal-subgroup"	[style=dashed];}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"lem:exists-pow-sandwich"	[color=green,		fillcolor="#1CAC78",		label="exists-pow-sandwich",		shape=ellipse,		style=filled];	"lem:d-j-theorem"	[color=green,		fillcolor="#1CAC78",		label="d-j-theorem",		shape=ellipse,		style=filled];	"lem:exists-pow-sandwich" -> "lem:d-j-theorem"	[style=dashed];	"lem:j-strengthening"	[color=green,		fillcolor="#1CAC78",		label="j-strengthening",		shape=ellipse,		style=filled];	"lem:d-j-theorem" -> "lem:j-strengthening"	[style=dashed];	"lem:h-of-sandwich"	[color=green,		fillcolor="#1CAC78",		label="h-of-sandwich",		shape=ellipse,		style=filled];	"lem:j-strengthening" -> "lem:h-of-sandwich"	[style=dashed];	"lem:location-theorem"	[color=green,		fillcolor="#1CAC78",		label="location-theorem",		shape=ellipse,		style=filled];	"lem:j-strengthening" -> "lem:location-theorem"	[style=dashed];	"lem:hclass-subgroup"	[color=green,		fillcolor="#1CAC78",		label="hclass-subgroup",		shape=ellipse,		style=filled];	"lem:location-theorem" -> "lem:hclass-subgroup"	[style=dashed];	"lem:greens-relations-mul-compat"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-mul-compat",		shape=ellipse,		style=filled];	"lem:r-l-comm"	[color=green,		fillcolor="#1CAC78",		label="r-l-comm",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:r-l-comm"	[style=dashed];	"lem:greens-lemma"	[color=green,		fillcolor="#1CAC78",		label="greens-lemma",		shape=ellipse,		style=filled];	"lem:greens-relations-mul-compat" -> "lem:greens-lemma"	[style=dashed];	"lem:d-equiv-closed"	[color=green,		fillcolor="#1CAC78",		label="d-equiv-closed",		shape=ellipse,		style=filled];	"lem:r-l-comm" -> "lem:d-equiv-closed";	"lem:greens-lemma" -> "lem:location-theorem"	[style=dashed];	"lem:le-idempotent"	[color=green,		fillcolor="#1CAC78",		label="le-idempotent",		shape=ellipse,		style=filled];	"lem:le-idempotent" -> "lem:location-theorem"	[style=dashed];	"lem:maximal-subgroups-isomorphic"	[color=green,		fillcolor="#1CAC78",		label="maximal-subgroups-isomorphic",		shape=ellipse,		style=filled];	"lem:hclass-subgroup" -> "lem:maximal-subgroups-isomorphic"	[style=dashed];	"lem:greens-relations-hom-pres"	[color=green,		fillcolor="#1CAC78",		label="greens-relations-hom-pres",		shape=ellipse,		style=filled];	"def:greens-relations"	[color=green,		fillcolor="#B0ECA3",		label="greens-relations",		shape=box,		style=filled];	"def:greens-relations" -> "lem:d-j-theorem"	[style=dashed];	"def:greens-relations" -> "lem:greens-relations-mul-compat"	[style=dashed];	"def:greens-relations" -> "lem:le-idempotent"	[style=dashed];	"def:greens-relations" -> "lem:greens-relations-hom-pres"	[style=dashed];	"lem:exists-unique-idempotent-pow"	[color=green,		fillcolor="#1CAC78",		label="exists-unique-idempotent-pow",		shape=ellipse,		style=filled];	"lem:exists-unique-idempotent-pow" -> "lem:exists-pow-sandwich"	[style=dashed];	"def:maximal-subgroup"	[color=green,		fillcolor="#B0ECA3",		label="maximal-subgroup",		shape=box,		style=filled];	"def:maximal-subgroup" -> "lem:hclass-subgroup"	[style=dashed];	"def:subgroup-of-semigroup"	[color=green,		fillcolor="#B0ECA3",		label="subgroup-of-semigroup",		shape=box,		style=filled];	"def:subgroup-of-semigroup" -> "def:maximal-subgroup"	[style=dashed];}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {

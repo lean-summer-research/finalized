@@ -1,5 +1,3 @@
-import MyProject.Green.Finite
-import MyProject.Substructures
-import MyProject.Green.GreensLemma
+import MyProject.Green.Location
 
 -- #redundant_imports

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1768863920 "print.tex" "/workspaces/finalized/blueprint/print/print.pdf" "print" 1768863921
+["pdflatex"] 1768954903 "print.tex" "/workspaces/finalized/blueprint/print/print.pdf" "print" 1768954904
   "/etc/texmf/web2c/texmf.cnf" 1768498758 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -85,15 +85,16 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1768498779 3606610 2f9af6b61f005588765b73fbfd4155ca ""
-  "/workspaces/finalized/blueprint/print/../../LaTeX/Chapters.tex" 1768863022 223 1082530dca2e5d3dab4290953882522a ""
+  "/workspaces/finalized/blueprint/print/../../LaTeX/Chapters.tex" 1768864024 262 4353b3a2b2a8c71402c21e0c80e3ffb3 ""
   "/workspaces/finalized/blueprint/print/../../LaTeX/Green/Basic.tex" 1762107309 2584 e2abf0ead4225564dad31e2940bdc16e ""
   "/workspaces/finalized/blueprint/print/../../LaTeX/Green/Defs.tex" 1762450301 7135 3c5724a9ba9cdc3a5e762cec78ca1cd0 ""
   "/workspaces/finalized/blueprint/print/../../LaTeX/Green/Finite.tex" 1768861290 5361 9fb4f41782bc7318f7cd5ed2c88ee873 ""
   "/workspaces/finalized/blueprint/print/../../LaTeX/Green/GreensLemma.tex" 1768863915 4710 11cf9ae6e7cc575d8e88ad4579144427 ""
+  "/workspaces/finalized/blueprint/print/../../LaTeX/Green/Location.tex" 1768954898 8864 b73b005a3118b4a4094d94987b0e3d41 ""
   "/workspaces/finalized/blueprint/print/../../LaTeX/Idempotent.tex" 1768857994 2921 92a8acfdb44263d173dcab550781e02d ""
   "/workspaces/finalized/blueprint/print/../../LaTeX/Substructures.tex" 1768863317 2177 2458a983c862fdeeffd33e18c0983e2d ""
-  "/workspaces/finalized/blueprint/print/print.aux" 1768863921 3154 76b83898d0c4042c9863fdba297f9cc0 "pdflatex"
-  "/workspaces/finalized/blueprint/print/print.out" 1768863921 1146 226944c567d177999070ed04a65a98fc "pdflatex"
+  "/workspaces/finalized/blueprint/print/print.aux" 1768954904 3697 d377cdc0e415cfd9dc85cf2da7e9d266 "pdflatex"
+  "/workspaces/finalized/blueprint/print/print.out" 1768954904 1465 5a9f9d54315f5ac79321511fafa07b2c "pdflatex"
   "content.tex" 1762121259 397 c59d46ff748cbf5fc2552c4b44bd6e87 ""
   "macros/common.tex" 1762110946 820 60fafcc3aa944a5e60030581a943ef6b ""
   "macros/print.tex" 1762110946 1101 87627b2ec24fef68edc71c13f43f7bab ""

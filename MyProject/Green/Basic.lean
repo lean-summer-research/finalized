@@ -33,15 +33,15 @@ TODO
 ## Blueprint
 
 * Characterization of Elements Below Idempotents
-Label : le-idempotent
+Label : lem:le-idempotent
 Tagged Lean lemmas :
  - `Semigroup.RPreorder.le_idempotent`
  - `Semigroup.LPreorder.le_idempotent`
  - `Semigroup.HPreorder.le_idempotent`
-Dependencies : greens-relations
+Dependencies : def:greens-relations
 
 * Preservation of Green's Relations by Morphisms
-Label : greens-relations-hom-pres
+Label : lem:greens-relations-hom-pres
 Tagged Lean lemmas :
  - `Semigroup.RPreorder.hom_pres`
  - `Semigroup.LPreorder.hom_pres`
@@ -53,7 +53,7 @@ Tagged Lean lemmas :
  - `Semigroup.HEquiv.hom_pres`
  - `Semigroup.DEquiv.hom_pres`
 Then, prove ≤𝓙 and 𝓙, then ≤𝓗 and 𝓗, then 𝓓.
-Dependencies : greens-relations
+Dependencies : def:greens-relations
 -/
 
 /-! ### Idempotent properties (Prop 1.4.1) -/
