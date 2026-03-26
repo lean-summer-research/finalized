@@ -1,7 +1,10 @@
 import MyProject.Green.GreensLemma
 import MyProject.Green.Finite
+import MyProject.Ideals
 import MyProject.Substructures
 import Mathlib
+import Mathlib.Data.List.TFAE
+import Mathlib.Tactic.TFAE
 
 /-!
 # The Location Theorem
@@ -522,5 +525,249 @@ theorem DEquiv.maximal_subgroups_equiv {x y : S} {H K : Subgroup S}
     simp [Subgroup.mem_def, h₂]
   rw [heq₁, heq₂]
   exact DEquiv.hClass_equiv hi₁ hi₂ he
+
+
+section Prop_1_9
+
+variable {S : Type*} [Semigroup S]
+
+lemma isRegularElem_of_idempotent {e : S} (he : IsIdempotentElem e) : isRegularElem e := by
+  use e
+  have hee : e * e = e := by simpa [IsIdempotentElem] using he
+  simp [hee]
+
+/-- In `MulOpposite S`, `𝓡` for `op`-images matches `𝓛` in `S`. -/
+lemma mulOpposite_rEquiv_of_lEquiv {e x : S} (h : e 𝓛 x) :
+    (MulOpposite.op e) 𝓡 (MulOpposite.op x) := by
+  rcases h with ⟨heL, hxL⟩
+  constructor
+  · rcases heL with ⟨a, ha⟩
+    cases a with
+    | one =>
+      simp at ha
+      use 1
+      simp [ha]
+    | coe a =>
+      use MulOpposite.op a
+      have hae : a * x = e := by simpa [← WithOne.coe_mul] using ha
+      simp [← WithOne.coe_mul, ← MulOpposite.op_mul, hae]
+  · rcases hxL with ⟨b, hb⟩
+    cases b with
+    | one =>
+      simp at hb
+      use 1
+      simp [hb]
+    | coe b =>
+      use MulOpposite.op b
+      have hbx : b * e = x := by simpa [← WithOne.coe_mul] using hb
+      simp [← WithOne.coe_mul, ← MulOpposite.op_mul, hbx]
+
+/-- If `x` is regular then `⟦x⟧𝓡` contains an idempotent (`x * y` for a witness `x * y * x = x`). -/
+lemma exists_idempotent_r_of_isRegularElem {x : S} (hx : isRegularElem x) :
+    ∃ e, IsIdempotentElem e ∧ e 𝓡 x := by
+  obtain ⟨y, hy⟩ := hx
+  refine ⟨x * y, ?_, ?_⟩
+  · simp [IsIdempotentElem]
+    calc
+      (x * y) * (x * y) = x * y * x * y := by rw [← mul_assoc]
+      _ = x * y := by rw [hy]
+  · constructor
+    · -- `e ≤𝓡 x` means `∃ z, x * z = e`
+      use y
+      rfl
+    · -- `x ≤𝓡 e` means `∃ z, e * z = x`
+      use x
+      simp [← WithOne.coe_mul, hy]
+
+/-- If `x` is regular then `⟦x⟧𝓛` contains an idempotent (`y * x` for a witness `x * y * x = x`). -/
+lemma exists_idempotent_l_of_isRegularElem {x : S} (hx : isRegularElem x) :
+    ∃ e, IsIdempotentElem e ∧ e 𝓛 x := by
+  obtain ⟨y, hy⟩ := hx
+  refine ⟨y * x, ?_, ?_⟩
+  · simp [IsIdempotentElem]
+    calc
+      (y * x) * (y * x) = y * (x * y * x) := by simp [← mul_assoc]
+      _ = y * x := by rw [hy]
+  · constructor
+    · -- `e ≤𝓛 x` means `∃ z, z * x = e`
+      use y
+      rfl
+    · -- `x ≤𝓛 e` means `∃ z, z * e = x`
+      use x
+      simp [← WithOne.coe_mul, ← mul_assoc, hy]
+
+/-- If the `𝓡`-class of `x` contains an idempotent, then `x` is regular. -/
+lemma isRegularElem_of_exists_idempotent_r {x : S}
+    (h : ∃ e, IsIdempotentElem e ∧ e 𝓡 x) : isRegularElem x := by
+  obtain ⟨e, he, hr⟩ := h
+  rcases hr with ⟨he_le_x, hx_le_e⟩
+  have hex : e * x = x := (RPreorder.le_idempotent he x).mp hx_le_e
+  obtain ⟨p, hp⟩ := he_le_x
+  cases p with
+  | one =>
+    rw [mul_one] at hp
+    rw [WithOne.coe_inj] at hp
+    simpa [hp] using isRegularElem_of_idempotent he
+  | coe u =>
+    simp [← WithOne.coe_mul] at hp
+    use u
+    calc
+      x * u * x = (x * u) * x := by rw [mul_assoc]
+      _         = e * x := by rw [hp]
+      _         = x := hex
+
+/-- If the `𝓛`-class of `x` contains an idempotent, then `x` is regular. -/
+lemma isRegularElem_of_exists_idempotent_l {x : S}
+    (h : ∃ e, IsIdempotentElem e ∧ e 𝓛 x) : isRegularElem x := by
+  obtain ⟨e, he, hr⟩ := h
+  have hrR := mulOpposite_rEquiv_of_lEquiv hr
+  have hop : isRegularElem (MulOpposite.op x) := by
+    apply isRegularElem_of_exists_idempotent_r (S := MulOpposite S)
+    refine ⟨MulOpposite.op e, ?_, hrR⟩
+    have hee : e * e = e := by simpa [IsIdempotentElem] using he
+    simp [IsIdempotentElem, ← MulOpposite.op_mul, hee]
+  rcases hop with ⟨z, hz⟩
+  use z.unop
+  simpa [MulOpposite, mul_assoc] using congrArg MulOpposite.unop hz
+
+lemma isRegularElem_of_rEquiv {x y : S} (h : x 𝓡 y) (hx : isRegularElem x) : isRegularElem y := by
+  obtain ⟨e, he, her⟩ := exists_idempotent_r_of_isRegularElem hx
+  apply isRegularElem_of_exists_idempotent_r
+  refine ⟨e, he, ?_⟩
+  exact REquiv.trans her h
+
+lemma isRegularElem_of_lEquiv {x y : S} (h : x 𝓛 y) (hx : isRegularElem x) : isRegularElem y := by
+  obtain ⟨e, he, hel⟩ := exists_idempotent_l_of_isRegularElem hx
+  apply isRegularElem_of_exists_idempotent_l
+  refine ⟨e, he, ?_⟩
+  exact LEquiv.trans hel h
+
+/-- Regularity propagates within a `𝓓`-class. -/
+theorem isRegularElem_of_dEquiv {x y : S} (hd : x 𝓓 y) (hx : isRegularElem x) :
+    isRegularElem y := by
+  obtain ⟨z, hrz, hzy⟩ := hd
+  have hz : isRegularElem z := isRegularElem_of_rEquiv hrz hx
+  exact isRegularElem_of_lEquiv hzy hz
+
+namespace DEquiv
+
+variable (d : S)
+
+def regularClass : Prop :=
+  ∀ x, x 𝓓 d → isRegularElem x
+
+def hasIdempotent : Prop :=
+  ∃ e, e 𝓓 d ∧ IsIdempotentElem e
+
+/-- **(i) ↔ (ii)** There is at least one regular element 𝓓-related to `d`. -/
+theorem regularClass_iff_exists_regular (d : S) :
+    regularClass d ↔ (∃ x, x 𝓓 d ∧ isRegularElem x) := by
+  constructor
+  · intro h
+    use d
+    exact ⟨DEquiv.refl _, h _ (DEquiv.refl _)⟩
+  · rintro ⟨x, hxD, hxr⟩ y hyD
+    exact isRegularElem_of_dEquiv (DEquiv.trans hxD hyD.symm) hxr
+
+/-- **(i) ↔ (iii)** Each 𝓡-class that meets the class contains an idempotent. -/
+theorem regularClass_iff_forall_rClass_idem (d : S) :
+    regularClass d ↔ (∀ x, x 𝓓 d → ∃ e, IsIdempotentElem e ∧ e 𝓡 x) := by
+  constructor
+  · intro h x hxD
+    exact exists_idempotent_r_of_isRegularElem (h x hxD)
+  · intro h x hxD
+    obtain ⟨e, he, hr⟩ := h x hxD
+    exact isRegularElem_of_exists_idempotent_r ⟨e, he, hr⟩
+
+/-- **(i) ↔ (iv)** Each 𝓛-class that meets the class contains an idempotent. -/
+theorem regularClass_iff_forall_lClass_idem (d : S) :
+    regularClass d ↔ (∀ x, x 𝓓 d → ∃ e, IsIdempotentElem e ∧ e 𝓛 x) := by
+  constructor
+  · intro h x hxD
+    exact exists_idempotent_l_of_isRegularElem (h x hxD)
+  · intro h x hxD
+    obtain ⟨e, he, hl⟩ := h x hxD
+    exact isRegularElem_of_exists_idempotent_l ⟨e, he, hl⟩
+
+theorem regularClass_iff_hasIdempotent : regularClass d ↔ hasIdempotent d := by
+  constructor
+  · intro h
+    obtain ⟨e, he, hr⟩ := exists_idempotent_r_of_isRegularElem (h d (DEquiv.refl _))
+    exact ⟨e, REquiv.to_dEquiv hr, he⟩
+  · rintro ⟨e, heD, he⟩
+    intro x hxD
+    exact isRegularElem_of_dEquiv (DEquiv.trans heD hxD.symm) (isRegularElem_of_idempotent he)
+
+/-- **(iii) ↔ (v)** (each 𝓡-class has an idempotent vs. some idempotent in the class). -/
+theorem forall_rClass_idem_iff_hasIdempotent (d : S) :
+    (∀ x, x 𝓓 d → ∃ e, IsIdempotentElem e ∧ e 𝓡 x) ↔ hasIdempotent d := by
+  constructor
+  · intro h
+    obtain ⟨e, he, hr⟩ := h d (DEquiv.refl _)
+    exact ⟨e, REquiv.to_dEquiv hr, he⟩
+  · rintro ⟨e, heD, he⟩
+    intro x hxD
+    obtain ⟨f, hfR, hf⟩ := idempotent_in_rClass he (DEquiv.trans hxD heD.symm)
+    exact ⟨f, hf, hfR⟩
+
+/-- **(iv) ↔ (v)** -/
+theorem forall_lClass_idem_iff_hasIdempotent (d : S) :
+    (∀ x, x 𝓓 d → ∃ e, IsIdempotentElem e ∧ e 𝓛 x) ↔ hasIdempotent d := by
+  constructor
+  · intro h
+    obtain ⟨e, he, hr⟩ := h d (DEquiv.refl _)
+    exact ⟨e, LEquiv.to_dEquiv hr, he⟩
+  · rintro ⟨e, heD, he⟩
+    intro x hxD
+    obtain ⟨f, hfL, hf⟩ := idempotent_in_lClass he (DEquiv.trans hxD heD.symm)
+    exact ⟨f, hf, hfL⟩
+
+/-- **(v) ↔ (ii)** -/
+theorem hasIdempotent_iff_exists_regular (d : S) :
+    hasIdempotent d ↔ (∃ x, x 𝓓 d ∧ isRegularElem x) := by
+  constructor
+  · rintro ⟨e, heD, he⟩
+    exact ⟨e, heD, isRegularElem_of_idempotent he⟩
+  · rintro ⟨x, hxD, hxr⟩
+    obtain ⟨e, he, hr⟩ := exists_idempotent_r_of_isRegularElem hxr
+    exact ⟨e, DEquiv.trans (REquiv.to_dEquiv hr) hxD, he⟩
+
+/-- **(v) ↔ (vi)** for finite semigroups: there exist `x, y` in the class with `x * y` still in the
+class  -/
+theorem hasIdempotent_iff_pair_product_in_class [Finite S] (d : S) :
+    hasIdempotent d ↔ (∃ x y, x 𝓓 d ∧ y 𝓓 d ∧ (x * y) 𝓓 d) := by
+  constructor
+  · rintro ⟨e, heD, he⟩
+    use e, e
+    refine ⟨heD, heD, ?_⟩
+    have hee : e * e = e := by simpa [IsIdempotentElem] using he
+    simpa [hee] using heD
+  · rintro ⟨x, y, hxD, hyD, hxyD⟩
+    have hxjy : x 𝓓 y := DEquiv.trans hxD hyD.symm
+    have hxyDx : (x * y) 𝓓 x := DEquiv.trans hxyD hxD.symm
+    have hxy : x * y ∈ ⟦x⟧𝓡 ∩ ⟦y⟧𝓛 :=
+      (mul_in_inter_iff_equiv (x := x) (y := y)).2 ⟨hxjy, hxyDx⟩
+    obtain ⟨e, he, hmem⟩ := (mul_in_inter_iff_exists_idempotent x y).1 hxy
+    refine ⟨e, ?_, he⟩
+    exact DEquiv.trans (LEquiv.to_dEquiv hmem.2) hxD
+
+theorem regular_d_class_tfae [Finite S] (d : S) :
+    List.TFAE
+      [ regularClass d,
+        ∃ x, x 𝓓 d ∧ isRegularElem x,
+        ∀ x, x 𝓓 d → ∃ e, IsIdempotentElem e ∧ e 𝓡 x,
+        ∀ x, x 𝓓 d → ∃ e, IsIdempotentElem e ∧ e 𝓛 x,
+        hasIdempotent d,
+        ∃ x y, x 𝓓 d ∧ y 𝓓 d ∧ (x * y) 𝓓 d ] := by
+  tfae_have 1 ↔ 2 := regularClass_iff_exists_regular d
+  tfae_have 2 ↔ 5 := (hasIdempotent_iff_exists_regular d).symm
+  tfae_have 3 ↔ 5 := forall_rClass_idem_iff_hasIdempotent d
+  tfae_have 4 ↔ 5 := forall_lClass_idem_iff_hasIdempotent d
+  tfae_have 5 ↔ 6 := hasIdempotent_iff_pair_product_in_class d
+  tfae_finish
+
+end DEquiv
+
+end Prop_1_9
 
 end Semigroup

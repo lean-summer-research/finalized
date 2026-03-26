@@ -10,9 +10,7 @@ section RegularSemigroup
 
 variable {S : Type*} [Semigroup S]
 
-def isRegularElem (x : S) : Prop :=
-  ∃ y : S, x * y * x = x
-
+/-- Every element has a pseudoinverse (`MyProject.Ideals` / Prop. 1.9). -/
 def isRegularSemigroup : Prop :=
   ∀ x : S, isRegularElem x
 
@@ -220,8 +218,18 @@ theorem simple_iff_rees_forward :
     obtain ⟨m, hm⟩ := Semigroup.exists_idempotent_pow (default : S)
     exact ⟨(default : S) ^ m, hm⟩ -- any element raised to some power is idempotent
   obtain ⟨e, he⟩ := h_idem
+  -- here the whole semigroup is a single 𝓓-class. proposition 1.9 in
+  -- Pin says: if that class contains an idempotent, then every element of the class is regular.
+  -- since our semigroup contains an idempotent, we apply prop. 1.9
   have h_reg : @isRegularSemigroup S _ := by
-    sorry -- proposition 1.9
+    -- first we import the (v) ⇒ (i) half: from "idempotent in the class" deduce "whole class regular".
+    have hrc : DEquiv.regularClass e :=
+      (DEquiv.regularClass_iff_hasIdempotent e).2 ⟨e, DEquiv.refl e, he⟩
+    -- `isRegularSemigroup S` unfolds to "for every x : S, x is regular". so we fix an arbitrary x.
+    intro x
+    -- `hrc` says: if x is in the 𝓓-class of e, then x is regular. but "in the class" is just x 𝓓 e,
+    -- which is exactly `h_single_d x e` (single 𝓓-class). feeding that proof into `hrc` gives regularity of x.
+    exact hrc x (h_single_d x e)
   -- visualize the single D-class as a rectangular grid of R-classes (rows) by L-classes
   -- (columns), with each cell being an H-class. WLOG place e in the (1,1) position of the grid. the h-class
   -- ⟦e⟧𝓗 = {x ∈ S | x 𝓗 e} is a maximal subgroup of S, which we become our Rees Matrix group G. in lean, G is a subtype of S,

@@ -858,7 +858,8 @@ instance JPreorder.toZeroSimpleSemigroup [SemigroupWithZero S] (h : ∀ x y : S,
 /-!
 ### Regular Semigroups
 
-- TODO - Prove that a d-class with an idemptoent is regular
+See `Semigroup.DEquiv.regular_d_class_tfae` and `regularClass_iff_*` / `hasIdempotent_iff_*` in
+`MyProject/Green/Location.lean` (Proposition 1.9).
 -/
 
 section Regular
