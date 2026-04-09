@@ -8,6 +8,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
+      "tamasfe.even-better-toml",
       "leanprover.lean4"
       ]
     }
