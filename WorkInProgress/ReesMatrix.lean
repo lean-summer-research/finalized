@@ -606,4 +606,610 @@ theorem simple_iff_rees_forward :
 
 end ReesTheorem
 
+section ReesZeroIffZeroSimple
+
+open Semigroup Ideal'
+
+/-- **Rees–Suschkewitsch Theorem for 0-simple semigroups (backward direction).**
+A regular Rees matrix semigroup with zero is 0-simple: for any nonzero elements
+`x, y`, there exist `s, t` such that `s * x * t = y`. -/
+instance ReesZero.zeroSimple_of_regular
+    {I : Type*} {J : Type*} {G : Type*} [Group G]
+    (P : I → J → WithZero G)
+    [Nonempty I] [Nonempty J]
+    (hrow : ∀ i : I, ∃ j : J, P i j ≠ 0)
+    (hcol : ∀ j : J, ∃ i : I, P i j ≠ 0) : ZeroSimpleSemigroup (Option (ReesZero P)) where
+  exists_nonzero_mul := by
+    obtain ⟨j₀, hj₀⟩ := hrow (Classical.arbitrary I)
+    rw [WithZero.ne_zero_iff_exists] at hj₀
+    obtain ⟨g₀, hg₀⟩ := hj₀
+    refine ⟨some ⟨Classical.arbitrary I, j₀, 1⟩,
+            some ⟨Classical.arbitrary I, j₀, 1⟩, ?_⟩
+    change ¬ (some _ * some _ = none)
+    rw [ReesZero.mul_def, ← hg₀]
+    exact Option.isSome_iff_ne_none.mp rfl
+  ideal_trivial := by
+    intro K
+    by_cases hK_ne : K = ∅
+    · exact Or.inl hK_ne
+    · right
+      by_cases hK_has_nonzero : ∃ x : ReesZero P, (some x) ∈ K
+      · right
+        obtain ⟨x₀, hx₀⟩ := hK_has_nonzero
+        have hK_all : ∀ a : Option (ReesZero P), a ∈ K := by
+          intro a
+          rcases a with (_ | a)
+          · -- 0 ∈ K: none * some x₀ = none, and K is closed under left mult
+            have h0 : (none : Option (ReesZero P)) * some x₀ ∈ K :=
+              K.mul_mem_mem hx₀ none
+            simpa using h0
+          · -- For any nonzero a, show a ∈ K by finding s, t with s * x₀ * t = a
+            obtain ⟨j', hj'⟩ := hrow x₀.i
+            obtain ⟨i', hi'⟩ := hcol x₀.j
+            rw [WithZero.ne_zero_iff_exists] at hj' hi'
+            obtain ⟨pj, hpj⟩ := hj'
+            obtain ⟨pi, hpi⟩ := hi'
+            let s : Option (ReesZero P) := some ⟨a.i, j', x₀.g⁻¹ * pj⁻¹⟩
+            let t : Option (ReesZero P) := some ⟨i', a.j, pi⁻¹ * a.g⟩
+            have h1 : s * some x₀ ∈ K := K.mul_mem_mem hx₀ s
+            have h2 : s * some x₀ * t ∈ K := K.mem_mul_mem h1 t
+            convert h2 using 1
+            simp only [s, t, ReesZero.mul_def, ← hpj, ← hpi]
+            congr 1; simp [mul_assoc]
+        exact SetLike.ext (fun a => ⟨fun _ => trivial, fun _ => hK_all a⟩)
+      · left
+        push Not at hK_has_nonzero
+        ext a; simp only [Set.mem_singleton_iff]
+        constructor
+        · intro ha
+          rcases a with (_ | a)
+          · rfl
+          · exact absurd ha (hK_has_nonzero a)
+        · intro ha; rw [ha]
+          obtain ⟨x, hx⟩ := Ideal'.exists_mem_of_ne_empty hK_ne
+          rcases x with (_ | x)
+          · exact hx
+          · exact absurd hx (hK_has_nonzero x)
+
+---- following are lemmas from aristotle that we use.
+/-
+In a finite 0-simple semigroup, every non-zero element generates the whole
+semigroup as a two-sided ideal. As a consequence, for any two non-zero elements
+`x, y`, we have `x ≤𝓙 y`.
+-/
+lemma zeroSimple_j_preorder {S : Type*} [SemigroupWithZero S]
+    (h : Ideal'.isZeroSimple S) {x y : S} (hx : x ≠ 0) (hy : y ≠ 0) : x ≤𝓙 y := by
+  -- By definition of ideal, since $x \in \text{Ideal'.principal } y$, we have $x \leq \text{𝓙 } y$.
+  have hx_ideal : x ∈ Ideal'.principal y := by
+    have := h.2 ( Ideal'.principal y );
+    cases this <;> simp_all +decide [ Set.ext_iff, Ideal'.principal ];
+    · rename_i h;
+      replace h := congr_arg ( fun s => y ∈ s.carrier ) h ; simp_all +decide;
+      contradiction;
+    · rename_i h; cases' h with h h; specialize h y; aesop;
+      exact h.symm ▸ Set.mem_univ x;
+  simp_all +decide [ JPreorder ];
+  rcases hx_ideal with ( h | h | h ) <;> simp_all +decide [ Set.union_comm ];
+  · rcases h with ( rfl | ⟨ z, rfl ⟩ | ⟨ z, w, hz, hw, rfl ⟩ ) <;> simp_all +decide;
+    · exact ⟨ 1, 1, by simp +decide ⟩;
+    · exact ⟨ z, 1, by simp +decide ⟩;
+    · rcases w with ⟨ w, rfl ⟩ ; use ↑w, ↑hz; simp +decide [ mul_assoc ] ;
+  · rcases h with ⟨ w, rfl ⟩ ; exact ⟨ 1, WithOne.coe w, by simp +decide ⟩ ;
+  · exact ⟨ 1, 1, by simp +decide ⟩
+
+/-- In a finite 0-simple semigroup, all non-zero elements are J-equivalent. -/
+lemma zeroSimple_j_equiv {S : Type*} [SemigroupWithZero S]
+    (h : Ideal'.isZeroSimple S) {x y : S} (hx : x ≠ 0) (hy : y ≠ 0) : x 𝓙 y :=
+  ⟨zeroSimple_j_preorder h hx hy, zeroSimple_j_preorder h hy hx⟩
+
+/-- In a *finite* 0-simple semigroup, all non-zero elements are D-equivalent. -/
+lemma zeroSimple_d_equiv {S : Type*} [SemigroupWithZero S] [Finite S]
+    (h : Ideal'.isZeroSimple S) {x y : S} (hx : x ≠ 0) (hy : y ≠ 0) : x 𝓓 y :=
+  JEquiv.to_dEquiv (zeroSimple_j_equiv h hx hy)
+
+/-
+If `a = a * t` and `a ≠ 0` in a finite semigroup with zero, then `t` has a
+non-zero idempotent power.
+-/
+lemma nonzero_idempotent_of_right_absorb {S : Type*} [SemigroupWithZero S] [Finite S]
+    {a t : S} (ha : a ≠ 0) (hat : a = a * t) :
+    ∃ e : S, e ≠ 0 ∧ IsIdempotentElem e := by
+  obtain ⟨ m, hm ⟩ := Semigroup.exists_idempotent_pow t;
+  refine' ⟨ t ^ m, _, hm ⟩;
+  intro h_zero_pow
+  have h_a_zero : a = a * 0 := by
+    rw [ ← h_zero_pow ];
+    refine' PNat.recOn m _ _ <;> simp +decide at *;
+    · exact hat;
+    · intro n hn
+      have h_a_zero : a = a * t ^ n * t := by
+        grind +ring;
+      simpa only [ pow_succ, mul_assoc ] using h_a_zero
+  have h_contra : a = 0 := by
+    simpa using h_a_zero
+  contradiction
+
+/-- If `s * a * c = a` and `a ≠ 0` in a finite semigroup with zero, then `c` has a
+non-zero idempotent power. The key idea: by induction `a = s^k * a * c^k`,
+and `c^m` is idempotent; if `c^m = 0` then `a = s^m * a * 0 = 0`, contradiction. -/
+lemma nonzero_idempotent_of_sandwich {S : Type*} [SemigroupWithZero S] [Finite S]
+    {s a c : S} (ha : a ≠ 0) (hsac : s * a * c = a) :
+    ∃ e : S, e ≠ 0 ∧ IsIdempotentElem e := by
+  -- Lift to WithOne S
+  have hsac' : (↑s : WithOne S) * ↑a * ↑c = ↑a := by
+    rw [← WithOne.coe_mul, ← WithOne.coe_mul, hsac]
+  -- Apply the sandwich lemma in the finite monoid WithOne S
+  obtain ⟨n₁, n₂, hn₁, hn₂, _, hc⟩ := Monoid.exists_pow_sandwich_eq_self hsac'
+  -- Convert: (↑c)^n₂ = ↑(c^n₂_pnat) and extract S-level equation
+  have hn₂_pos : 0 < n₂ := Nat.pos_of_ne_zero hn₂
+  let n₂p : ℕ+ := ⟨n₂, hn₂_pos⟩
+  have hpow : (↑c : WithOne S) ^ n₂ = ↑(c ^ n₂p) := by
+    have h1 : (↑c : WithOne S) ^ n₂p = (↑c : WithOne S) ^ n₂ :=
+      Monoid.pow_pNat_to_nat (↑c : WithOne S) n₂p
+    have h2 : (↑c : WithOne S) ^ n₂p = ↑(c ^ n₂p) := WithOne.pow_eq c n₂p
+    rw [← h1, h2]
+  rw [hpow] at hc
+  -- Now hc : ↑a * ↑(c ^ n₂p) = ↑a, i.e., ↑(a * c ^ n₂p) = ↑a
+  rw [← WithOne.coe_mul] at hc
+  have hac : a * c ^ n₂p = a := WithOne.coe_inj.mp hc
+  exact nonzero_idempotent_of_right_absorb ha hac.symm
+
+/-
+In a finite 0-simple semigroup, there exists a non-zero idempotent.
+-/
+lemma zeroSimple_exists_nonzero_idempotent {S : Type*} [SemigroupWithZero S] [Finite S]
+    (h : Ideal'.isZeroSimple S) : ∃ e : S, e ≠ 0 ∧ IsIdempotentElem e := by
+  -- From h.1, get a, b with a * b ≠ 0. So a ≠ 0 (left_ne_zero_of_mul).
+  obtain ⟨a, b, hab⟩ : ∃ a b : S, a * b ≠ 0 := by
+    exact h.1
+  have ha : a ≠ 0 := by
+    aesop;
+  -- Apply zeroSimple_j_preorder to get ∃ z w : WithOne S, ↑a = z * ↑(a*b) * w.
+  obtain ⟨z, w, hzw⟩ : ∃ z w : WithOne S, (a : WithOne S) = z * (a * b : WithOne S) * w := by
+    have := zeroSimple_j_preorder h ha hab;
+    obtain ⟨ z, w, hzw ⟩ := this;
+    exact ⟨ z, w, hzw.symm ⟩;
+  rcases z with ( _ | z ) <;> rcases w with ( _ | w ) <;> simp_all +decide [ mul_assoc ];
+  · -- From hzw, we have a = a * b. Applying nonzero_idempotent_of_right_absorb gives us the existence of a non-zero idempotent.
+    have h_eq : a = a * b := by
+      exact WithOne.coe_inj.mp hzw
+    exact nonzero_idempotent_of_right_absorb ha h_eq;
+  · -- Since $a = (a * b) * w$, we can apply the lemma `nonzero_idempotent_of_right_absorb` to conclude that there exists a non-zero idempotent.
+    have h_right_absorb : a = (a * b) * w := by
+      exact WithOne.coe_injective ( by simpa [ mul_assoc ] using hzw );
+    convert nonzero_idempotent_of_right_absorb ha ( show a = a * ( b * w ) by simpa only [ mul_assoc ] using h_right_absorb ) using 1;
+  · -- Since $a = z * (a * b)$, we can apply the lemma `nonzero_idempotent_of_sandwich` to conclude that there exists a non-zero idempotent.
+    have h_sandwich : ∃ e : S, e ≠ 0 ∧ IsIdempotentElem e := by
+      have h_eq : a = z * (a * b) := by
+        injection hzw
+      apply_rules [ nonzero_idempotent_of_sandwich ];
+    exact h_sandwich;
+  · -- From the equation $a = z * (a * b * w)$, we can derive that $a = z * a * b * w$.
+    have h_eq : a = z * a * b * w := by
+      exact WithOne.coe_inj.mp ( by simpa [ mul_assoc ] using hzw );
+    exact nonzero_idempotent_of_sandwich ( by simpa [ mul_assoc ] using ha ) ( by simpa [ mul_assoc ] using h_eq.symm )
+
+--A 0-simple semigroup is isomorphic to a regular Rees matrix semigroup with zero -/
+theorem zero_simple_implies_reesZero (h : ∃ x : S, x ≠ 0) :
+    ∃ (I J G : Type uS) (_ : Group G) (P : I → J → WithZero G),
+    Nonempty (S ≃* Option (ReesZero P)) := by
+  classical
+  set S₀ := {x : S // x ≠ 0}
+  -- haveI : Inhabited S₀ := ⟨⟨Classical.choose h, Classical.choose_spec h⟩⟩
+  -- commenting out line above-- not sure needed directly
+  have h_j_all : ∀ x y : S₀, (x :S) 𝓙 (y: S) := by
+    intro x y
+    have hx : (x : S) ≠ 0 ∧ (y : S) ≠ 0 := by
+      simp_all only [ne_eq]
+      obtain ⟨xval, xproperty⟩ := x; obtain ⟨yval, yproperty⟩ := y
+      obtain ⟨w, h⟩ := h
+      simp_all only [not_false_eq_true, and_self]
+    refine ⟨JPreorder.ofZeroSimple (x:S) (y:S) hx.right, JPreorder.ofZeroSimple (y:S) (x:S) hx.left⟩
+
+  have h_d_all : ∀ x y : S₀, (x :S) 𝓓 (y : S) := by
+    intro x y
+    exact JEquiv.to_dEquiv (h_j_all x y)
+
+  have hzs : Ideal'.isZeroSimple S :=
+  ⟨ZeroSimpleSemigroup.exists_nonzero_mul,
+   ZeroSimpleSemigroup.ideal_trivial⟩
+
+  have h_idem : ∃ e : S₀, IsIdempotentElem (e :S) := by
+    rcases Semigroup.zeroSimple_exists_nonzero_idempotent hzs with ⟨e, hne, hidem⟩
+    refine ⟨⟨e, hne⟩, ?_⟩
+    exact hidem
+
+  obtain ⟨e, he⟩ := h_idem 
+
+  let rSetoid : Setoid S₀ := Setoid.comap (Subtype.val) ⟨fun a b => (a : S) 𝓡 (b : S), REquiv.isEquivalence⟩
+  let lSetoid : Setoid S₀ := Setoid.comap (Subtype.val) ⟨fun a b => (a : S) 𝓛 (b : S), LEquiv.isEquivalence⟩
+  let I := Quotient rSetoid
+  let J := Quotient lSetoid
+
+  let G := {x : S | x ∈ {y : S | y 𝓗 e}}
+
+  letI hG_group : Group G := HEquiv.group_of_idempotent he
+
+  have h_single_d : ∀ x y : S₀, (x :S) 𝓓 (y: S) := by
+    intro x y
+    exact JEquiv.to_dEquiv (h_j_all x y)
+
+  have h_r_exists :
+      ∀ j : J, ∃ z : S₀, ((z : S) 𝓡 e) ∧ Quotient.mk lSetoid z = j := by
+    intro j
+    simp
+    obtain ⟨y, rfl⟩ := Quotient.exists_rep j
+    have hD : (e : S) 𝓓 (y: S) := h_single_d e y
+    rcases hD with ⟨z, hzR, hzL⟩
+    have hz0 : (z : S) ≠ 0 := by
+      intro h
+      have hre0 : (e : S) 𝓡 (0 : S) := by
+        simp_all only [ne_eq]
+      rcases hre0.1 with ⟨t, ht⟩
+      have : (e :S) = 0 := by
+        cases t with
+        | one =>
+            have : ↑e = (0 : S) := by simpa using ht.symm
+            exact this
+        | coe a =>
+            simp[<- WithOne.coe_mul] at ht; exact ht.symm
+      exact e.property this
+    refine ⟨⟨z, hz0⟩, ?_, ?_⟩
+    · exact REquiv.symm hzR
+    · exact Quotient.sound hzL
+
+  -- classical.choose picks a specific z satisfying h_r_exists j for each j, giving
+  -- us the function r : J → S. Classical.choose_spec extracts the proof that this
+  -- choice satisfies both conditions (r_j ∈ ⟦e⟧𝓡 and Quotient.mk lSetoid (r_j) = j).
+  let r : J → S₀ := fun j => Classical.choose (h_r_exists j)
+  have hr_repr :
+      ∀ j : J, r j ∈ { y : S₀ | (y: S) 𝓡 e} ∧ Quotient.mk lSetoid (r j) = j := by
+    intro j
+    exact Classical.choose_spec (h_r_exists j)
+  have h_s_exists :
+      ∀ i : I, ∃ z : S₀, ((z : S) 𝓛 e) ∧ Quotient.mk rSetoid z = i := by
+    intro i
+    simp
+    obtain ⟨x, rfl⟩ := Quotient.exists_rep i
+    have hD : (x: S) 𝓓 e := h_single_d x e
+    rcases hD with ⟨z, hzR, hzL⟩
+    have hz0 : (z : S) ≠ 0 := by
+      intro h
+      have hle0 : (e :S) 𝓛 (0 : S) := by simp[h] at hzL; exact hzL.symm
+      rcases hle0.1 with ⟨t, ht⟩
+      have : e = (0 :S) := by
+        cases t with
+        | one =>
+            have : ↑e = (0 :S) := by simpa using ht.symm
+            exact this
+        | coe a =>
+            simp[<- WithOne.coe_mul] at ht; exact ht.symm
+      exact e.property this
+    refine ⟨⟨z, hz0⟩, ?_, ?_⟩
+    · exact hzL
+    · exact Quotient.sound hzR.symm
+
+  let s : I → S₀ := fun i => Classical.choose (h_s_exists i)
+  have hs_repr :
+      ∀ i : I, s i ∈ { y : S₀ | (y : S) 𝓛 e} ∧ Quotient.mk rSetoid (s i) = i := by
+    intro i
+    exact Classical.choose_spec (h_s_exists i)
+
+  have hP_in_G_or_0 :
+      ∀ i j, ((r j : S) * (s i : S) ≠ 0) →((r j : S) * (s i : S) ∈ { y : S | y 𝓗 e }) := by
+      intro i j hnz
+      set r := (r j : S)
+      set s := (s i : S)
+      have rj_nonzero : r ≠ 0 := by
+        intro h;
+        have : r * s = 0 := by simp [h]
+        contradiction
+      have si_nonzero : s ≠ 0 := by
+        intro h;
+        have : r * s = 0 := by simp [h]
+        contradiction
+      have hrR : r 𝓡 e := (hr_repr j).1
+      have hsL : s 𝓛 e := (hs_repr i).1
+      have hrs0 : S₀ := ⟨r * s, hnz⟩
+      have hr0 : S₀ := ⟨r, rj_nonzero⟩
+      have hs0 : S₀ := ⟨s, si_nonzero⟩
+      have hR : r * s 𝓡 e := by
+        have hle : r * s ≤𝓡 r := RPreorder.mul_right_self
+        have hj : (((⟨r * s, hnz⟩ : S₀ ): S) 𝓙 (((⟨r, rj_nonzero⟩ : S₀ ): S))) := h_j_all ⟨r * s, hnz⟩ ⟨r, rj_nonzero⟩ 
+        change r * s 𝓙 r at hj
+        exact REquiv.trans (REquiv.of_rPreorder_and_jEquiv hle hj) hrR
+      have hL : r * s 𝓛 e := by
+        have hle : r * s ≤𝓛 s := LPreorder.mul_left_self
+        have hj : (((⟨r * s, hnz⟩ : S₀ ): S) 𝓙 (((⟨s, si_nonzero⟩ : S₀ ): S))) := h_j_all ⟨r * s, hnz⟩ ⟨s, si_nonzero⟩ 
+        change r * s 𝓙 s at hj
+        exact LEquiv.trans (LEquiv.of_lPreorder_and_jEquiv hle hj) hsL
+      have hH : r * s 𝓗 e := by
+        have hRL : r * s 𝓡 e ∧ r * s 𝓛 e := ⟨hR, hL⟩
+        exact (HEquiv.iff_rEquiv_and_lEquiv (r * s) e).2 hRL
+      exact hH
+
+  let P : I → J → WithZero G := fun i j =>
+    if h : (r j : S) * (s i : S) = 0 then
+      none
+    else
+      some ⟨(r j : S) * (s i : S), hP_in_G_or_0 i j h⟩
+
+  have h_decomp :
+      ∀ x : S₀,
+        ∃ (i : I) (j : J) (g : G),
+          x = (s i :S) * ↑g * (r j : S):= by
+    intro x
+    -- define i and j as the R-class and L-class of x
+    let i := Quotient.mk rSetoid x
+    let j := Quotient.mk lSetoid x
+    use i, j
+    let s := (s i : S)
+    let r := (r j : S)
+    have h_si_R : s 𝓡 x := Quotient.exact (hs_repr i).2
+    have h_rj_L : r 𝓛 x := Quotient.exact (hr_repr j).2
+    have hrR : r 𝓡 e := (hr_repr j).1
+    have hsL : s 𝓛 e := (hs_repr i).1
+    have h_sie : s * e = s := (LPreorder.le_idempotent he (s)).mp hsL.1
+    have h_sirj_mem : (s * r) ∈ ({y : S | y 𝓡 s} ∩ {y : S | y 𝓛 r}) := (mul_in_inter_iff_exists_idempotent (s) (r)).2 ⟨e, he, hrR.symm, hsL.symm⟩
+    have h_sirj_H : s * r 𝓗 x :=
+        (HEquiv.iff_rEquiv_and_lEquiv _ _).2
+        ⟨REquiv.trans h_sirj_mem.1 h_si_R, LEquiv.trans h_sirj_mem.2 h_rj_L⟩
+    -- h_sir_rsi : s i 𝓡 s i * r j is the hypothesis that surjon_hclass needs to apply Green's lemma (the R-class bijection preserves H-classes).
+    have h_sir_Rsi : s 𝓡 s * r := h_sirj_mem.1.symm
+    -- surjon_hclass says: if s i 𝓡 s i * r j and s i * r j = s i * r j (rfl), then right-mult
+    -- by r j is surjective from ⟦s i⟧𝓗 onto ⟦s i * r j⟧𝓗. since x 𝓗 s i * r j,
+    --we get some h ∈ ⟦s i⟧𝓗 with h * r j = x.
+    obtain ⟨h, hh_mem, hh_eq⟩ :=
+      h_sir_Rsi.surjOn_hClass rfl h_sirj_H.symm
+    -- surjon_hclass returns hh_eq as a lambda application (fun w ↦ w * r j) h = x,
+    -- which lean will not rewrite with directly since rw is syntactic. we introduce
+    -- hh_eq' with type h * r j = x, which lean accepts via definitional equality (beta).
+    have hh_eq' : h * r = x := hh_eq
+    -- now apply Green's lemma in the L-direction: left-mult by s i is surjective from
+    -- ⟦e⟧𝓗 = G onto ⟦s i⟧𝓗. the surjectivity condition is s i 𝓛 e and
+    -- s i * e = s i, together giving the bijection s i * · from ⟦e⟧𝓗 to ⟦s i⟧𝓗.
+    -- since h ∈ ⟦s i⟧𝓗, we get g ∈ G with s i * g = h.
+    obtain ⟨g, hg_mem, hg_eq⟩ :=
+      hsL.symm.surjOn_hClass h_sie hh_mem
+    have hg_eq' : s * g = h := hg_eq
+    -- wrap g together with hg_mem (the proof that g ∈ ⟦e⟧𝓗) into a subtype element of g.
+    exact ⟨⟨g, hg_mem⟩, show x = s * ↑(⟨g, hg_mem⟩ : G) * r from by
+      change x = s * g * r
+      calc x = h * r       := hh_eq'.symm
+           _ = s * g * r := by rw [hg_eq']⟩
+
+  have h_decomp_unique : ∀ x (hx_ne : x ≠ 0) (i i' : I) (j j' : J) (g g' : G),
+      x = (s i : S) * g * (r j : S) → x = (s i' : S) * g' * (r j': S) →
+      i = i' ∧ j = j' ∧ g = g' := by
+    intro x hx_ne i i' j j' g g' hx hx'
+    have hrR  : (r j : S)  𝓡 e := (hr_repr j).1
+    have hrR' : (r j' :S) 𝓡 e := (hr_repr j').1
+    have hsL  : (s i :S)  𝓛 e := (hs_repr i).1
+    have hsL' : (s i' :S) 𝓛 e := (hs_repr i').1
+    have h_sie  : (s i :S)  * e = s i  := (LPreorder.le_idempotent he ((s i: S) )).mp hsL.1
+    have h_sie' : (s i' :S) * e = s i' := (LPreorder.le_idempotent he ((s i' :S))).mp hsL'.1
+    have hgH  : (↑g  : S) 𝓗 e := g.prop
+    have hgH' : (↑g' : S) 𝓗 e := g'.prop
+    have hgR  : (↑g  : S) 𝓡 e := hgH.to_rEquiv
+    have hgR' : (↑g' : S) 𝓡 e := hgH'.to_rEquiv
+    have h_sig_nz : (s i : S) * ↑g ≠ 0 := by
+      intro h0; rw [h0, zero_mul] at hx; exact hx_ne hx
+    have h_sig'_nz : (s i' : S) * ↑g' ≠ 0 := by
+      intro h0; rw [h0, zero_mul] at hx'; exact hx_ne hx'
+    have hx_nz : (s i : S) * ↑g * (r j : S) ≠ 0 := by rw [← hx]; exact hx_ne
+    have hx'_nz : (s i' : S) * ↑g' * (r j' : S) ≠ 0 := by rw [← hx']; exact hx_ne
+    have h_x_Rsi : x 𝓡 (s i :S) := by
+      have h_sig_Rsi : (s i :S) * ↑g 𝓡 (s i :S) := by
+        have h := REquiv.lmul_compat hgR ((s i :S)); rw [h_sie] at h; exact h
+      rw [hx]
+      exact (REquiv.of_rPreorder_and_jEquiv RPreorder.mul_right_self
+        (h_j_all ⟨_, hx_nz⟩ ⟨_, h_sig_nz⟩)).trans h_sig_Rsi
+    have h_x_Rsi' : x 𝓡 (s i' :S) := by
+      have h_sig_Rsi' : (s i' :S) * ↑g' 𝓡 (s i' :S) := by
+        have h := REquiv.lmul_compat hgR' ((s i' :S)); rw [h_sie'] at h; exact h
+      rw [hx']
+      exact (REquiv.of_rPreorder_and_jEquiv RPreorder.mul_right_self
+        (h_j_all ⟨_, hx'_nz⟩ ⟨_, h_sig'_nz⟩)).trans h_sig_Rsi'
+    have hi_eq : i = i' := by
+      have h := @Quotient.sound S₀ rSetoid _ _ (h_x_Rsi.symm.trans h_x_Rsi')
+      rw [(hs_repr i).2, (hs_repr i').2] at h; exact h
+    have h_x_Lrj : x 𝓛 (r j :S) := by
+      rw [hx]
+      exact LEquiv.of_lPreorder_and_jEquiv LPreorder.mul_left_self
+        (h_j_all ⟨_, hx_nz⟩ (r j))
+    have h_x_Lrj' : x 𝓛 (r j' :S) := by
+      rw [hx']
+      exact LEquiv.of_lPreorder_and_jEquiv LPreorder.mul_left_self
+        (h_j_all ⟨_, hx'_nz⟩ (r j'))
+    have hj_eq : j = j' := by
+      have h := @Quotient.sound S₀ lSetoid _ _ (h_x_Lrj.symm.trans h_x_Lrj')
+      rw [(hr_repr j).2, (hr_repr j').2] at h; exact h
+    refine ⟨hi_eq, hj_eq, ?_⟩
+    have h_eq : (s i :S) * ↑g * (r j :S) = (s i :S) * ↑g' * (r j :S) := by
+      have := hx.symm.trans hx'; rwa [← hi_eq, ← hj_eq] at this
+    have h_sir_Rsi : (s i :S) 𝓡 (s i : S) * (r j :S) :=
+      (((mul_in_inter_iff_exists_idempotent (s i : S) (r j :S)).2
+        ⟨e, he, hrR.symm, hsL.symm⟩).1).symm
+    have h_sig_mem : (s i :S) * ↑g ∈ {y : S | y 𝓗 (s i :S)} := by
+      show (s i :S) * ↑g 𝓗 (s i :S)
+      have h := (mul_in_inter_iff_exists_idempotent ((s i: S)) (↑g)).2
+        ⟨e, he, hgR.symm, hsL.symm⟩
+      exact (HEquiv.iff_rEquiv_and_lEquiv _ _).2
+        ⟨h.1, h.2.trans (hgH.to_lEquiv.trans hsL.symm)⟩
+    have h_sig'_mem : (s i :S) * ↑g' ∈ {y : S | y 𝓗 (s i :S)} := by
+      show (s i :S) * ↑g' 𝓗 (s i :S)
+      have h := (mul_in_inter_iff_exists_idempotent ((s i:S)) (↑g')).2
+        ⟨e, he, hgR'.symm, hsL.symm⟩
+      exact (HEquiv.iff_rEquiv_and_lEquiv _ _).2
+        ⟨h.1, h.2.trans (hgH'.to_lEquiv.trans hsL.symm)⟩
+    have h_sig_eq : (s i :S) * ↑g = (s i :S) * ↑g' :=
+      (REquiv.injOn_hClass h_sir_Rsi rfl) h_sig_mem h_sig'_mem h_eq
+    have h_g_eq : (↑g : S) = ↑g' :=
+      (LEquiv.injOn_hClass hsL.symm h_sie) hgH hgH' h_sig_eq
+    exact Subtype.ext h_g_eq
+
+  choose i_of j_of g_of h_decomp using h_decomp
+
+  let φ : S → Option (ReesZero P) := fun x =>
+    if hx : x = 0 then
+      none
+    else
+      let x₀ : S₀ := ⟨x, hx⟩
+      some ⟨i_of x₀, j_of x₀, g_of x₀⟩
+
+  let ψ : Option (ReesZero P) → S
+    | none => 0
+    | some z => s z.i * z.g * r z.j
+
+  -- Helper lemmas, useful for hmul
+  have hφ_nz : ∀ (x : S) (hx : x ≠ 0),
+      φ x = some ⟨i_of ⟨x, hx⟩, j_of ⟨x, hx⟩, g_of ⟨x, hx⟩⟩ := by
+    intro x hx
+    simp only [φ, dif_neg hx]
+
+  have rpreorder_zero : ∀ (x : S), x ≤𝓡 0 → x = 0 := by
+    intro x ⟨z, hz⟩
+    cases z with
+    | one => simpa using hz.symm
+    | coe a => simp [← WithOne.coe_mul] at hz; exact hz.symm
+
+  have lpreorder_zero : ∀ (x : S), x ≤𝓛 0 → x = 0 := by
+    intro x ⟨z, hz⟩
+    cases z with
+    | one => simpa using hz.symm
+    | coe a => simp [← WithOne.coe_mul] at hz; exact hz.symm
+ 
+  have h_decomp_nz : ∀ (i : I) (j : J) (g : G), (↑(s i) : S) * ↑g * ↑(r j) ≠ 0 := by
+    intro i j g h_zero
+    have hsL : ((s i) : S) 𝓛 e := (hs_repr i).1
+    have hrR : ((r j) : S) 𝓡 e := (hr_repr j).1
+    have hgH : (g : S) 𝓗 e := g.prop
+    have hgR : (g : S) 𝓡 e := hgH.to_rEquiv
+    have hgL : (g : S) 𝓛 e := hgH.to_lEquiv
+    have h_sie : ((s i) : S) * e = (s i) := (LPreorder.le_idempotent he _).mp hsL.1
+    have h_sig_R : ((s i) : S) * g 𝓡 (s i) := by
+      have := REquiv.lmul_compat hgR ((s i) : S); rw [h_sie] at this; exact this
+    have h_sig_nz : ((s i) : S) * g ≠ 0 := by
+      intro h0; rw [h0] at h_sig_R
+      exact (s i).property (rpreorder_zero _ h_sig_R.2)
+    -- use location theorem to get that s i * g is l-related to e
+    have h_sig_L : ((s i) : S) * g 𝓛 e := by
+      have h_mem := (mul_in_inter_iff_exists_idempotent (↑(s i) : S) (↑g : S)).2
+        ⟨↑e, he, hgR.symm, hsL.symm⟩
+      exact LEquiv.trans h_mem.2 hgL
+    -- and thus that s i * g * r j is l-related to r j
+    have h_prod_L : (↑(s i) : S) * ↑g * ↑(r j) 𝓛 ↑(r j) := by
+      have : (↑e : S) ∈ ⟦(↑(r j) : S)⟧𝓡 ∩ ⟦((↑(s i) : S) * (↑g : S))⟧𝓛 :=
+        ⟨hrR.symm, h_sig_L.symm⟩
+      exact ((mul_in_inter_iff_exists_idempotent ((↑(s i) : S) * (↑g : S)) ((↑(r j) : S))).2
+        ⟨↑e, he, this⟩).2
+    -- but r is nonzero, so s i * g * r j is contradction
+    rw [h_zero] at h_prod_L
+    exact (r j).property (lpreorder_zero _ h_prod_L.2)
+
+  have h_mul : ∀ x y : S, φ (x * y) = φ x * φ y := by
+    intro x y
+    by_cases hx : x = 0
+    · simp [φ, hx]
+    by_cases hy : y = 0
+    · simp [φ, hy]
+    · let x₀ : S₀ := ⟨x, hx⟩
+      let y₀ : S₀ := ⟨y, hy⟩
+      have hxdecomp : x = s (i_of x₀) * g_of x₀ * r (j_of x₀) := h_decomp ⟨x, hx⟩
+      have hydecomp : y = s (i_of y₀) * g_of y₀ * r (j_of y₀) := h_decomp ⟨y, hy⟩
+      have hxydecomp : x * y = s (i_of x₀) * g_of x₀ * r (j_of x₀) * s (i_of y₀) * g_of y₀ * r (j_of y₀) := by
+        simp[hxdecomp, hydecomp, mul_assoc]
+      have hxx : φ x = some ⟨i_of x₀, j_of x₀, g_of x₀⟩ := hφ_nz x hx
+      have hyy : φ y = some ⟨i_of y₀, j_of y₀, g_of y₀⟩ := hφ_nz y hy
+      rw [hxx, hyy, ReesZero.mul_def]
+      by_cases hxy : x * y = 0
+      · have hPnone : P (i_of y₀) (j_of x₀) = none := by
+          by_contra hPnone
+          simp only [P] at hPnone
+          split_ifs at hPnone with hmid_z
+          · exact hPnone rfl
+          · have hmid_nz := hmid_z
+            have hmid_H := hP_in_G_or_0 (i_of y₀) (j_of x₀) hmid_nz
+            set mid_G : G := ⟨(r (j_of x₀)) * (s (i_of y₀)), hmid_H⟩
+            have hmid_cast : ((mid_G : G) : S) = (r (j_of x₀) : S) * s (i_of y₀) := rfl
+            have h_eq : x * y = ↑(s (i_of x₀)) * ↑(g_of x₀ * mid_G * g_of y₀) * ↑(r (j_of y₀)) := by 
+              have : ((g_of x₀ * mid_G * g_of y₀) : S) = ((g_of x₀) :S) * ((r (j_of x₀) : S) * (s (i_of y₀)) : S) * (g_of y₀ : S) := by rfl 
+              sorry -- this is literally just a matter of getting parentheses to match up
+              rw [hxdecomp, hydecomp]; simp [mul_assoc]
+            rw [h_eq] at hxy
+            exact h_decomp_nz (i_of x₀) (j_of y₀) (g_of x₀ * mid_G * g_of y₀) hxy
+        simp [φ, hxy, hPnone]
+      · let xy₀ : S₀ := ⟨x * y, hxy⟩
+        let ix  : I := i_of x₀
+        let jx  : J := j_of x₀
+        let gx  : G := g_of x₀
+        let iy  : I := i_of y₀
+        let jy  : J := j_of y₀
+        let gy  : G := g_of y₀
+        have hp : P iy jx ≠ 0 := by
+          intro hP0
+          apply hxy
+          have hmid : ((r jx) : S) * (s iy) = 0 := by
+            dsimp only [P] at hP0; split_ifs at hP0 with h; exact h
+          calc x * y = (((s ix) :S) * (gx :S) * (r jx)) * ((s iy) * gy * (r jy)) := by rw [hxdecomp, hydecomp]
+            _ = ((s ix) :S) * (gx :S) * (((r jx) :S) * ((s iy) :S)) * ((gy :S) * ((r jy):S)) := by simp [mul_assoc]
+            _ = ((s ix) :S) * (gx :S) * 0 * ((gy :S) * ((r jy):S)) := by rw [hmid]
+            _ = 0 := by simp [mul_zero, zero_mul]
+        obtain ⟨pg, hpg⟩ : ∃ pg : G, P iy jx = some pg := by
+          cases hP : P iy jx with
+          | zero => exact absurd hP hp
+          | coe g => exact ⟨g, rfl⟩
+        rw [hpg]
+        rw [hφ_nz (x * y) hxy]
+        have h_candidate :
+            x * y = (s ix : S) * (↑(gx * pg * gy) : S) * (r jy : S) := by 
+          have hpg_val : (↑pg : S) = ↑(r jx) * ↑(s iy) := by
+            simp only [P] at hpg
+            split_ifs at hpg with h
+            exact (congrArg Subtype.val (Option.some.inj hpg)).symm
+          conv_rhs => rw [show (↑(gx * pg * gy) : S) = ↑gx * ↑pg * ↑gy from rfl, hpg_val]
+          rw [hxdecomp, hydecomp]
+          simp only [mul_assoc]; rfl
+        have hxy_decomp := h_decomp xy₀
+        have ⟨hi_eq, hj_eq, hg_eq⟩ := h_decomp_unique (x * y) hxy
+            (i_of xy₀) ix (j_of xy₀) jy (g_of xy₀) (gx * pg * gy)
+            hxy_decomp h_candidate
+        show some (ReesZero.mk (i_of xy₀) (j_of xy₀) (g_of xy₀)) =
+          some (ReesZero.mk ix jy (gx * pg * gy))
+        rw [hi_eq, hj_eq, hg_eq]
+
+  have h_left_inv : ∀ z, ψ (φ z) = z := by
+    intro z
+    by_cases hz : z = 0
+    · simp [φ, ψ, hz]
+    · rw [hφ_nz z hz]
+      simp only [ψ]
+      exact (h_decomp ⟨z, hz⟩).symm
+
+  have h_right_inv : ∀ z, φ (ψ z) = z := by
+    intro z
+    cases z with
+    | none =>
+        simp [φ, ψ]
+    | some z =>
+        have hnz : ((s z.i) : S) * (z.g : S) * (r z.j) ≠ 0 := h_decomp_nz z.i z.j z.g
+        simp only [ψ]
+        rw [hφ_nz _ hnz]
+        have h1 := h_decomp ⟨((s z.i) :S) * (z.g : S) * (r z.j), hnz⟩
+        have ⟨hi, hj, hg⟩ := h_decomp_unique _ hnz _ z.i _ z.j _ z.g h1 rfl
+        simp only [hi, hj, hg]
+
+  --Assemble isomorphism
+
+  let iso : S ≃* Option (ReesZero P) :=
+    { toFun := φ
+      invFun := ψ
+      left_inv := h_left_inv
+      right_inv := h_right_inv
+      map_mul' := h_mul }
+
+  refine ⟨I, J, G, inferInstance, P, ⟨iso⟩⟩
+
+end ReesZeroIffZeroSimple
+
 end Semigroup
